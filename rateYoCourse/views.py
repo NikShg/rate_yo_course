@@ -2,15 +2,21 @@ from django.shortcuts import render
 from rateYoCourse.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
-from django.core.ursresolvers import reverse
+from django.core.urlresolvers import reverse
+
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 
+def index(request):
 
-
+    response = render(request, 'rateyocourse/index.html', context=context_dict)
+   
+    return response
 
 def register(request):
-	registered = False;
+	registered = False
 	if request.method == 'POST':
 		user_form = UserForm(data=request.POST)
 		profile_form = UserProfileForm(data=request.POST)
@@ -36,7 +42,7 @@ def register(request):
 		user_form = UserForm()
 		profile_form = UserProfileForm()
 		
-	return render(request, 'rango/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+	return render(request, 'rateyocourse/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 	
 def user_login(request):
 	if request.method == 'POST':
@@ -57,9 +63,9 @@ def user_login(request):
 			print("Invalid login details: {0}, {1}".format(username, password))
 			return HttpResponse("Invalid login details supplied.")
 	else:
-		return render(request, 'rango/login.html', {})
+		return render(request, 'rateyocourse/login.html', {})
 				
-@login_required
+@login_required 
 def user_logout(request):
 	logout(request)
 	
