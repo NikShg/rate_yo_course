@@ -4,14 +4,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-
-# Create your views here.
-
-
-def index(request):
-
-
-
 from django.core.ursresolvers import reverse
 from datetime import datetime
 # Create your views here.
