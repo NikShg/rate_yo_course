@@ -23,9 +23,6 @@
 		<div>
 
 			{% block body_block %}
-
-		
-
 			{% endblock %}
 
 		</div>
@@ -35,6 +32,9 @@
 		<div>
 			<ul>
 				{% if user.is_authenticated %}
+					<li><a href="{% url 'list_profiles' %}">List Profiles<a></li>
+					<li><a href="{% url 'profile' user.username %}">Profile</a></li>
+					<li><a href="{% url 'password_change_form' %}">Change your password</a></li>
 					<li><a href="{% url 'logout' %}">Logout</a></li>
 				{% else %}
 					<li><a href="{% url 'login' %}">Login</a></li>

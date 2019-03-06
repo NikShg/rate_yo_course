@@ -1,0 +1,36 @@
+{% extends 'rateyocourse/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+	User Profiles
+{% endblock %}
+
+{% block body_block %}
+	<h1>User Profiles</h1>
+	
+	<div class="panel">
+		{% if userprofile_list %}
+		<div class="panel-heading">
+			<div class="panel-body">
+				<div class="list-group">
+					{% for listuser in userprofile_list %}
+					<div class="list-group-item">
+						{% if listuser.picture %}
+						<img width="64" height="64" src="{{ MEDIA_URL}}{{listuser.picture}}"/>
+						{% else %}
+						<img width="64" height="64" src="http://lorempixel.com/64/64/people/"/>
+						{% endif %}
+						<h4 class="list-group-item-heading">
+							<a href="{% url 'profile' listuser.user.username %}">
+								{{ listuser.user.username }}</a>
+						</h4>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		{% else %}
+			<p><strong>There are no registered users on this site.</strong></p>
+		{% endif %}
+	</div>
+{% endblock %}

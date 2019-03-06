@@ -9,11 +9,15 @@
 	<h1>Login to Rate Yo Course</h1>
 	<form id="login_form" method="post" action="{% url 'login' %}">
 		{% csrf_token %}
-		Username: <input type="text" name="username" value="" size="50"/>
+		<p>Username: <input type="text" name="username" value="" size="50"/>
 		<br/>
-		Password: <input type="text" name="password" value="" size="50" />
+		<p>Password: <input type="text" name="password" value="" size="50" />
 		<br/>
-		<input type="submit" value="submit" />
+		<p><input type="submit" value="submit" />
 		<p><a href="{% url 'password_reset' %}">Forgotten your password?</a><br/>
+		<p>
+		Not a member?
+		<a href="{% url 'registration_register' %}">Register</a>
+	</p>
 	</form>
 {% endblock %}
