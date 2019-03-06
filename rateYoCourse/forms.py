@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from rateYoCourse.models import UserProfile
-
+#from rateYoCourse.models import Category, Page, UserProfile
 
 
 
@@ -21,6 +21,8 @@ class UserForm(forms.ModelForm):
 		fields = ('username', 'email', 'password')
 		
 class UserProfileForm(forms.ModelForm):
+	picture = forms.ImageField(required=False)
+	
 	class Meta:
 		model = UserProfile
-		fields = ('picture',)
+		exclude = ('user', )
