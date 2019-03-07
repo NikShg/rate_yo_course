@@ -25,10 +25,10 @@ from django.contrib.auth.views import (password_reset, password_reset_done, pass
 class MyRegistrationView(RegistrationView):
 	def get_success_url(self, user):
 		return '/rateyocourse/'
-		
+
 urlpatterns = [
-    url(r'^$', views.index, name='index'), 
-    url(r'^rateyocourse/', include('rateYoCourse.urls')), 
+    url(r'^$', views.index, name='index'),
+    url(r'^rateyocourse/', include('rateYoCourse.urls')),
     url(r'^admin/', admin.site.urls),
 	url(r'^accounts/', include('registration.backends.simple.urls')),
 	url(r'^accounts/register/$', MyRegistrationView.as_view(), name='registration_register'),
@@ -36,4 +36,6 @@ urlpatterns = [
 	url(r'^accounts/password/change/done/$', password_change_done, name='password_change_done'),
 	url(r'^accounts/password/reset/$', password_reset, name='password_reset'),
 	url(r'^accounts/password/reset/done/$', password_reset_done, name='password_reset_done'),
+    url(r'^university/', views.university, name='university'),
+    url(r'^course/', views.course, name='course'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
