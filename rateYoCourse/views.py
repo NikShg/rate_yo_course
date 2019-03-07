@@ -1,11 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect, HttpResponse
 from rateYoCourse.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
 from datetime import datetime
+from django.contrib.auth.models import User
+from rateYoCourse.models import UserProfile
 
 
 # Create your views here.
@@ -54,11 +56,14 @@ def register(request):
 
 		if user_form.is_valid() and profile_form.is_valid():
 			user = user_form.save()
-
 			user.set_password(user.password)
 			user.save()
 
 			profile = profile_form.save(commit = False)
+			user.set_password(user.password)
+			user.save()
+			
+			profile = profile_form.save(commit=False)
 			profile.user = user
 
 			if 'picture' in request.FILES:
@@ -78,7 +83,7 @@ def register(request):
 def user_login(request):
 	if request.method == 'POST':
 		username = request.POST.get('username')
-		pasword = request.POST.get('password')
+		password = request.POST.get('password')
 
 		user = authenticate(username=username, password=password)
 
@@ -102,6 +107,7 @@ def user_logout(request):
 
 	return HttpResponseRedirect(reverse('index'))
 
+
 def university(request):
 
 	context_dict = {'boldmessage': "Here will be all the info you need!"}
@@ -110,3 +116,50 @@ def university(request):
 def course(request):
 	context_dict = {'boldmessage': "Here will be all the info you need!"}
 	return render(request, 'rateYoCourse/course.html', context=context_dict)
+
+	
+@login_required
+def register_profile(request):
+	form = UserProfileForm()
+	
+	if request.method == 'POST':
+		form = UserProfileForm(request.POST, request.FILES)
+		if form.is_valid():
+			user_profile = form.save(commit=False)
+			user_profile.user = request.user
+			user_profile.save()
+			
+			return redirect('index')
+		else:
+			print(form.errors)
+			
+	context_dict = {'form': form}
+	
+	return render(request, 'rateyocourse/profile_registration.html', context_dict)
+
+@login_required
+def profile(request, username):
+	try:
+		user = User.objects.get(username=username)
+	except User.DoesNotExist:
+		return redirect('index')
+		
+	userprofile = UserProfile.objects.get_or_create(user=user)[0]
+	form = UserProfileForm({'picture': userprofile.picture})
+	
+	if request.method == 'POST':
+		form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+		if form.is_valid():
+			form.save(commit=True)
+			return redirect('profile', user.username)
+		else:
+			print(form.errors)
+	
+	return render(request, 'rateyocourse/profile.html', {'userprofile': userprofile, 'selecteduser': user, 'form': form})
+	
+@login_required
+def list_profiles(request):
+	userprofile_list = UserProfile.objects.all()
+	
+	return render(request, 'rateyocourse/list_profiles.html', {'userprofile_list': userprofile_list})
+

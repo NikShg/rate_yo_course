@@ -24,8 +24,8 @@ from django.contrib.auth.views import (password_reset, password_reset_done, pass
 
 class MyRegistrationView(RegistrationView):
 	def get_success_url(self, user):
-		return '/rateyocourse/'
-
+		return reverse('register_profile')
+		
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^rateyocourse/', include('rateYoCourse.urls')),
