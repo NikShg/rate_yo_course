@@ -15,6 +15,7 @@ class University(models.Model):
 
 class Course(models.Model):
 	name = models.CharField(max_length=256, null=False)
+	url = models.URLField(null=False)
 	university = models.ForeignKey(University, null=False)
 
 	def __str__(self):
