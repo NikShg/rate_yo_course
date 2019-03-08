@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.contrib.auth.models import User
-from rateYoCourse.models import UserProfile
+from rateYoCourse.models import UserProfile, University, Course
 
 
 # Create your views here.
@@ -107,17 +107,44 @@ def user_logout(request):
 
 	return HttpResponseRedirect(reverse('index'))
 
-
-def university(request):
-
-	context_dict = {'boldmessage': "Here will be all the info you need!"}
-	return render(request, 'rateYoCourse/university.html', context=context_dict)
-
-def course(request):
-	context_dict = {'boldmessage': "Here will be all the info you need!"}
-	return render(request, 'rateYoCourse/course.html', context=context_dict)
+def show_university_(request):
+	context_dict = {}
+	universities = University.objects.all()
+	#'university_names = University.objects.get(slug=university_name_slug)
+	context_dict['universities'] = universities
+	#context_dict['university_names'] = university_names
+	return render(request, 'rateYoCourse/universities.html', context=context_dict)
 
 	
+def show_university(request, university_name_slug):
+	context_dict = {}
+	
+	try:
+		university = University.objects.get(slug=university_name_slug)
+		courses = Course.objects.filter(university=university)
+		context_dict['courses'] = courses
+		context_dict['university'] = university
+	except:
+		context_dict['university'] = None
+		context_dict['courses'] = None
+	#context_dict = {'boldmessage': "Here will be all the info you need!"}
+	return render(request, 'rateYoCourse/university.html', context=context_dict)
+
+def show_course(request, university_name_slug, course_name_slug):
+	context_dict = {}
+	try:
+		university = University.objects.get(slug=university_name_slug)
+		course = Course.objects.get(slug=course_name_slug)
+		context_dict['course'] = course
+		context_dict['university'] = university
+	except:
+		context_dict['course'] = None
+		context_dict['university'] = None
+	#context_dict = {'boldmessage': "Here will be all the info you need!"}
+
+	return render(request, 'rateYoCourse/course.html', context=context_dict)
+
+
 @login_required
 def register_profile(request):
 	form = UserProfileForm()

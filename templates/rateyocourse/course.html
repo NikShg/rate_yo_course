@@ -1,12 +1,24 @@
 {% extends 'rateyocourse/base.html' %}
 {% load staticfiles %}
+
 {% block title_block %}
 	 Courses
 {% endblock %}
 
 {% block body_block %}
-
 <div>
 <h1>Rate Yo Course - Courses section</h1>
+<div>
+	{% if course %}
+	<h2>
+		
+				<a href="{{ course.url }}">{{ university.name}}:  {{ course.name }}</a></h2>
+				<p> Course rating {{ course.rating }} </li> 
+				
 
+			</ul>
+			{% else %}
+				<strong>This is not a course provided by any university.</strong>
+			{% endif %}
+	</div>
 {% endblock %}
