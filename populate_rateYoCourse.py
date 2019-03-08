@@ -42,6 +42,11 @@ def add_uni(name): #city, url
     u.save()
     return u
 
+<<<<<<< HEAD
 if __name__ == '__main__' :
     print("Starting RateYoCourse population script...")
+=======
+if __name__ == '__main__':
+    print("Starting RateYoCOourse population script...")
+>>>>>>> c8f061c6da9caa7e8139456349d12654fa7e3768
     populate()
