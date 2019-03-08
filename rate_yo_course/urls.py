@@ -35,5 +35,8 @@ urlpatterns = [
 	url(r'^accounts/password/change/$', password_change, name='password_change_form'),
 	url(r'^accounts/password/change/done/$', password_change_done, name='password_change_done'),
 	url(r'^accounts/password/reset/$', password_reset, name='password_reset'),
-	url(r'^accounts/password/reset/done/$', password_reset_done, name='password_reset_done'),
+	url(r'^accounts/password/reset/done/$', password_reset_done, name='password_reset_done'
+	url(r'^university/$', views.university, name='university'),
+	url(r'^course/$', views.course, name='course'),
+	),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
