@@ -13,4 +13,12 @@ urlpatterns = [
 	url(r'^university/(?P<university_name_slug>[\w\-]+)/$', views.show_university, name='university'),
 	url(r'^university/$', views.show_university_, name='universities'),
 	url(r'^university/(?P<university_name_slug>[\w\-]+)/courses/(?P<course_name_slug>[\w\-]+)/$', views.show_course, name='course'),
+	
+	url(r'^goto/$', views.track_url, name='goto'),
+	
+    url(r'^search/$', views.search, name = 'search'),
+	url(r'^search/(?P<university_name_slug>[\w\-]+)/$', views.show_university, name='course'),
+
+	
+
 	]

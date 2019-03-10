@@ -8,6 +8,13 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.contrib.auth.models import User
 from rateYoCourse.models import UserProfile, University, Course
+from django.shortcuts import redirect
+
+from django.db.models import Q
+
+
+
+
 
 
 # Create your views here.
@@ -137,9 +144,22 @@ def show_course(request, university_name_slug, course_name_slug):
 		course = Course.objects.get(slug=course_name_slug)
 		context_dict['course'] = course
 		context_dict['university'] = university
-	except:
+	except Course.DoesNotExist:
 		context_dict['course'] = None
 		context_dict['university'] = None
+
+	context_dict['query'] = course.name
+	result_list = [] 
+	if request.method == 'POST':
+		query = request.POST['query'].strip()
+
+		if query: 
+			result_list = run_query(query) 
+			context_dict['query'] = query 
+			context_dict['result_list'] = result_list
+
+
+	
 	#context_dict = {'boldmessage': "Here will be all the info you need!"}
 
 	return render(request, 'rateYoCourse/course.html', context=context_dict)
@@ -189,4 +209,38 @@ def list_profiles(request):
 	userprofile_list = UserProfile.objects.all()
 	
 	return render(request, 'rateyocourse/list_profiles.html', {'userprofile_list': userprofile_list})
+
+def track_url(request): 
+	course_id = None 
+	url = '/rateyocourse/' 
+	if request.method == 'GET': 
+		if 'course_id' in request.GET: 
+			course_id= request.GET['course_id']
+
+			try: 
+				course = Course.objects.get(id=course_id) 
+				course.views = Course.views + 1
+
+				course.save() 
+				url = course.url 
+			except:
+				pass
+	return redirect(url)
+
+
+def search(request):
+	error = False 
+	if'q' in request.GET:
+		q = request.GET['q']
+		if not q:
+			error = True
+		else:
+			course = Course.objects.filter(name__icontains = q)
+			university = University.objects.filter(name__icontains = q)
+			return render(request, 'rateyocourse/search_results.html', {'universities':university, 'courses':course,'query': q})
+			
+			
+	return render(request, 'rateyocourse/search_form.html',{'error':error})
+
+
 
