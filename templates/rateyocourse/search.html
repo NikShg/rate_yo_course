@@ -1,0 +1,15 @@
+{% extends 'rateYoCourse/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Search
+{% endblock %}
+
+{% block body_block %}
+<form action="/search/" method="get">
+        <input type="text" name="q">
+        <input type="submit" value="Search">
+</form>
+
+
+{% endblock %}
