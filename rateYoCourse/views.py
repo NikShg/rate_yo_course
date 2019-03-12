@@ -9,20 +9,12 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from rateYoCourse.models import UserProfile, University, Course
 from django.shortcuts import redirect
-
 from django.db.models import Q
 
-
-
-
-
-
 # Create your views here.
-# Itech team AB - if program won't run, comment out some of these views
 def index(request):
 	context_dict = {}
 	visitor_cookie_handler(request)
-
 
 	context_dict['visits'] = request.session['visits']
 
@@ -55,68 +47,69 @@ def visitor_cookie_handler(request):
 
 	request.session['visits'] = visits
 
-def register(request):
-	registered = False
-	if request.method == 'POST':
-		user_form = UserForm(data=request.POST)
-		profile_form = UserProfileForm(data=request.POST)
+#def register(request):
+	#registered = False
+	#if request.method == 'POST':
+	#	user_form = UserForm(data=request.POST)
+		#profile_form = UserProfileForm(data=request.POST)
+#
+	#	if user_form.is_valid() and profile_form.is_valid():
+		#	user = user_form.save()
+			#user.set_password(user.password)
+			#user.save()
+#
+	#		profile = profile_form.save(commit = False)
+		#	user.set_password(user.password)
+			#user.save()
+			#
+			#profile = profile_form.save(commit=False)
+			#profile.user = user
+#
+#			if 'picture' in request.FILES:
+	#			profile.picture = request.FILES['picture']
+#
+	#		profile.save()
+#
+	#		registered = True
+	#	else:
+		#	print(user_form.errors, profile_form.errors)
+	#else:
+		#user_form = UserForm()
+		#profile_form = UserProfileForm()
+#
+	#return render(request, 'rateyocourse/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
-		if user_form.is_valid() and profile_form.is_valid():
-			user = user_form.save()
-			user.set_password(user.password)
-			user.save()
+	
+#def user_login(request):
+	#if request.method == 'POST':
+		#username = request.POST.get('username')
+		#password = request.POST.get('password')
+#
+	#	user = authenticate(username=username, password=password)
+#
+	#	if user:
+		#	if user.is_active:
+			#	login(request, user)
+				#return HttpResponseRedirect(reverse('index'))
+#
+	#		else:
+		#		return HttpResponse("Your account is disabled.")
+#
+	#	else:
+		#	print("Invalid login details: {0}, {1}".format(username, password))
+			#return HttpResponse("Invalid login details supplied.")
+	#else:
+		#return render(request, 'rateyocourse/login.html', {})
 
-			profile = profile_form.save(commit = False)
-			user.set_password(user.password)
-			user.save()
-			
-			profile = profile_form.save(commit=False)
-			profile.user = user
-
-			if 'picture' in request.FILES:
-				profile.picture = request.FILES['picture']
-
-			profile.save()
-
-			registered = True
-		else:
-			print(user_form.errors, profile_form.errors)
-	else:
-		user_form = UserForm()
-		profile_form = UserProfileForm()
-
-	return render(request, 'rateyocourse/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
-
-def user_login(request):
-	if request.method == 'POST':
-		username = request.POST.get('username')
-		password = request.POST.get('password')
-
-		user = authenticate(username=username, password=password)
-
-		if user:
-			if user.is_active:
-				login(request, user)
-				return HttpResponseRedirect(reverse('index'))
-
-			else:
-				return HttpResponse("Your account is disabled.")
-
-		else:
-			print("Invalid login details: {0}, {1}".format(username, password))
-			return HttpResponse("Invalid login details supplied.")
-	else:
-		return render(request, 'rateyocourse/login.html', {})
-
-@login_required
-def user_logout(request):
-	logout(request)
-
-	return HttpResponseRedirect(reverse('index'))
+#@login_required
+#def user_logout(request):
+#	logout(request)
+#
+	#return HttpResponseRedirect(reverse('index'))
 
 def show_university_(request):
 	context_dict = {}
-	universities = University.objects.all()
+	universities = University.objects.all().order_by('name')
 	#'university_names = University.objects.get(slug=university_name_slug)
 	context_dict['universities'] = universities
 	#context_dict['university_names'] = university_names
@@ -128,7 +121,7 @@ def show_university(request, university_name_slug):
 	
 	try:
 		university = University.objects.get(slug=university_name_slug)
-		courses = Course.objects.filter(university=university)
+		courses = Course.objects.filter(university=university).order_by('name')
 		context_dict['courses'] = courses
 		context_dict['university'] = university
 	except:
@@ -241,6 +234,41 @@ def search(request):
 			
 			
 	return render(request, 'rateyocourse/search_form.html',{'error':error})
+
+#@login_required
+#def settings(request):
+  #  user = request.user
+    #try:
+       # facebook_login = user.social_auth.get(provider='facebook')
+    #except UserSocialAuth.DoesNotExist:
+      #  facebook_login = None
+
+    #can_disconnect = (user.social_auth.count() > 1 or user.has_usable_password())
+
+    #return render(request, 'rateyocourse/settings.html', {
+      #  'facebook_login': facebook_login,
+       # 'can_disconnect': can_disconnect
+    #})
+	#
+#@login_required
+#def password(request):
+ #   if request.user.has_usable_password():
+   #     PasswordForm = PasswordChangeForm
+    #else:
+      #  PasswordForm = AdminPasswordChangeForm
+
+    #if request.method == 'POST':
+      #  form = PasswordForm(request.user, request.POST)
+       # if form.is_valid():
+         #   form.save()
+          #  update_session_auth_hash(request, form.user)
+            #messages.success(request, 'Your password was successfully updated!')
+            #return redirect('password')
+        #else:
+          #  messages.error(request, 'Please correct the error below.')
+    #else:
+      #  form = PasswordForm(request.user)
+#    return render(request, 'core/password.html', {'form': form})
 
 
 

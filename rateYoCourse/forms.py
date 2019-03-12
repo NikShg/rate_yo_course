@@ -1,17 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
 from rateYoCourse.models import UserProfile
-#from rateYoCourse.models import Category, Page, UserProfile
-
-
-
-
-
-
-
-
-
-
 
 class UserForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput())
