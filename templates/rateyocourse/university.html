@@ -7,15 +7,16 @@
 
 {% block body_block %}
 <div>
+<p><a href="{% url 'universities' %}"> Universities</a></p>
 	{% if university %}
 	<h1> {{ university.name }} </h1>
+	<h2> Here are the courses provided by this university </h2><br/>
 		{% if courses %}
-			<ul>
+			<ol>
 			{% for course in courses %}
-				<a href="{% url 'course' university.slug course.slug %}">{{ course.name }}</a>: Course rating {{ course.rating }} </li><br/>
-				<!--<li><a href="{{ course.url }}">{{ course.name }}</a>: Course rating {{ course.rating }} </li>-->
+				<li><a href="{% url 'course' university.slug course.slug %}">{{ course.name }}</a>: Course rating {{ course.rating }} </li>
 			{% endfor %}
-			</ul>
+			</ol>
 			{% else %}
 				<strong>There are no courses for this university.</strong>
 			{% endif %}

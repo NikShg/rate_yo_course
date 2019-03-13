@@ -11,7 +11,7 @@ from rateYoCourse.models import UserProfile, University, Course
 from django.shortcuts import redirect
 from django.db.models import Q
 
-# Create your views here.
+
 def index(request):
 	context_dict = {}
 	visitor_cookie_handler(request)
@@ -47,59 +47,66 @@ def visitor_cookie_handler(request):
 
 	request.session['visits'] = visits
 
-#def register(request):
-	#registered = False
-	#if request.method == 'POST':
-	#	user_form = UserForm(data=request.POST)
-		#profile_form = UserProfileForm(data=request.POST)
-#
-	#	if user_form.is_valid() and profile_form.is_valid():
-		#	user = user_form.save()
-			#user.set_password(user.password)
-			#user.save()
-#
-	#		profile = profile_form.save(commit = False)
-		#	user.set_password(user.password)
-			#user.save()
-			#
-			#profile = profile_form.save(commit=False)
-			#profile.user = user
-#
-#			if 'picture' in request.FILES:
-	#			profile.picture = request.FILES['picture']
-#
-	#		profile.save()
-#
-	#		registered = True
-	#	else:
-		#	print(user_form.errors, profile_form.errors)
-	#else:
-		#user_form = UserForm()
-		#profile_form = UserProfileForm()
-#
-	#return render(request, 'rateyocourse/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+def login(request):
+	return render(request, 'login.html')
+
+@login_required
+def home(request):
+	return render(request, 'index.html')
+	
+def register(request):
+	registered = False
+	if request.method == 'POST':
+		user_form = UserForm(data=request.POST)
+		profile_form = UserProfileForm(data=request.POST)
+
+		if user_form.is_valid() and profile_form.is_valid():
+			user = user_form.save()
+			user.set_password(user.password)
+			user.save()
+
+			profile = profile_form.save(commit = False)
+			user.set_password(user.password)
+			user.save()
+			
+			profile = profile_form.save(commit=False)
+			profile.user = user
+
+			if 'picture' in request.FILES:
+				profile.picture = request.FILES['picture']
+
+			profile.save()
+
+			registered = True
+		else:
+			print(user_form.errors, profile_form.errors)
+	else:
+		user_form = UserForm()
+		profile_form = UserProfileForm()
+
+	return render(request, 'rateyocourse/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 	
-#def user_login(request):
-	#if request.method == 'POST':
-		#username = request.POST.get('username')
-		#password = request.POST.get('password')
-#
-	#	user = authenticate(username=username, password=password)
-#
-	#	if user:
-		#	if user.is_active:
-			#	login(request, user)
-				#return HttpResponseRedirect(reverse('index'))
-#
-	#		else:
-		#		return HttpResponse("Your account is disabled.")
-#
-	#	else:
-		#	print("Invalid login details: {0}, {1}".format(username, password))
-			#return HttpResponse("Invalid login details supplied.")
-	#else:
-		#return render(request, 'rateyocourse/login.html', {})
+def user_login(request):
+	if request.method == 'POST':
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+
+		user = authenticate(username=username, password=password)
+
+		if user:
+			if user.is_active:
+				login(request, user)
+				return HttpResponseRedirect(reverse('index'))
+
+			else:
+				return HttpResponse("Your account is disabled.")
+
+		else:
+			print("Invalid login details: {0}, {1}".format(username, password))
+			return HttpResponse("Invalid login details supplied.")
+	else:
+		return render(request, 'rateyocourse/login.html', {})
 
 #@login_required
 #def user_logout(request):
@@ -107,15 +114,16 @@ def visitor_cookie_handler(request):
 #
 	#return HttpResponseRedirect(reverse('index'))
 
+# This function returns the view for the list of universities. Universities are fetched
+# from the university table and sorted by name asscending.
 def show_university_(request):
 	context_dict = {}
 	universities = University.objects.all().order_by('name')
-	#'university_names = University.objects.get(slug=university_name_slug)
 	context_dict['universities'] = universities
-	#context_dict['university_names'] = university_names
 	return render(request, 'rateYoCourse/universities.html', context=context_dict)
 
-	
+# This function returns the view for the list of courses provided by a university. #
+# A selection of courses are fetched depending on the selected university and sorted in ascending order.
 def show_university(request, university_name_slug):
 	context_dict = {}
 	
@@ -127,9 +135,9 @@ def show_university(request, university_name_slug):
 	except:
 		context_dict['university'] = None
 		context_dict['courses'] = None
-	#context_dict = {'boldmessage': "Here will be all the info you need!"}
 	return render(request, 'rateYoCourse/university.html', context=context_dict)
 
+# This view defines method that returns the information for a particular course provided by a particular university
 def show_course(request, university_name_slug, course_name_slug):
 	context_dict = {}
 	try:
@@ -150,10 +158,6 @@ def show_course(request, university_name_slug, course_name_slug):
 			result_list = run_query(query) 
 			context_dict['query'] = query 
 			context_dict['result_list'] = result_list
-
-
-	
-	#context_dict = {'boldmessage': "Here will be all the info you need!"}
 
 	return render(request, 'rateYoCourse/course.html', context=context_dict)
 
@@ -209,11 +213,9 @@ def track_url(request):
 	if request.method == 'GET': 
 		if 'course_id' in request.GET: 
 			course_id= request.GET['course_id']
-
 			try: 
 				course = Course.objects.get(id=course_id) 
 				course.views = Course.views + 1
-
 				course.save() 
 				url = course.url 
 			except:
