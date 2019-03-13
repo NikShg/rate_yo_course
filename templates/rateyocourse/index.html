@@ -1,19 +1,28 @@
 {% extends 'rateyocourse/base.html' %}
 {% load staticfiles %}
+
 {% block title_block %}
 	 GradeYoCourse
 {% endblock %}
 
 {% block body_block %}
 	<div>
-	<h1>GradeIT</h1> 
-		{% if user.is_authenticated %} 
-		howdy {{ user.username }}! 
-		blahblah
-		{% else %} 
-		hey there partner! 
-		bloo bloo 
-		{% endif %}
+	<link rel="stylesheet" href="{% static "css/index.css" %}""/>
+	<div class="jumbotron">
+  <h1>Rate Yo Course</h1>
+  {% if user.is_authenticated %} 
+  <p> Welcome {{ user.username }} </p> 
+  {% else %} 
+  <p> Welcome </p>
+  {% endif %}
+  <p> The place to go to rate your courses </p>
+</div>
+		<button class=".alert .alert-info" id="show" alt="Max-width 100%">To start rating a course, why not search for your university? Click here!</button>
+		 <form class="form-inline" action="{% url 'search'  %}" method="get" accept-charset="utf-8" id="search-form" alt="Max-width 100%" >
+    <input class="form-control mr-sm-2" type="text" placeholder="University Name" name="q">
+    <button class="btn btn-success" type="submit">Search</button>
+  </form>
+	<p><a href="#" id="cancel-link"> Cancel </a></p>
 	</div>
 	
 {% endblock %}

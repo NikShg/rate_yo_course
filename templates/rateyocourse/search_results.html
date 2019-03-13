@@ -8,7 +8,7 @@
 {% block body_block %}
 
     <p>You searched for: <strong>{{ query }}</strong></p>
-
+	<!--
     {% if courses %}
         <p>Found {{ courses|length }} course{{ courses|pluralize }}.</p>
     
@@ -22,15 +22,17 @@
 		</ul>
 		
         {% endif %}
-    
+    -->
     {% if universities %}
     <p>Found {{ universities|length }} university{{ universities|pluralize }}.</p>   
     <ul>
         {% for university in universities %}
       
         <li><a href="{{ university.slug }}">{{ university.name }}</a></li>
-        
          {% endfor %}           
+		 {% else %}
+		 <p> There are no universities matching <strong> {{ query }} </strong> </p>
     </ul>
     {% endif %}
+	<p> <a href="{% url 'index' %}"> Click here to go back </p>
 {% endblock %}

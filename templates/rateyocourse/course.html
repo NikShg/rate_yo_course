@@ -9,6 +9,7 @@
 <div>
 <h1>Rate Yo Course - Courses section</h1>
 <div>
+	<p><a href="{% url 'universities' %}"> Universities</a> / <a href="{% url 'university' university.slug %}">{{ university.name }}</a></p>
 	{% if course %}
 	<h2>
 		

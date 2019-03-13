@@ -14,7 +14,8 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 
@@ -29,7 +30,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
@@ -94,11 +94,12 @@ ACCOUNT_ACTIVATION_DAYS = 7
 
 REGISTRATION_AUTO_LOGIN = True
 
+#LOGIN_REDIRECT_URL = '/rateyocourse/'
+#LOGIN_URL = '/accounts/login/'
+#LOGOUT_URL =  '/rateyocourse/'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = '/rateyocourse/'
-
-LOGIN_URL = '/accounts/login/'
-
-LOGOUT_URL =  '/rateyocourse/'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '569098240271575'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'bde071c254249f1655178756c1fbd8d8' 
@@ -115,6 +116,12 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+AUTHENTICATION_BACKENDS = [ 
+	'social_core.backends.facebook.FacebookOAuth2',
+	 'social_core.backends.twitter.TwitterOAuth',
+	'django.contrib.auth.backends.ModelBackend',
+]
 
 
 # Password validation
@@ -159,3 +166,4 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [STATIC_DIR, ]

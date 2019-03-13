@@ -21,6 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from registration.backends.simple.views import RegistrationView
 from django.contrib.auth.views import (password_reset, password_reset_done, password_reset_confirm, password_reset_complete, password_change, password_change_done)
+from django.contrib.auth import authenticate, login, logout
 
 class MyRegistrationView(RegistrationView):
 	def get_success_url(self, user):
