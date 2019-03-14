@@ -7,9 +7,10 @@
 
 {% block body_block %}
 <div>
-<p><a href="{% url 'universities' %}"> Universities</a></p>
+<p><a href="{% url 'universities' %}" id="site-map"> Universities</a></p>
 	{% if university %}
 	<h1> {{ university.name }} </h1>
+	<p id="uni-city">Location: {{university.city}} </p>
 	  {% if university.name|default:""|slice:"-1:" == "w" %}
         <img width="200" height="150" src="{% static 'glasgow.jpg' %}" alt="Picture of University"  id="picture"/>
 
@@ -18,7 +19,7 @@
  {% endif %}
 	 
 	<!--<img src="{% static '{{university.name}}/armageddon.jpg' %}" alt="Picture of University" />-->
-	<h2> Here are the courses provided by this university </h2><br/>
+	<h2> Here are some courses provided by this university that you can rate </h2><br/>
 		{% if courses %}
 			<ol>
 			{% for course in courses %}

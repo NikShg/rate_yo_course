@@ -83,17 +83,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rate_yo_course.wsgi.application'
 
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/rateyocourse/'
+
 REGISTRATION_OPEN = True
-
 ACCOUNT_ACTIVATION_DAYS = 7
-
 REGISTRATION_AUTO_LOGIN = True
 
 #LOGOUT_URL =  '/rateyocourse/'
 #LOGIN_URL = 'login'
 #LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = '/rateyocourse/'
-LOGIN_URL = '/accounts/login/'
+
 
 SOCIAL_AUTH_FACEBOOK_KEY = '569098240271575'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'bde071c254249f1655178756c1fbd8d8' 

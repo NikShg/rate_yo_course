@@ -10,19 +10,23 @@
 	<link rel="stylesheet" href="{% static "css/index.css" %}""/>
 	<div class="jumbotron">
   <h1>Rate Yo Course</h1>
+   <p> The place to go to rate your courses and get your own back</p>
+  
   {% if user.is_authenticated %} 
-  <p> Welcome {{ user.username }} </p> 
+  <h3> Welcome {{ user.username }} </h3> 
   {% else %} 
-  <p> Welcome unauthenticated user</p>
+  <h3> Welcome unauthenticated user</h3>
   {% endif %}
-  <p> The place to go to rate your courses </p>
+ 
 </div>
-		<button class=".alert .alert-info" id="show" alt="Max-width 100%">To start rating a course, why not search for your university? Click here!</button>
+
+		<button class=".alert .alert-info" id="show" >To get started, why not search for your university? Click here!</button>
+		
 		 <form class="form-group" action="{% url 'search'  %}" method="get" accept-charset="utf-8" id="search-form" >
     <input class="form-control" type="text" placeholder="University Name" name="q">
     <p><button class="btn btn-success" type="submit">Search</button></p>
   </form>
 	<p><a href="#" id="cancel-link"> Cancel </a></p>
 	</div>
-	
+		
 {% endblock %}
