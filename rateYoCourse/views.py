@@ -4,10 +4,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from rateYoCourse.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
 from datetime import datetime
 from django.contrib.auth.models import User
 from rateYoCourse.models import UserProfile, University, Course
@@ -63,7 +61,6 @@ def register(request):
 
 		if user_form.is_valid() and profile_form.is_valid():
 			user = user_form.save()
-
 			user.set_password(user.password)
 			user.save()
 
@@ -91,7 +88,7 @@ def register(request):
 def user_login(request):
 	if request.method == 'POST':
 		username = request.POST.get('username')
-		pasword = request.POST.get('password')
+		password = request.POST.get('password')
 
 		user = authenticate(username=username, password=password)
 
@@ -140,7 +137,6 @@ def show_university(request, university_name_slug):
 	#context_dict = {'boldmessage': "Here will be all the info you need!"}
 	return render(request, 'rateYoCourse/university.html', context=context_dict)
 
-
 def show_course(request, university_name_slug, course_name_slug):
 	context_dict = {}
 	try:
@@ -152,7 +148,7 @@ def show_course(request, university_name_slug, course_name_slug):
 		context_dict['course'] = None
 		context_dict['university'] = None
 
-	context_dict['query'] = course.name
+	context_dict['query'] = course.name #from here til end of if might have been deleted between pulls
 	result_list = []
 	if request.method == 'POST':
 		query = request.POST['query'].strip()

@@ -1,28 +1,25 @@
 {% extends 'rateyocourse/base.html' %}
 {% load staticfiles %}
-<<<<<<< Updated upstream
-=======
 {% load static %}
 {% load ratings %}
 {% ratings courses %} <!-- or course?-->
 
->>>>>>> Stashed changes
+=======
+
+>>>>>>> origin/master
 {% block title_block %}
 	 Courses
 {% endblock %}
 
 {% block body_block %}
-
 <div>
 <h1>Rate Yo Course - Courses section</h1>
-<<<<<<< Updated upstream
 
-=======
 <div>
 	{% if course %}
 	<h2>
 
-				<a href="{{ course.url }}">{{ university.name}}:  {{ course.name }}</a></h2></li> <!--<p> Course rating {{ course.rating }} </li> -->
+				<a href="{{ course.url }}">{{ university.name}}:  {{ course.name }}</a></h2></li>
 
 
 			</ul>
@@ -38,5 +35,4 @@
 	        <input type="submit" id="id_submit">
 	    </form>
 	{% endblock %}
->>>>>>> Stashed changes
 {% endblock %}

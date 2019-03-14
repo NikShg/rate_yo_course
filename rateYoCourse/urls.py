@@ -13,5 +13,4 @@ urlpatterns = [
 	url(r'^university/(?P<university_name_slug>[\w\-]+)/$', views.show_university, name='university'),
 	url(r'^university/$', views.show_university_, name='universities'),
 	url(r'^university/(?P<university_name_slug>[\w\-]+)/courses/(?P<course_name_slug>[\w\-]+)/$', views.show_course, name='course'),
-
 	]

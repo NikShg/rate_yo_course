@@ -1,21 +1,20 @@
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rate_yo_course.settings')
 
-
 import django
 django.setup()
 from rateYoCourse.models import University, Course
 
 
 def populate():
-     University_of_Glasgow_courses = [
-        {"name": "Internet Technology", "url": "https://www.gla.ac.uk/postgraduate/taught/informationtechnology/?card=course&code=COMPSCI5012"},
-        {"name": "Advanced Programming", "url": "https://www.gla.ac.uk/postgraduate/taught/softwaredevelopment/?card=course&code=COMPSCI5002"}
+    University_of_Glasgow_courses = [
+        {"name": "Internet Technology", "url": "https://www.gla.ac.uk/postgraduate/taught/informationtechnology/?card=course&code=COMPSCI5012", "rating": 5},
+        {"name": "Advanced Programming", "url": "https://www.gla.ac.uk/postgraduate/taught/softwaredevelopment/?card=course&code=COMPSCI5002", "rating": 3}
     ]
 
     University_of_Edinburgh_courses = [
-        {"name":"Computer Science BSc", "url":"https://www.ed.ac.uk/studying/undergraduate/degrees/index.php?action=programme&code=G400"},
-        {"name":"Artificial Intelligence BSc", "url":"https://www.ed.ac.uk/studying/undergraduate/degrees/index.php?action=programme&code=G700"},
+        {"name":"Computer Science BSc", "url": "https://www.ed.ac.uk/studying/undergraduate/degrees/index.php?action=programme&code=G400", "rating": 0},
+        {"name":"Artificial Intelligence BSc", "url": "https://www.ed.ac.uk/studying/undergraduate/degrees/index.php?action=programme&code=G700", "rating": 1},
     ]
 
     unis = {"University of Glasgow": {"courses": University_of_Glasgow_courses, "city": "Glasgow", "url": "https://www.gla.ac.uk"}, "University of Edinburgh": {"courses": University_of_Edinburgh_courses, "city": "Edinburgh", "url": "https://www.ed.ac.uk"}}
@@ -32,7 +31,7 @@ def populate():
 def add_course(uni, name, url): #, rating=0
 	c = Course.objects.get_or_create(university=uni, name=name)[0]
 	c.url=url
-	##c.rating = rating
+    c.rating = rating
 	c.save()
 	return c
 

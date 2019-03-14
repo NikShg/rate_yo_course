@@ -18,15 +18,16 @@ class University(models.Model):
 		super(University, self).save(*args, **kwargs)
 
 	class Meta:
-		verbose_name_plural = 'Universities'
+		verbose_name_plural = 'universities'
 
 	def __str__(self):
 		return self.name
 
 class Course(models.Model):
+	university = models.ForeignKey(University)
 	name = models.CharField(max_length=256, null=False)
 	url = models.URLField(null=False)
-	##rating = models.IntegerField(default=0)-
+	rating = models.IntegerField(default=0)
 	slug = models.SlugField(unique=True)
 
 	def save(self, *args, **kwargs):
@@ -38,6 +39,7 @@ class Course(models.Model):
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
+	#should we display reviews in the userprofile?
 	picture = models.ImageField(upload_to='profile_images', blank=True)
 
 	def __str__(self):
