@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 {% load staticfiles %}
 <html lang="en">
@@ -82,13 +83,17 @@ Login
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-3 col-md-2 sidebar">
+
 {% block sidebar_block %}
 {% endblock %}
 </div>
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
 <div class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 main">
 {% block body_block %}
 {% endblock %}
+
 </div>
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.js' %}"></script>
 </div>
 </div>
 <!-- Bootstrap core JavaScript

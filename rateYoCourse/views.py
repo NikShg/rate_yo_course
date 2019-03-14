@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
@@ -8,6 +9,10 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.contrib.auth.models import User
 from rateYoCourse.models import UserProfile, University, Course
+from rateYoCourse.models import Rate
+from star_ratings.models import Rating
+from django.views.generic import DetailView, TemplateView
+
 from django.shortcuts import redirect
 from django.db.models import Q
 
@@ -51,7 +56,7 @@ def visitor_cookie_handler(request):
 @login_required
 def home(request):
 	return render(request, 'index.html')
-	
+
 #def register(request):
 	registered = False
 	if request.method == 'POST':
@@ -66,7 +71,7 @@ def home(request):
 			profile = profile_form.save(commit = False)
 			user.set_password(user.password)
 			user.save()
-			
+
 			profile = profile_form.save(commit=False)
 			profile.user = user
 
@@ -84,7 +89,7 @@ def home(request):
 
 	return render(request, 'rateyocourse/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
-	
+
 #def user_login(request):
 	if request.method == 'POST':
 		username = request.POST.get('username')
@@ -105,7 +110,7 @@ def home(request):
 			return HttpResponse("Invalid login details supplied.")
 	else:
 		return render(request, 'rateyocourse/login.html', {})
-		
+
 		#Commenting out as using registration app package
 #@login_required
 #def user_logout(request):
@@ -125,7 +130,7 @@ def show_university_(request):
 # A selection of courses are fetched depending on the selected university and sorted in ascending order.
 def show_university(request, university_name_slug):
 	context_dict = {}
-	
+
 	try:
 		university = University.objects.get(slug=university_name_slug)
 		courses = Course.objects.filter(university=university).order_by('name')
@@ -149,35 +154,51 @@ def show_course(request, university_name_slug, course_name_slug):
 		context_dict['university'] = None
 
 	context_dict['query'] = course.name
-	result_list = [] 
+	result_list = []
 	if request.method == 'POST':
 		query = request.POST['query'].strip()
 
-		if query: 
-			result_list = run_query(query) 
-			context_dict['query'] = query 
+		if query:
+			result_list = run_query(query)
+			context_dict['query'] = query
 			context_dict['result_list'] = result_list
 
 	return render(request, 'rateYoCourse/course.html', context=context_dict)
+
+class RateView(DetailView):
+    model = Rate
+
+    def get_object(self, queryset=None):
+        obj, created = self.model.objects.get_or_create(bar='rate bar baz')
+        return obj
+
+
+class SizesView(TemplateView):
+    model = Rate
+    template_name = 'sizes.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['sizes'] = {size: self.model.objects.get_or_create(bar=str(size))[0] for size in range(10, 40)}
+        return super(SizesView, self).get_context_data(**kwargs)
 
 
 @login_required
 def register_profile(request):
 	form = UserProfileForm()
-	
+
 	if request.method == 'POST':
 		form = UserProfileForm(request.POST, request.FILES)
 		if form.is_valid():
 			user_profile = form.save(commit=False)
 			user_profile.user = request.user
 			user_profile.save()
-			
+
 			return redirect('index')
 		else:
 			print(form.errors)
-			
+
 	context_dict = {'form': form}
-	
+
 	return render(request, 'rateyocourse/profile_registration.html', context_dict)
 
 @login_required
@@ -186,10 +207,10 @@ def profile(request, username):
 		user = User.objects.get(username=username)
 	except User.DoesNotExist:
 		return redirect('index')
-		
+
 	userprofile = UserProfile.objects.get_or_create(user=user)[0]
 	form = UserProfileForm({'picture': userprofile.picture})
-	
+
 	if request.method == 'POST':
 		form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
 		if form.is_valid():
@@ -197,33 +218,32 @@ def profile(request, username):
 			return redirect('profile', user.username)
 		else:
 			print(form.errors)
-	
+
 	return render(request, 'rateyocourse/profile.html', {'userprofile': userprofile, 'selecteduser': user, 'form': form})
-	
+
 @login_required
 def list_profiles(request):
 	userprofile_list = UserProfile.objects.all()
-	
-	return render(request, 'rateyocourse/list_profiles.html', {'userprofile_list': userprofile_list})
 
-def track_url(request): 
-	course_id = None 
-	url = '/rateyocourse/' 
-	if request.method == 'GET': 
-		if 'course_id' in request.GET: 
+	return render(request, 'rateyocourse/list_profiles.html', {'userprofile_list': userprofile_list})
+def track_url(request):
+	course_id = None
+	url = '/rateyocourse/'
+	if request.method == 'GET':
+		if 'course_id' in request.GET:
 			course_id= request.GET['course_id']
-			try: 
-				course = Course.objects.get(id=course_id) 
+			try:
+				course = Course.objects.get(id=course_id)
 				course.views = Course.views + 1
-				course.save() 
-				url = course.url 
+				course.save()
+				url = course.url
 			except:
 				pass
 	return redirect(url)
 
 
 def search(request):
-	error = False 
+	error = False
 	if'q' in request.GET:
 		q = request.GET['q']
 		if not q:
@@ -232,8 +252,8 @@ def search(request):
 			course = Course.objects.filter(name__icontains = q)
 			university = University.objects.filter(name__icontains = q)
 			return render(request, 'rateyocourse/search_results.html', {'universities':university, 'courses':course,'query': q})
-			
-			
+
+
 	return render(request, 'rateyocourse/search_form.html',{'error':error})
 
 #@login_required
@@ -270,6 +290,3 @@ def search(request):
     #else:
       #  form = PasswordForm(request.user)
 #    return render(request, 'core/password.html', {'form': form})
-
-
-
