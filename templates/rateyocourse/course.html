@@ -1,5 +1,12 @@
 {% extends 'rateyocourse/base.html' %}
 {% load staticfiles %}
+<<<<<<< Updated upstream
+=======
+{% load static %}
+{% load ratings %}
+{% ratings courses %} <!-- or course?-->
+
+>>>>>>> Stashed changes
 {% block title_block %}
 	 Courses
 {% endblock %}
@@ -8,5 +15,28 @@
 
 <div>
 <h1>Rate Yo Course - Courses section</h1>
+<<<<<<< Updated upstream
 
+=======
+<div>
+	{% if course %}
+	<h2>
+
+				<a href="{{ course.url }}">{{ university.name}}:  {{ course.name }}</a></h2></li> <!--<p> Course rating {{ course.rating }} </li> -->
+
+
+			</ul>
+			{% else %}
+				<strong>This is not a course provided by any university.</strong>
+			{% endif %}
+	</div>
+	{% ratings course %}
+	{% block content %}
+	    <form method="post">
+	        {% csrf_token %}
+	        {{ form.as_p }}
+	        <input type="submit" id="id_submit">
+	    </form>
+	{% endblock %}
+>>>>>>> Stashed changes
 {% endblock %}

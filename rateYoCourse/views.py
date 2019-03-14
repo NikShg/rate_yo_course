@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from __future__ import unicode_literals
+from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect, HttpResponse
 from rateYoCourse.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
@@ -6,6 +9,12 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from datetime import datetime
+from django.contrib.auth.models import User
+from rateYoCourse.models import UserProfile, University, Course
+from rateYoCourse.models import Rate
+from star_ratings.models import Rating
+from django.views.generic import DetailView, TemplateView
+
 
 
 # Create your views here.
@@ -59,6 +68,10 @@ def register(request):
 			user.save()
 
 			profile = profile_form.save(commit = False)
+			user.set_password(user.password)
+			user.save()
+
+			profile = profile_form.save(commit=False)
 			profile.user = user
 
 			if 'picture' in request.FILES:
@@ -96,17 +109,119 @@ def user_login(request):
 	else:
 		return render(request, 'rateyocourse/login.html', {})
 
+
+
 @login_required
 def user_logout(request):
 	logout(request)
 
 	return HttpResponseRedirect(reverse('index'))
 
-def university(request):
+def show_university_(request):
+	context_dict = {}
+	universities = University.objects.all()
+	#'university_names = University.objects.get(slug=university_name_slug)
+	context_dict['universities'] = universities
+	#context_dict['university_names'] = university_names
+	return render(request, 'rateYoCourse/universities.html', context=context_dict)
 
-	context_dict = {'boldmessage': "Here will be all the info you need!"}
+
+def show_university(request, university_name_slug):
+	context_dict = {}
+
+	try:
+		university = University.objects.get(slug=university_name_slug)
+		courses = Course.objects.filter(university=university)
+		context_dict['courses'] = courses
+		context_dict['university'] = university
+	except:
+		context_dict['university'] = None
+		context_dict['courses'] = None
+	#context_dict = {'boldmessage': "Here will be all the info you need!"}
 	return render(request, 'rateYoCourse/university.html', context=context_dict)
 
-def course(request):
-	context_dict = {'boldmessage': "Here will be all the info you need!"}
+
+def show_course(request, university_name_slug, course_name_slug):
+	context_dict = {}
+	try:
+		university = University.objects.get(slug=university_name_slug)
+		course = Course.objects.get(slug=course_name_slug)
+		context_dict['course'] = course
+		context_dict['university'] = university
+	except Course.DoesNotExist:
+		context_dict['course'] = None
+		context_dict['university'] = None
+
+	context_dict['query'] = course.name
+	result_list = []
+	if request.method == 'POST':
+		query = request.POST['query'].strip()
+
+		if query:
+			result_list = run_query(query)
+			context_dict['query'] = query
+			context_dict['result_list'] = result_list
+
 	return render(request, 'rateYoCourse/course.html', context=context_dict)
+
+class RateView(DetailView):
+    model = Rate
+
+    def get_object(self, queryset=None):
+        obj, created = self.model.objects.get_or_create(bar='rate bar baz')
+        return obj
+
+
+class SizesView(TemplateView):
+    model = Rate
+    template_name = 'sizes.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['sizes'] = {size: self.model.objects.get_or_create(bar=str(size))[0] for size in range(10, 40)}
+        return super(SizesView, self).get_context_data(**kwargs)
+
+
+@login_required
+def register_profile(request):
+	form = UserProfileForm()
+
+	if request.method == 'POST':
+		form = UserProfileForm(request.POST, request.FILES)
+		if form.is_valid():
+			user_profile = form.save(commit=False)
+			user_profile.user = request.user
+			user_profile.save()
+
+			return redirect('index')
+		else:
+			print(form.errors)
+
+	context_dict = {'form': form}
+
+	return render(request, 'rateyocourse/profile_registration.html', context_dict)
+
+@login_required
+def profile(request, username):
+	try:
+		user = User.objects.get(username=username)
+	except User.DoesNotExist:
+		return redirect('index')
+
+	userprofile = UserProfile.objects.get_or_create(user=user)[0]
+	form = UserProfileForm({'picture': userprofile.picture})
+
+	if request.method == 'POST':
+		form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+		if form.is_valid():
+			form.save(commit=True)
+			return redirect('profile', user.username)
+		else:
+			print(form.errors)
+
+	return render(request, 'rateyocourse/profile.html', {'userprofile': userprofile, 'selecteduser': user, 'form': form})
+
+@login_required
+def list_profiles(request):
+	userprofile_list = UserProfile.objects.all()
+
+	return render(request, 'rateyocourse/list_profiles.html', {'userprofile_list': userprofile_list})

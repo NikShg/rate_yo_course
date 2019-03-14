@@ -1,0 +1,13 @@
+{% extends 'rateyocourse/base.html' %}
+{% load staticfiles %}
+{% load ratings %}
+
+{% for image in images %}
+    {% ratings image %}
+{% endfor %}
+
+{% for item in ratings %}
+
+    {{ rating.name }} and {{ rating.ratings }}
+
+{% endfor %}
