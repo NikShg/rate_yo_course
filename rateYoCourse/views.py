@@ -15,9 +15,7 @@ from django.db.models import Q
 def index(request):
 	context_dict = {}
 	visitor_cookie_handler(request)
-
 	context_dict['visits'] = request.session['visits']
-
 	response = render(request, 'rateyocourse/index.html', context=context_dict)
 	return response
 
@@ -47,14 +45,14 @@ def visitor_cookie_handler(request):
 
 	request.session['visits'] = visits
 
-def login(request):
-	return render(request, 'login.html')
+#def login(request):
+	#return render(request, 'login.html')
 
 @login_required
 def home(request):
 	return render(request, 'index.html')
 	
-def register(request):
+#def register(request):
 	registered = False
 	if request.method == 'POST':
 		user_form = UserForm(data=request.POST)
@@ -87,7 +85,7 @@ def register(request):
 	return render(request, 'rateyocourse/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 	
-def user_login(request):
+#def user_login(request):
 	if request.method == 'POST':
 		username = request.POST.get('username')
 		password = request.POST.get('password')
@@ -107,12 +105,13 @@ def user_login(request):
 			return HttpResponse("Invalid login details supplied.")
 	else:
 		return render(request, 'rateyocourse/login.html', {})
-
+		
+		#Commenting out as using registration app package
 #@login_required
 #def user_logout(request):
-#	logout(request)
-#
-	#return HttpResponseRedirect(reverse('index'))
+	logout(request)
+
+	return HttpResponseRedirect(reverse('index'))
 
 # This function returns the view for the list of universities. Universities are fetched
 # from the university table and sorted by name asscending.

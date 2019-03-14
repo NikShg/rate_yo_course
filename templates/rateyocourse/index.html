@@ -13,14 +13,14 @@
   {% if user.is_authenticated %} 
   <p> Welcome {{ user.username }} </p> 
   {% else %} 
-  <p> Welcome </p>
+  <p> Welcome unauthenticated user</p>
   {% endif %}
   <p> The place to go to rate your courses </p>
 </div>
 		<button class=".alert .alert-info" id="show" alt="Max-width 100%">To start rating a course, why not search for your university? Click here!</button>
-		 <form class="form-inline" action="{% url 'search'  %}" method="get" accept-charset="utf-8" id="search-form" alt="Max-width 100%" >
-    <input class="form-control mr-sm-2" type="text" placeholder="University Name" name="q">
-    <button class="btn btn-success" type="submit">Search</button>
+		 <form class="form-group" action="{% url 'search'  %}" method="get" accept-charset="utf-8" id="search-form" >
+    <input class="form-control" type="text" placeholder="University Name" name="q">
+    <p><button class="btn btn-success" type="submit">Search</button></p>
   </form>
 	<p><a href="#" id="cancel-link"> Cancel </a></p>
 	</div>
