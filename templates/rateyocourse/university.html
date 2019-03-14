@@ -1,5 +1,6 @@
 {% extends 'rateyocourse/base.html' %}
 {% load staticfiles %}
+{% load ratings %}
 
 {% block title_block %}
 	 GradeYoCourse - University
@@ -7,12 +8,13 @@
 
 {% block body_block %}
 <div>
+
 	{% if university %}
 	<h1> {{ university.name }} </h1>
 		{% if courses %}
 			<ul>
 			{% for course in courses %}
-				<a href="{% url 'course' university.slug course.slug %}">{{ course.name }}</a>: Course rating {{ course.rating }} </li><br/>
+				<a href="{% url 'course' university.slug course.slug %}">{{ course.name }}</a></li><br/> <!--: Course rating {{ course.rating }} </li><br/>-->
 				<!--<li><a href="{{ course.url }}">{{ course.name }}</a>: Course rating {{ course.rating }} </li>-->
 			{% endfor %}
 			</ul>
@@ -23,4 +25,14 @@
 			The specified university does not exist!
 		{% endif %}
 	</div>
+
+{% ratings university %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" id="id_submit">
+    </form>
+{% endblock %}
+
 {% endblock %}

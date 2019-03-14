@@ -29,6 +29,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 
 MEDIA_ROOT = MEDIA_DIR
@@ -45,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rateYoCourse',
 	'registration',
+    'star_ratings'
 ]
 
 MIDDLEWARE = [
@@ -72,6 +76,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -88,6 +93,9 @@ REGISTRATION_AUTO_LOGIN = True
 LOGIN_REDIRECT_URL = '/rateyocourse/'
 
 LOGIN_URL = '/accounts/login/'
+
+# Star Ratings settings
+
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases

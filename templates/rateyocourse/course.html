@@ -1,6 +1,12 @@
 {% extends 'rateyocourse/base.html' %}
 {% load staticfiles %}
+{% load static %}
+{% load ratings %}
+{% ratings courses %} <!-- or course?-->
 
+=======
+
+>>>>>>> origin/master
 {% block title_block %}
 	 Courses
 {% endblock %}
@@ -8,17 +14,25 @@
 {% block body_block %}
 <div>
 <h1>Rate Yo Course - Courses section</h1>
+
 <div>
 	{% if course %}
 	<h2>
-		
-				<a href="{{ course.url }}">{{ university.name}}:  {{ course.name }}</a></h2>
-				<p> Course rating {{ course.rating }} </li> 
-				
+
+				<a href="{{ course.url }}">{{ university.name}}:  {{ course.name }}</a></h2></li>
+
 
 			</ul>
 			{% else %}
 				<strong>This is not a course provided by any university.</strong>
 			{% endif %}
 	</div>
+	{% ratings course %}
+	{% block content %}
+	    <form method="post">
+	        {% csrf_token %}
+	        {{ form.as_p }}
+	        <input type="submit" id="id_submit">
+	    </form>
+	{% endblock %}
 {% endblock %}
