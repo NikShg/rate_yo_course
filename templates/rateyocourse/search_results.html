@@ -1,0 +1,38 @@
+{% extends 'rateyocourse/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Search results
+{% endblock %}
+
+{% block body_block %}
+
+    <p>You searched for: <strong>{{ query }}</strong></p>
+	<!--
+    {% if courses %}
+        <p>Found {{ courses|length }} course{{ courses|pluralize }}.</p>
+    
+        <ul>
+			{% for course in courses %}
+			<li>
+                <a href="{% url 'goto' %}?course_id={{course.id}}">{{ course.name }}</a>: Course rating {{ course.rating }}
+                    
+            </li>
+            {% endfor %}           
+		</ul>
+		
+        {% endif %}
+    -->
+    {% if universities %}
+    <p>Found {{ universities|length }} university{{ universities|pluralize }}.</p>   
+    <ul>
+        {% for university in universities %}
+      
+        <li><a href="{{ university.slug }}">{{ university.name }}</a></li>
+         {% endfor %}           
+		 {% else %}
+		 <p> There are no universities matching <strong> {{ query }} </strong> </p>
+    </ul>
+    {% endif %}
+	<p> <a href="{% url 'index' %}"> Click here to go back </p>
+{% endblock %}

@@ -13,17 +13,14 @@ from rateYoCourse.models import Rate
 from star_ratings.models import Rating
 from django.views.generic import DetailView, TemplateView
 
+from django.shortcuts import redirect
+from django.db.models import Q
 
 
-# Create your views here.
-# Itech team AB - if program won't run, comment out some of these views
 def index(request):
 	context_dict = {}
 	visitor_cookie_handler(request)
-
-
 	context_dict['visits'] = request.session['visits']
-
 	response = render(request, 'rateyocourse/index.html', context=context_dict)
 	return response
 
@@ -53,7 +50,14 @@ def visitor_cookie_handler(request):
 
 	request.session['visits'] = visits
 
-def register(request):
+#def login(request):
+	#return render(request, 'login.html')
+
+@login_required
+def home(request):
+	return render(request, 'index.html')
+
+#def register(request):
 	registered = False
 	if request.method == 'POST':
 		user_form = UserForm(data=request.POST)
@@ -85,7 +89,8 @@ def register(request):
 
 	return render(request, 'rateyocourse/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
-def user_login(request):
+
+#def user_login(request):
 	if request.method == 'POST':
 		username = request.POST.get('username')
 		password = request.POST.get('password')
@@ -106,37 +111,37 @@ def user_login(request):
 	else:
 		return render(request, 'rateyocourse/login.html', {})
 
-
-
-@login_required
-def user_logout(request):
+		#Commenting out as using registration app package
+#@login_required
+#def user_logout(request):
 	logout(request)
 
 	return HttpResponseRedirect(reverse('index'))
 
+# This function returns the view for the list of universities. Universities are fetched
+# from the university table and sorted by name asscending.
 def show_university_(request):
 	context_dict = {}
-	universities = University.objects.all()
-	#'university_names = University.objects.get(slug=university_name_slug)
+	universities = University.objects.all().order_by('name')
 	context_dict['universities'] = universities
-	#context_dict['university_names'] = university_names
 	return render(request, 'rateYoCourse/universities.html', context=context_dict)
 
-
+# This function returns the view for the list of courses provided by a university. #
+# A selection of courses are fetched depending on the selected university and sorted in ascending order.
 def show_university(request, university_name_slug):
 	context_dict = {}
 
 	try:
 		university = University.objects.get(slug=university_name_slug)
-		courses = Course.objects.filter(university=university)
+		courses = Course.objects.filter(university=university).order_by('name')
 		context_dict['courses'] = courses
 		context_dict['university'] = university
 	except:
 		context_dict['university'] = None
 		context_dict['courses'] = None
-	#context_dict = {'boldmessage': "Here will be all the info you need!"}
 	return render(request, 'rateYoCourse/university.html', context=context_dict)
 
+# This view defines method that returns the information for a particular course provided by a particular university
 def show_course(request, university_name_slug, course_name_slug):
 	context_dict = {}
 	try:
@@ -148,7 +153,7 @@ def show_course(request, university_name_slug, course_name_slug):
 		context_dict['course'] = None
 		context_dict['university'] = None
 
-	context_dict['query'] = course.name #from here til end of if might have been deleted between pulls
+	context_dict['query'] = course.name
 	result_list = []
 	if request.method == 'POST':
 		query = request.POST['query'].strip()
@@ -221,3 +226,67 @@ def list_profiles(request):
 	userprofile_list = UserProfile.objects.all()
 
 	return render(request, 'rateyocourse/list_profiles.html', {'userprofile_list': userprofile_list})
+def track_url(request):
+	course_id = None
+	url = '/rateyocourse/'
+	if request.method == 'GET':
+		if 'course_id' in request.GET:
+			course_id= request.GET['course_id']
+			try:
+				course = Course.objects.get(id=course_id)
+				course.views = Course.views + 1
+				course.save()
+				url = course.url
+			except:
+				pass
+	return redirect(url)
+
+
+def search(request):
+	error = False
+	if'q' in request.GET:
+		q = request.GET['q']
+		if not q:
+			error = True
+		else:
+			course = Course.objects.filter(name__icontains = q)
+			university = University.objects.filter(name__icontains = q)
+			return render(request, 'rateyocourse/search_results.html', {'universities':university, 'courses':course,'query': q})
+
+
+	return render(request, 'rateyocourse/search_form.html',{'error':error})
+
+#@login_required
+#def settings(request):
+  #  user = request.user
+    #try:
+       # facebook_login = user.social_auth.get(provider='facebook')
+    #except UserSocialAuth.DoesNotExist:
+      #  facebook_login = None
+
+    #can_disconnect = (user.social_auth.count() > 1 or user.has_usable_password())
+
+    #return render(request, 'rateyocourse/settings.html', {
+      #  'facebook_login': facebook_login,
+       # 'can_disconnect': can_disconnect
+    #})
+	#
+#@login_required
+#def password(request):
+ #   if request.user.has_usable_password():
+   #     PasswordForm = PasswordChangeForm
+    #else:
+      #  PasswordForm = AdminPasswordChangeForm
+
+    #if request.method == 'POST':
+      #  form = PasswordForm(request.user, request.POST)
+       # if form.is_valid():
+         #   form.save()
+          #  update_session_auth_hash(request, form.user)
+            #messages.success(request, 'Your password was successfully updated!')
+            #return redirect('password')
+        #else:
+          #  messages.error(request, 'Please correct the error below.')
+    #else:
+      #  form = PasswordForm(request.user)
+#    return render(request, 'core/password.html', {'form': form})

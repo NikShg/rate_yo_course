@@ -21,6 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from registration.backends.simple.views import RegistrationView
 from django.contrib.auth.views import (password_reset, password_reset_done, password_reset_confirm, password_reset_complete, password_change, password_change_done)
+from django.core.urlresolvers import reverse
 
 class MyRegistrationView(RegistrationView):
 	def get_success_url(self, user):
@@ -28,10 +29,12 @@ class MyRegistrationView(RegistrationView):
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^rateyocourse/', include('rateYoCourse.urls')),
+	url(r'^rateyocourse/', include('rateYoCourse.urls')),
     url(r'^admin/', admin.site.urls),
-	url(r'^accounts/', include('registration.backends.simple.urls')),
 	url(r'^accounts/register/$', MyRegistrationView.as_view(), name='registration_register'),
+	url(r'^accounts/', include('registration.backends.simple.urls')),
+	url(r'^accounts/profile/(?P<username>[\w\-]+)/$', views.profile, name='profile'),
+	url(r'^accounts/profile/$', views.list_profiles, name='list_profiles'),
 	url(r'^accounts/password/change/$', password_change, name='password_change_form'),
 	url(r'^accounts/password/change/done/$', password_change_done, name='password_change_done'),
 	url(r'^accounts/password/reset/$', password_reset, name='password_reset'),

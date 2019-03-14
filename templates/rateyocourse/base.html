@@ -1,53 +1,115 @@
 {% load static %}
 <!DOCTYPE html>
-
 {% load staticfiles %}
-<html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,
+initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>
+RateYoCourse {% block title %}{% endblock %}
+</title>
+<!-- Bootstrap core CSS -->
+<link href="http://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css"
+rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href=
+"http://v4-alpha.getbootstrap.com/examples/dashboard/dashboard.css"
+rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+<button class="navbar-toggler navbar-toggler-right hidden-lg-up"
+type="button"
+data-toggle="collapse"
+data-target="#navbar"
+aria-controls="navbar"
+aria-expanded="false"
+aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<a class="navbar-brand" href="{% url 'index' %}">RateYoCourse</a>
+<div class="collapse navbar-collapse" id="navbar">
+<ul class="navbar-nav mr-auto">
+ <li class="nav-item active">
+<a class="nav-link" href="{% url 'index' %}" id="nbtn">
+Home
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{% url 'universities' %}"   id="nbtn">
+Universities
+</a>
+</li>
+<li class="nav-item"  >
+<a class="nav-link" href="{% url 'about' %}" id="nbtn">
+About
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{% url 'list_profiles' %}">
+Registered Users
+</a>
+</li>
+{% if user.is_authenticated %}
+<li class="nav-item">
+<a class="nav-link" href="{% url 'profile' user.username %}">
+Profile
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{% url 'auth_logout' %}?next=/rateyocourse/"  id="nbtn">
+Logout
+</a>
+</li>
+{% else %}
+<li class="nav-item"  >
+<a class="nav-link" href="{% url 'registration_register' %}" id="nbtn">
+Register Here
+</a>
+</li>
+<li class="nav-item" >
+<a class="nav-link" href="{% url 'auth_login' %}"  id="nbtn">
+Login
+</a>
+</li>
+{% endif %}
+</ul>
+</div>
+</nav>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-3 col-md-2 sidebar">
 
-	<head>
+{% block sidebar_block %}
+{% endblock %}
+</div>
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<div class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 main">
+{% block body_block %}
+{% endblock %}
 
-		<title>
-
-			GradeYoCourse
-
-			{% block title_block %}
-
-				Rate it!
-
-			{% endblock %}
-
-		</title>
-		 <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
-
-	</head>
-
-	<body>
-		<div>
-
-			{% block body_block %}
-			{% endblock %}
-
-		</div>
-
-		 <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.js' %}"></script>
-
-		<hr />
-
-		<div>
-			<ul>
-				{% if user.is_authenticated %}
-					<li><a href="{% url 'list_profiles' %}">List Profiles<a></li>
-					<li><a href="{% url 'profile' user.username %}">Profile</a></li>
-					<li><a href="{% url 'password_change_form' %}">Change your password</a></li>
-					<li><a href="{% url 'logout' %}">Logout</a></li>
-				{% else %}
-					<li><a href="{% url 'login' %}">Login</a></li>
-					<li><a href="{% url 'register' %}">Register</a></li>
-				{% endif %}
-					<li><a href="{% url 'about' %}">About</a></li>
-					<li><a href="{% url 'index' %}">Index</a></li>
-					<li><a href="{% url 'universities' %}">Universities</a></li>
-			</ul>
-		</div>
-	</body>
+</div>
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.js' %}"></script>
+</div>
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script
+src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
+</script>
+<script
+src="http://v4-alpha.getbootstrap.com/dist/js/bootstrap.min.js">
+</script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script
+src=
+"http://v4-alpha.getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js">
+</script>
+  <script src="{% static "js/itech.js" %}"></script>
+</body>
 </html>

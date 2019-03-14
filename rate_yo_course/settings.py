@@ -14,7 +14,8 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 
@@ -48,7 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rateYoCourse',
 	'registration',
-    'star_ratings'
+    'star_ratings',
+	'social_django',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'rate_yo_course.urls'
@@ -77,6 +80,8 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
+				'social_django.context_processors.backends',
+				'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -90,13 +95,18 @@ ACCOUNT_ACTIVATION_DAYS = 7
 
 REGISTRATION_AUTO_LOGIN = True
 
+#LOGOUT_URL =  '/rateyocourse/'
+#LOGIN_URL = 'login'
+#LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = '/rateyocourse/'
-
 LOGIN_URL = '/accounts/login/'
 
-# Star Ratings settings
-
-
+SOCIAL_AUTH_FACEBOOK_KEY = '569098240271575'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'bde071c254249f1655178756c1fbd8d8'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/settings/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/settings/'
+SOCIAL_AUTH_RAISE_EXCEPTIONS = False
+SESSION_COOKIE_SECURE = True
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -107,6 +117,11 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+	 'social_core.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -127,7 +142,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-PASSWORD_HASHERRS = (
+PASSWORD_HASHERS = (
 	'django.contrib.auth.hashers.PBKDF2PasswordHasher',
 	'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
 )
@@ -150,3 +165,4 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [STATIC_DIR, ]
