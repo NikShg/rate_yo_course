@@ -21,6 +21,9 @@ rel="stylesheet">
 rel="stylesheet">
 </head>
 <body>
+<br>
+<h1><t class="text-danger"><p align="center"><strong>Rate Yo Course</strong></p></t></h1>
+<br>
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
 <button class="navbar-toggler navbar-toggler-right hidden-lg-up"
 type="button"
@@ -31,7 +34,7 @@ aria-expanded="false"
 aria-label="Toggle navigation">
 <span class="navbar-toggler-icon"></span>
 </button>
-<a class="navbar-brand" href="{% url 'index' %}">RateYoCourse</a>
+
 <div class="collapse navbar-collapse" id="navbar">
 <ul class="navbar-nav mr-auto">
  <li class="nav-item active">
@@ -80,20 +83,14 @@ Login
 </ul>
 </div>
 </nav>
-<div class="container-fluid">
-<div class="row">
-<div class="col-sm-3 col-md-2 sidebar">
 
 {% block sidebar_block %}
 {% endblock %}
 </div>
-<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
 <div class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 main">
 {% block body_block %}
 {% endblock %}
-
 </div>
-<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.js' %}"></script>
 </div>
 </div>
 <!-- Bootstrap core JavaScript
