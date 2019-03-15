@@ -87,10 +87,16 @@ Login
 {% block sidebar_block %}
 {% endblock %}
 </div>
+<!--star_ratings-->
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<!--end of star_ratings-->
 <div class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 main">
 {% block body_block %}
 {% endblock %}
 </div>
+<!--star_ratings-->
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+<!--end of star_ratings-->
 </div>
 </div>
 <!-- Bootstrap core JavaScript
