@@ -7,11 +7,10 @@
 
 {% block body_block %}
  <br>
-<div align="center" class="col-md-8 center-block">
+<div align="center" >
 Welcome to Rate Yo Course where you can rate yo course,
 without your professors` knowledge. This cite was created
 to help students decide if they are in the right course.
- <br>
  <br>
  <br>
 <br>
@@ -32,12 +31,13 @@ to help students decide if they are in the right course.
   
 </div>
 
-<div>
+<div align="center" >
 
 
 
 	<link rel="stylesheet" href="{% static "css/index.css" %}""/>
-	<div class="jumbotron col-md-9">
+<span class="border"></span>	
+<div class="jumbotron col-md-9"> 
   {% if user.is_authenticated %} 
   <p> Welcome {{ user.username }} </p> 
  {% else %}
@@ -50,7 +50,7 @@ to help students decide if they are in the right course.
 		
 		<button class="btn btn-danger center-block" id="show" alt="Max-width 100%">Search Yo Uni!</button>
 </div>
-<div class="col-md-4 center-block">
+<div class="col-md-4 ">
 <form class="form-group" action="{% url 'search'  %}" method="get" accept-charset="utf-8" id="search-form" >
     <input class="form-control center-block" type="text" placeholder="University Name" name="q">
    <p><button class="btn btn-danger" type="submit">Search</button></p>
