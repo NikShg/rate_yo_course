@@ -8,11 +8,11 @@
 {% endblock %}
 
 {% block body_block %}
-<div align="center" class="col-md-8 center-block">
+ <br>
+<div align="center" >
 Welcome to Rate Yo Course where you can rate yo course,
 without your professors` knowledge. This site was created
 to help students decide if they are in the right course.
- <br>
  <br>
  <br>
 <br>
@@ -25,27 +25,25 @@ to help students decide if they are in the right course.
  <br>
  <br>
 </div>
-</div>
-<div>
-	<link href="{% static "css/index.css" %}"  rel="stylesheet" type="text/css"/>
-	<div class="jumbotron col-md-9">
-  {% if user.is_authenticated %} 
-  <p> Welcome {{ user.username }} </p> 
- {% else %}
-<p class="text-center"> <b class="font-weight-bold"><o class="text-danger"></p>WARNING!</o></b></p>
-  <p> You are not signed in, this means you will not be able to rate courses and universities</p>
-{% endif %}
-</div>
+<div align="center" >
 <div class="form-group">
 		<button class="btn btn-danger center-block" id="show" alt="Max-width 100%">Search Yo Uni!</button>
 </div>
-<div class="col-md-4 center-block">
-	 <form class="form-group" action="{% url 'search'  %}" method="get" accept-charset="utf-8" id="search-form" >
-    <p> <label for="q"></label>  <input class="form-control" type="text" placeholder="University Name" name="q" id="input" title="Start typing the name of a university for suggestions..."></p>
-    <p><button class="btn btn-success" type="submit">Search</button></p>
+<div class="col-md-4 ">
+<form class="form-group" action="{% url 'search'  %}" method="get" accept-charset="utf-8" id="search-form" >
+    <input class="form-control center-block" type="text" placeholder="Start typing a University Name for suggestions.." name="q">
+   <p><button class="btn btn-danger" type="submit">Search</button></p>
   </form>
-	<p><a href="#" id="cancel-link" title="Click here to go back"> Cancel </a></p>
-	
+	<p><a href="#" id="cancel-link"> Cancel </a></p>
 	</div>
-
+	<link rel="stylesheet" href="{% static "css/index.css" %}""/>
+<div class="jumbotron col-md-6"> 
+  {% if user.is_authenticated %} 
+  <p> Welcome {{ user.username }} </p> 
+ {% else %}
+<p class="text-center"> <b class="font-weight-bold"><o class="text-danger">WARNING!</o></b></p>
+  <p> You are not signed in, this means you will not be able to rate courses and universities</p>
+{% endif %}
+</div>
+</div>
 {% endblock %}

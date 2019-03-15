@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,
-initial-scale=1, shrink-to-fit=no">
+initial-scale=1, shrink-to-fit=yes">
 <meta name="description" content="">
 <meta name="author" content="">
 <title>
@@ -89,16 +89,23 @@ About
 {% endblock %}
 </div>
 
-<div class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 main">
+<!--star_ratings-->
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<!--end of star_ratings-->
+<div class="col-sm-9 offset-sm-3 col-md-10 offset-md-1 main">
 {% block body_block %}
 {% endblock %}
 	</div>
 	</div>
 </div>
 
+<!--star_ratings-->
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+<!--end of star_ratings-->
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
+
 <script
 src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
 </script>

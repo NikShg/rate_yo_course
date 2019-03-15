@@ -12,6 +12,10 @@
 <div class = "jumbotron">
 	<div class="row marketing">
 	<div class="col-lg-8">
+<div>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
+<p><a href="{% url 'universities' %}"> Universities</a></p>
 	{% if university %}
 	<h1 class="display-4"> {{ university.name }} </h1>
 	<p id="uni-city">Location: {{university.city}} </p>
@@ -39,7 +43,15 @@
 			The specified university does not exist!
 		{% endif %}
 	</div>
+<div class="row">
 
+<div class="element2 col-md-7">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 {% ratings university %}
 {% block content %}
     <form method="post">
@@ -47,6 +59,22 @@
         {{ form.as_p }}
         <input type="submit" id="id_submit">
     </form>
+</div>
+
+<div class="element1 col-md-5">
+{% if university.name %}
+<div align="right">
+<div class="fb-page" data-href="https://www.facebook.com/UofGlasgow/" data-tabs="timeline" data-width="400" data-height="400" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/UofGlasgow/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/UofGlasgow/">University of Glasgow</a></blockquote></div>
+<br>
+<br>
+<br>
+</div>
+			
+			{% endif %}
+
+		
+</div>
+</div>
 {% endblock %}
 </div>
 {% endblock %}
