@@ -5,18 +5,29 @@
 {% endblock %}
 
 {% block body_block %}
-	<h1>Login to Rate Yo Course </h1>
-	<form method="post" action=".">
+<link href="http://v4-alpha.getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+<div class="jumbotron">
+	<h1 class="display-3">Login to Rate Yo Course </h1>
+	</div>
+	<form class="form-signin" role="form" method="post" action=".">
 		{% csrf_token %}
-		{{ form.as_p }}
-		<input type="submit" value=" Log in"/>
-		<input type="hidden" name="next" value="{{ next }}"/>
-	</form>
-	<p>~~<strong>OR</strong>~~</p>
-	<p><a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a></p>
-	<p><a href="{% url 'password_reset' %}">Forgotten your password?</a><br/>
-	<p>
+		<h2 class="form-signin-heading">Please sign in</h2>
+		<label for="inputUsername" class="sr-only">Username</label>
+		<input type="text" name="username" id="id_username" class="form-control" placeholder="Username" title="Please enter your username" required autofocus>
+		<label for="inputPassword" class="sr-only">Password</label>
+		<input type="text" name="password" id="id_password" class="form-control" placeholder="Password"  title="Please enter your password" required>
+		<button class="bnt bnt-lg btn-primary btn-block" type="submit" value="Submit"/>Sign in</button>
+			<p><a href="{% url 'password_reset' %}" >Forgotten your password?</a><br/>
+	
+	
+	<p><h5 class="text-center">~~<strong>OR</strong>~~</p></h3>
+	<p class="text-center"><a class="bnt bnt-lg btn-primary btn-block " href="{% url 'social:begin' 'facebook' %}" role="button">Login with Facebook</a></p>
+	
+	
+
+	<p class="text-center">
 		Not a member?
 		<a href="{% url 'registration_register' %}">Register</a>
 	</p>
+	</form>
 {% endblock %}

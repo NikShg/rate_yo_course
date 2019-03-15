@@ -7,24 +7,28 @@
 {% endblock %}
 
 {% block body_block %}
-<div>
 <p><a href="{% url 'universities' %}" id="site-map"> Universities</a></p>
+<hr/>
+<div class = "jumbotron">
+	<div class="row marketing">
+	<div class="col-lg-8">
 	{% if university %}
-	<h1> {{ university.name }} </h1>
+	<h1 class="display-4"> {{ university.name }} </h1>
 	<p id="uni-city">Location: {{university.city}} </p>
-	  {% if university.name|default:""|slice:"-1:" == "w" %}
-        <img width="200" height="150" src="{% static 'glasgow.jpg' %}" alt="Picture of University"  id="picture"/>
-
+	</div>
+	<div class="col-lg-4">
+	{% if university.name|default:""|slice:"-1:" == "w" %}
+        <img class="img-fluid" position=inline width=auto height=auto src="{% static 'glasgow.jpg' %}" alt="Picture of University"  id="picture"/>
 		{% else %}
-		<img width="200" height="150" src="{% static 'edinburgh.jpg' %}" alt="Picture of University"  id="picture" />
- {% endif %}
-	 
-	<!--<img src="{% static '{{university.name}}/armageddon.jpg' %}" alt="Picture of University" />-->
-	<h2> Here are some courses provided by this university that you can rate </h2><br/>
+		<img class="img-fluid" position=inline width=auto height=auto src="{% static 'edinburgh.jpg' %}" alt="Picture of University"  id="picture" />
+		{% endif %}
+		</div> 
+		</div>
+		<h2> Here are some courses provided by this university that you can rate </h2><br/>
 		{% if courses %}
 			<ol>
 			{% for course in courses %}
-				<a href="{% url 'course' university.slug course.slug %}">{{ course.name }}</a></li><br/> <!--: Course rating {{ course.rating }} </li><br/>-->
+				<li><a href="{% url 'course' university.slug course.slug %}">{{ course.name }}</a></li><!--: Course rating {{ course.rating }} </li><br/>-->
 				<!--<li><a href="{{ course.url }}">{{ course.name }}</a>: Course rating {{ course.rating }} </li>-->
 			{% endfor %}
 			</ol>
@@ -44,5 +48,5 @@
         <input type="submit" id="id_submit">
     </form>
 {% endblock %}
-
+</div>
 {% endblock %}

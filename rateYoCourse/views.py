@@ -214,6 +214,7 @@ def register_profile(request):
 
 	return render(request, 'rateyocourse/profile_registration.html', context_dict)
 
+
 @login_required
 def profile(request, username):
 	try:

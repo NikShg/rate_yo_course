@@ -7,14 +7,53 @@
 
 {% block body_block %}
 	<div>
+	<link href="{% static "css/about.css" %}"  rel="stylesheet" type="text/css"/>
 	<h1>About Rate Yo Course</h1>
+	<p> The site designed by students, for students to rate their university courses and get back at their professors</p>
 	
-	<!--</div>
-	<img src="{% static "images/rango.jpg" %}"
-		alt="Picture of Rango" />
-	<p>
-	<img src="{{ MEDIA_URL }}cat.jpg"
-				 alt="Picture of a cat" /></p>-->
+	<h2>If you have any questions, why not contact us?</h2>
+	<p> Your concerns will be disregarded.</p>
+
+<div class="container">
+  <form action="/action_page.php">
+  <div class="row">
+    <div class="col-25">
+      <label for="fname">First Name:</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="fname" name="firstname" placeholder="Your name.." title="Enter your first name">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="lname">Last Name:</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="lname" name="lastname" placeholder="Your last name.." title="Enter your last name">
+    </div>
+  </div>
+ <div class="row">
+    <div class="col-25">
+      <label for="email">E-mail:</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="email" name="email" placeholder="Your contact e-mail address.." title="Enter your email address">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="subject">Message:</label>
+    </div>
+    <div class="col-75">
+      <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px" title="Enter your message"></textarea>
+    </div>
+  </div>
+  <div class="row">
+    <input type="submit" value="Submit">
+  </div>
+  </form>
+</div>
+
 	
 {% endblock %}
 			

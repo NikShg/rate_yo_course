@@ -37,19 +37,14 @@ aria-label="Toggle navigation">
 
 <div class="collapse navbar-collapse" id="navbar">
 <ul class="navbar-nav mr-auto">
- <li class="nav-item">
-<a class="nav-link" href="{% url 'index' %}" id="nbtn">
+ <li class="nav-item active">
+<a class="nav-link" href="{% url 'index' %}">
 Home
 </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="{% url 'universities' %}"   id="nbtn">
+<a class="nav-link" href="{% url 'universities' %}">
 Universities
-</a>
-</li>
-<li class="nav-item"  >
-<a class="nav-link" href="{% url 'about' %}" id="nbtn">
-About
 </a>
 </li>
 <li class="nav-item">
@@ -64,39 +59,46 @@ Profile
 </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="{% url 'auth_logout' %}?next=/rateyocourse/"  id="nbtn">
+<a class="nav-link" href="{% url 'auth_logout' %}?next=/rateyocourse">
 Logout
 </a>
 </li>
 {% else %}
 <li class="nav-item"  >
-<a class="nav-link" href="{% url 'registration_register' %}" id="nbtn">
+<a class="nav-link" href="{% url 'registration_register' %}" >
 Register Here
 </a>
 </li>
 <li class="nav-item" >
-<a class="nav-link" href="{% url 'auth_login' %}"  id="nbtn">
+<a class="nav-link" href="{% url 'auth_login' %}"  >
 Login
 </a>
 </li>
 {% endif %}
+<li class="nav-item"  >
+<a class="nav-link" href="{% url 'about' %}">
+About
+</a>
+</li>
 </ul>
 </div>
 </nav>
 
+<div>
 {% block sidebar_block %}
 {% endblock %}
 </div>
+
 <div class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 main">
 {% block body_block %}
 {% endblock %}
+	</div>
+	</div>
 </div>
-</div>
-</div>
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-
 <script
 src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
 </script>
@@ -110,6 +112,7 @@ src=
 </script>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   <script src="{% static "js/index.js" %}"></script>
+   <script src="{% static 'js/index.js' %}"></script>
+   <script src="{% static 'js/base.js' %}"></script>
 </body>
 </html>
