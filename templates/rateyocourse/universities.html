@@ -7,9 +7,38 @@
 {% endblock %}
 
 {% block body_block %}
-	<div>
+<div class="row">
+	<div class="element1 col-md-5">
 
-		<h2>Here are the universities that are currently on our list</h2>
+		<h5>Most recently searched</h5>
+		<p>
+			<ul>
+			{% for u in universities %}
+			<li><a href="{{ u.slug }}">{{ u.name }}</a></li>
+			<!--<li><a href="{{ u.url }}">{{  u.name }}</a></li>-->
+			{% endfor %}
+			</ul>
+		</p>
+</div>
+<div class="element2 col-md-5">
+
+		<h5>Higest ranking universities</h5>
+		<p>
+			<ul>
+			{% for u in universities %}
+			<li><a href="{{ u.slug }}">{{ u.name }}</a></li>
+			<!--<li><a href="{{ u.url }}">{{  u.name }}</a></li>-->
+			{% endfor %}
+			</ul>
+		</p>
+</div>
+</div>
+<div>
+<br>
+<br>
+<br>
+
+		<h5>Bookmarked</h5>
 		<p>
 			<ul>
 			{% for u in universities %}
