@@ -33,18 +33,6 @@ to help students decide if they are in the right course.
 
 <div align="center" >
 
-
-
-	<link rel="stylesheet" href="{% static "css/index.css" %}""/>
-<span class="border"></span>	
-<div class="jumbotron col-md-9"> 
-  {% if user.is_authenticated %} 
-  <p> Welcome {{ user.username }} </p> 
- {% else %}
-<p class="text-center"> <b class="font-weight-bold"><o class="text-danger"></p>WARNING!</o></b></p>
-  <p> You are not signed in, this means you will not be able to rate courses and universities</p>
-{% endif %}
-</div>
 <div class="form-group">
 
 		
@@ -57,5 +45,22 @@ to help students decide if they are in the right course.
   </form>
 	<p><a href="#" id="cancel-link"> Cancel </a></p>
 	</div>
+
+	<link rel="stylesheet" href="{% static "css/index.css" %}""/>
+
+
+
+
+
+<div class="jumbotron col-md-6"> 
+  {% if user.is_authenticated %} 
+  <p> Welcome {{ user.username }} </p> 
+ {% else %}
+<p class="text-center"> <b class="font-weight-bold"><o class="text-danger">WARNING!</o></b></p>
+  <p> You are not signed in, this means you will not be able to rate courses and universities</p>
+{% endif %}
+</div>
+
+
 	
 {% endblock %}
