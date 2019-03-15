@@ -12,3 +12,19 @@ $(document).ready(function(){
 		$("#show").show();
 			});
 });
+	
+$(document).ready(function(){
+	var availableTags = ["glasgow", "edinburgh"];
+    $( '#input' ).autocomplete({
+      source: availableTags,
+	  messages: {
+        noResults: '',
+        results: function() {}
+    }
+    })
+	
+	$("#input").autocomplete({focus:function(e,ui) {
+        return false;
+    }});
+  });
+      

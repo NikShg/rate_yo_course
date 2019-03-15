@@ -236,6 +236,8 @@ def search(request):
 			
 			
 	return render(request, 'rateyocourse/search_form.html',{'error':error})
+	
+
 '''
 #@login_required
 #def settings(request):

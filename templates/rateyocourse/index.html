@@ -1,32 +1,32 @@
 {% extends 'rateyocourse/base.html' %}
 {% load staticfiles %}
 
+
 {% block title_block %}
 	 GradeYoCourse
 {% endblock %}
 
 {% block body_block %}
-	<div>
-	<link rel="stylesheet" href="{% static "css/index.css" %}""/>
-	<div class="jumbotron">
-  <h1>Rate Yo Course</h1>
-   <p> The place to go to rate your courses and get your own back</p>
+<div>
+	<link href="{% static "css/index.css" %}"  rel="stylesheet" type="text/css"/>
+<div class="jumbotron">
+	<h1>Rate Yo Course</h1>
+	<p> The place to go to rate your courses and get your own back</p>
   
-  {% if user.is_authenticated %} 
-  <h3> Welcome {{ user.username }} </h3> 
-  {% else %} 
-  <h3> Welcome unauthenticated user</h3>
-  {% endif %}
- 
+	{% if user.is_authenticated %} 
+	<h3> Welcome {{ user.username }} </h3> 
+	{% else %} 
+	<h3> Welcome unauthenticated user</h3>
+	{% endif %}
 </div>
+	 
 
 		<button class=".alert .alert-info" id="show" >To get started, why not search for your university? Click here!</button>
-		
 		 <form class="form-group" action="{% url 'search'  %}" method="get" accept-charset="utf-8" id="search-form" >
-    <input class="form-control" type="text" placeholder="University Name" name="q">
+    <input class="form-control" type="text" placeholder="University Name" name="q" id="input">
     <p><button class="btn btn-success" type="submit">Search</button></p>
   </form>
 	<p><a href="#" id="cancel-link"> Cancel </a></p>
 	</div>
-		
+	
 {% endblock %}
