@@ -5,6 +5,7 @@ import django
 django.setup()
 from rateYoCourse.models import University, Course
 
+
 def populate():
     University_of_Glasgow_courses = [
         {"name": "Internet Technology", "url": "https://www.gla.ac.uk/postgraduate/taught/informationtechnology/?card=course&code=COMPSCI5012", "rating": 5},
@@ -27,10 +28,10 @@ def populate():
         for c in Course.objects.filter(university=u):
             print("- {0} - {1}".format(str(u), str(c)))
 
-def add_course(uni, name, url, rating=0):
+def add_course(uni, name, url): #, rating=0
 	c = Course.objects.get_or_create(university=uni, name=name)[0]
 	c.url=url
-	c.rating = rating
+    c.rating = rating
 	c.save()
 	return c
 

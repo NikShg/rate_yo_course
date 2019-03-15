@@ -7,23 +7,40 @@
 {% endblock %}
 
 {% block body_block %}
-<div>
-	<link href="{% static "css/index.css" %}"  rel="stylesheet" type="text/css"/>
-<div class="jumbotron">
-	<h1>Rate Yo Course</h1>
-	<p> The place to go to rate your courses and get your own back</p>
-  
-	{% if user.is_authenticated %} 
-	<h3> Welcome {{ user.username }} </h3> 
-	{% else %} 
-	<h3> Welcome unauthenticated user</h3>
-	{% endif %}
-</div>
-	 
 
-		<button class=".alert .alert-info" id="show" >To get started, why not search for your university? Click here!</button>
-		 <form class="form-group" action="{% url 'search'  %}" method="get" accept-charset="utf-8" id="search-form" >
-    <input class="form-control" type="text" placeholder="University Name" name="q" id="input">
+<div align="center" class="col-md-8 center-block">
+Welcome to Rate Yo Course where you can rate yo course,
+without your professors` knowledge. This site was created
+to help students decide if they are in the right course.
+ <br>
+ <br>
+ <br>
+<br>
+<br>
+<div>
+<img class="img-responsive" src="{% static "images/rate.jpg" %}" alt="Rate Yo Course" width="400" height="280"/>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+</div>
+</div>
+<div>
+	<link href="{% static "css/index.css" %}"  rel="stylesheet" type="text/css"/>	<div class="jumbotron col-md-9">
+  {% if user.is_authenticated %} 
+  <p> Welcome {{ user.username }} </p> 
+ {% else %}
+<p class="text-center"> <b class="font-weight-bold"><o class="text-danger"></p>WARNING!</o></b></p>
+  <p> You are not signed in, this means you will not be able to rate courses and universities</p>
+{% endif %}
+</div>
+<div class="form-group">
+		<button class="btn btn-danger center-block" id="show" alt="Max-width 100%">Search Yo Uni!</button>
+</div>
+<div class="col-md-4 center-block">
+	 <form class="form-group" action="{% url 'search'  %}" method="get" accept-charset="utf-8" id="search-form" >
+       <input class="form-control" type="text" placeholder="University Name" name="q" id="input">
     <p><button class="btn btn-success" type="submit">Search</button></p>
   </form>
 	<p><a href="#" id="cancel-link"> Cancel </a></p>

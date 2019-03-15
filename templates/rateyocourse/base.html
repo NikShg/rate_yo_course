@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 {% load staticfiles %}
 <html lang="en">
@@ -20,6 +21,9 @@ rel="stylesheet">
 rel="stylesheet">
 </head>
 <body>
+<br>
+<h1><t class="text-danger"><p align="center"><strong>Rate Yo Course</strong></p></t></h1>
+<br>
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
 <button class="navbar-toggler navbar-toggler-right hidden-lg-up"
 type="button"
@@ -30,7 +34,7 @@ aria-expanded="false"
 aria-label="Toggle navigation">
 <span class="navbar-toggler-icon"></span>
 </button>
-<a class="navbar-brand" href="{% url 'index' %}">RateYoCourse</a>
+
 <div class="collapse navbar-collapse" id="navbar">
 <ul class="navbar-nav mr-auto">
  <li class="nav-item">
@@ -79,9 +83,7 @@ Login
 </ul>
 </div>
 </nav>
-<div class="container-fluid">
-<div class="row">
-<div class="col-sm-3 col-md-2 sidebar">
+
 {% block sidebar_block %}
 {% endblock %}
 </div>
