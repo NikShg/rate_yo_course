@@ -6,21 +6,54 @@
 {% endblock %}
 
 {% block body_block %}
-	<div>
+ <br>
+<div align="center" class="col-md-8 center-block">
+Welcome to Rate Yo Course where you can rate yo course,
+without your professors` knowledge. This cite was created
+to help students decide if they are in the right course.
+ <br>
+ <br>
+ <br>
+<br>
+<br>
+<div>
+<img class="img-responsive" src="{% static "images/rate.jpg" %}" alt="Rate Yo Course" width="400" height="280"/>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+</div>
+</div>
+<div>
+  
+  
+  
+  
+</div>
+
+<div>
+
+
+
 	<link rel="stylesheet" href="{% static "css/index.css" %}""/>
-	<div class="jumbotron">
-  <h1>Rate Yo Course</h1>
+	<div class="jumbotron col-md-9">
   {% if user.is_authenticated %} 
   <p> Welcome {{ user.username }} </p> 
-  {% else %} 
-  <p> Welcome unauthenticated user</p>
-  {% endif %}
-  <p> The place to go to rate your courses </p>
+ {% else %}
+<p class="text-center"> <b class="font-weight-bold"><o class="text-danger"></p>WARNING!</o></b></p>
+  <p> You are not signed in, this means you will not be able to rate courses and universities</p>
+{% endif %}
 </div>
-		<button class=".alert .alert-info" id="show" alt="Max-width 100%">To start rating a course, why not search for your university? Click here!</button>
-		 <form class="form-group" action="{% url 'search'  %}" method="get" accept-charset="utf-8" id="search-form" >
-    <input class="form-control" type="text" placeholder="University Name" name="q">
-    <p><button class="btn btn-success" type="submit">Search</button></p>
+<div class="form-group">
+
+		
+		<button class="btn btn-danger center-block" id="show" alt="Max-width 100%">Search Yo Uni!</button>
+</div>
+<div class="col-md-4 center-block">
+<form class="form-group" action="{% url 'search'  %}" method="get" accept-charset="utf-8" id="search-form" >
+    <input class="form-control center-block" type="text" placeholder="University Name" name="q">
+   <p><button class="btn btn-danger" type="submit">Search</button></p>
   </form>
 	<p><a href="#" id="cancel-link"> Cancel </a></p>
 	</div>
