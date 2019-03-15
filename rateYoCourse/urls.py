@@ -2,8 +2,6 @@ from django.conf.urls import url
 from rateYoCourse import views
 #from django.contrib.auth import views as auth_views
 from django.conf.urls import include
-from django.contrib.auth import authenticate, login, logout
-
 
 urlpatterns = [
 	url(r'^$', views.index, name='index'),

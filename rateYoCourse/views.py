@@ -49,14 +49,17 @@ def visitor_cookie_handler(request):
 		request.session['last_visit'] = last_visit_cookie
 
 	request.session['visits'] = visits
-
+'''
 #def login(request):
 	#return render(request, 'login.html')
-
+'''
 @login_required
 def home(request):
 	return render(request, 'index.html')
+'''
+=======
 
+>>>>>>> 7799bb623bcf7b24f064e0c7151e3c0bc24d3743
 #def register(request):
 	registered = False
 	if request.method == 'POST':
@@ -88,8 +91,13 @@ def home(request):
 		profile_form = UserProfileForm()
 
 	return render(request, 'rateyocourse/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+<<<<<<< HEAD
+'''
+'''
+=======
 
 
+>>>>>>> 7799bb623bcf7b24f064e0c7151e3c0bc24d3743
 #def user_login(request):
 	if request.method == 'POST':
 		username = request.POST.get('username')
@@ -110,14 +118,19 @@ def home(request):
 			return HttpResponse("Invalid login details supplied.")
 	else:
 		return render(request, 'rateyocourse/login.html', {})
+<<<<<<< HEAD
+'''
+'''
+=======
 
+>>>>>>> 7799bb623bcf7b24f064e0c7151e3c0bc24d3743
 		#Commenting out as using registration app package
 #@login_required
 #def user_logout(request):
 	logout(request)
 
 	return HttpResponseRedirect(reverse('index'))
-
+'''
 # This function returns the view for the list of universities. Universities are fetched
 # from the university table and sorted by name asscending.
 def show_university_(request):
@@ -201,6 +214,7 @@ def register_profile(request):
 
 	return render(request, 'rateyocourse/profile_registration.html', context_dict)
 
+
 @login_required
 def profile(request, username):
 	try:
@@ -255,7 +269,9 @@ def search(request):
 
 
 	return render(request, 'rateyocourse/search_form.html',{'error':error})
+	
 
+'''
 #@login_required
 #def settings(request):
   #  user = request.user
@@ -290,3 +306,6 @@ def search(request):
     #else:
       #  form = PasswordForm(request.user)
 #    return render(request, 'core/password.html', {'form': form})
+<<<<<<< HEAD
+
+'''

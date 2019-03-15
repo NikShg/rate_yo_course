@@ -7,15 +7,18 @@
 {% endblock %}
 
 {% block body_block %}
+	<div >
+	<h4 > Here are the universities that are currently on our list </h4>
+	</div>
+	<div class="row marketing">
+		<div class="col-lg-12">
 <div class="row">
 	<div class="element1 col-md-5">
-
 		<h5>Most recently searched</h5>
 		<p>
 			<ul>
 			{% for u in universities %}
 			<li><a href="{{ u.slug }}">{{ u.name }}</a></li>
-			<!--<li><a href="{{ u.url }}">{{  u.name }}</a></li>-->
 			{% endfor %}
 			</ul>
 		</p>
@@ -27,7 +30,6 @@
 			<ul>
 			{% for u in universities %}
 			<li><a href="{{ u.slug }}">{{ u.name }}</a></li>
-			<!--<li><a href="{{ u.url }}">{{  u.name }}</a></li>-->
 			{% endfor %}
 			</ul>
 		</p>
@@ -43,11 +45,9 @@
 			<ul>
 			{% for u in universities %}
 			<li><a href="{{ u.slug }}">{{ u.name }}</a></li>
-			<!--<li><a href="{{ u.url }}">{{  u.name }}</a></li>-->
 			{% endfor %}
 			</ul>
 		</p>
+	</div>
 </div>
-
-
 {% endblock %}

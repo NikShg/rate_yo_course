@@ -49,6 +49,7 @@ class Rate(models.Model):
     bar = models.CharField(max_length=100)
 	#ratings = GenericRelation(Rating, related_query_name='rates') #object_list
 
+
 	#def __str__(self):
 		#return self.name
 #Rate.ratings.filter(ratings__isnull=False).order_by('ratings__average') #Foo.object_list.filter
