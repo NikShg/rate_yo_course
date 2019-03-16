@@ -20,7 +20,7 @@ $(document).ready(function(){
   
 /* Autocomplete suggestions */ 
 $(document).ready(function(){
-	var availableTags = ["glasgow", "edinburgh"];
+	var availableTags = ["University of Glasgow", "University of Edinburgh", "Internet Technology", "Advanced Programming", "Artificial Intelligence BSc", "Computer Science BSc"];
     $( '#input' ).autocomplete({
       source: availableTags,
 	  messages: {

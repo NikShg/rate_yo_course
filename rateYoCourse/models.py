@@ -35,6 +35,10 @@ class Course(models.Model):
 	slug = models.SlugField(unique=True)
 	
 	@property
+	def get_university_slug(self):
+		return self.university.slug
+		
+	@property
 	def get_photo_url(self):
 		return 'images/%s.jpg' % self.name
 		
