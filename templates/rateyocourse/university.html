@@ -27,9 +27,12 @@
 	<div class="col-lg-4">
 	<div id="fb-root"></div>
 		<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
-		{% if university.name %}
+		{% if university.name|default:""|slice:"-1:" == "w" %}
 		<div align="right">
 		<div class="fb-page" data-href="https://www.facebook.com/UofGlasgow/" data-tabs="timeline" data-width="400" data-height="400" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/UofGlasgow/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/UofGlasgow/">University of Glasgow</a></blockquote></div>
+		{% else %}
+<div align="right">
+		<div class="fb-page" data-href="https://www.facebook.com/UniversityOfEdinburgh/" data-tabs="timeline" data-width="400" data-height="400" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/UniversityOfEdinburgh/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/UofGlasgow/">University of Edinburgh</a></blockquote></div>
 		{% endif %}
 		</div> 
 	</div>
