@@ -24,6 +24,5 @@ urlpatterns = [
  #   url(r'^settings/password/$', views.password, name='password'),
 	#url(r'^social-auth/', include('social_django.urls', namespace="social")),
 	#url(r'^$', views.home, name="home"),
+	url(r'^universities/(?P<university_name_slug>[\w\-]+)/courses/(?P<course_name_slug>[\w\-]+)/comment/$', views.add_comment, name='add_comment'),
 	]
-
-	

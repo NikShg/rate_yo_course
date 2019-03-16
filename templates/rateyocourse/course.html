@@ -2,7 +2,6 @@
 {% load staticfiles %}
 {% load ratings %}
 
-
 {% block title_block %}
 	 Courses
 {% endblock %}
@@ -15,10 +14,7 @@
 	<p><a href="{% url 'universities' %}"> Universities</a> / <a href="{% url 'university' university.slug %}">{{ university.name }}</a></p>
 	{% if course %}
 	<h2>
-
 				<a href="{{ course.url }}">{{ university.name}}:  {{ course.name }}</a></h2></li>
-
-
 			</ul>
 			{% else %}
 				<strong>This is not a course provided by any university.</strong>
@@ -31,5 +27,20 @@
 	        {{ form.as_p }}
 	        <input type="submit" id="id_submit">
 	    </form>
+		{% endblock %}
+		{% block detail %}
+	<br>
+	<h2>Leave a comment</h2>
+	<p>Total number of comments {{ course.comments.count }}</p>
+	<!--slug might have to be different below-->
+	<a href="{% url 'add_comment' university.slug course.slug %}">Leave a Comment</a>
+	{% for comment in course.comments.all %}
+		<p>{{ comment.created}}</p>
+		<p>{{ comment.user }}</p>
+		<p>{{ comment.body}}</p>
+	{% empty %}
+		<p>There are no comments</p>
+	{% endfor %}
 	{% endblock %}
+
 {% endblock %}

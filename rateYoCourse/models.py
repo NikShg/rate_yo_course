@@ -47,9 +47,17 @@ class UserProfile(models.Model):
 
 class Rate(models.Model):
     bar = models.CharField(max_length=100)
-	#ratings = GenericRelation(Rating, related_query_name='rates') #object_list
 
+class Comment(models.Model): #post = Course
+	course = models.ForeignKey(Course, related_name='comments') #Course?
+	user = models.ForeignKey(UserProfile, related_name='user_name')
+	body = models.TextField()
+	created = models.DateTimeField(auto_now_add=True)
+	approved = models.BooleanField(default=False)
 
-	#def __str__(self):
-		#return self.name
-#Rate.ratings.filter(ratings__isnull=False).order_by('ratings__average') #Foo.object_list.filter
+	def approved(self):
+		self.approved = True
+		self.save()
+
+	def __str__(self):
+		return self.user

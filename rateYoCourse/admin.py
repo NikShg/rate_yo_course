@@ -1,6 +1,6 @@
 from django.contrib import admin
 from rateYoCourse.models import UserProfile
-from rateYoCourse.models import Course, University
+from rateYoCourse.models import Course, University, Comment
 
 # Register your models here.
 
@@ -17,4 +17,7 @@ class CourseAdmin(admin.ModelAdmin):
 admin.site.register(Course, CourseAdmin)
 admin.site.register(UserProfile)
 
+class CommentAdmin(admin.ModelAdmin):
+	list_display = ('user', 'approved')
 
+admin.site.register(Comment, CommentAdmin)	

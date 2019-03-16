@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
-from rateYoCourse.forms import UserForm, UserProfileForm
+from rateYoCourse.forms import UserForm, UserProfileForm, CommentForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -269,8 +269,25 @@ def search(request):
 
 
 	return render(request, 'rateyocourse/search_form.html',{'error':error})
-	
 
+def add_comment(request, slug):
+	#university = get_object_or_404(University, slug=slug)
+	#course = get_object_or_404(Course, slug=slug)
+	university = University.objects.get(slug=university_name_slug)
+	course = Course.objects.get(slug=course_name_slug)
+	if request.method == 'POST':
+		form = CommentForm(request.POST)
+		if form.is_valid():
+			comment=form.save(commit=False)
+			comment.course = course
+			comment.save()
+			return redirect('index') #this might have to be a uni slug
+
+		else:
+			form = CommentForm()
+			template = 'rateyocourse/add_comment.html' #is this course or no course or just uni?
+			content = {'form': form}
+			return render(request, template, context)
 '''
 #@login_required
 #def settings(request):
@@ -306,6 +323,6 @@ def search(request):
     #else:
       #  form = PasswordForm(request.user)
 #    return render(request, 'core/password.html', {'form': form})
-<<<<<<< HEAD
+
 
 '''
