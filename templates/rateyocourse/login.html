@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block body_block %}
+	<link rel="stylesheet"  href="{% static "css/login.css" %}" />
 	<h1>Login to Rate Yo Course</h1>
 	<form id="login_form" method="post" action="{% url 'login' %}">
 		{% csrf_token %}

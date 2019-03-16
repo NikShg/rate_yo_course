@@ -12,6 +12,10 @@ class University(models.Model):
 	city = models.CharField(max_length=32, null=False)
 	url = models.URLField(null=False)
 	slug = models.SlugField(unique=True)
+	
+	@property
+	def get_photo_url(self):
+		return 'images/%s.jpg' % self.name
 
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
@@ -29,13 +33,20 @@ class Course(models.Model):
 	url = models.URLField(null=False)
 	rating = models.IntegerField(default=0)
 	slug = models.SlugField(unique=True)
-
+	
+	@property
+	def get_photo_url(self):
+		return 'images/%s.jpg' % self.name
+		
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
 		super(Course, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return self.name
+		
+
+	
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
