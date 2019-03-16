@@ -16,7 +16,11 @@ from django.views.generic import DetailView, TemplateView
 from django.shortcuts import redirect
 from django.db.models import Q
 
+@property
+def get_photo_url(self):
+	return 'images/%s.jpg' % self.name
 
+	
 def index(request):
 	context_dict = {}
 	visitor_cookie_handler(request)

@@ -1,6 +1,8 @@
 {% load static %}
 <!DOCTYPE html>
 {% load staticfiles %}
+{% load rateYoCourse_template_tags %}
+
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -19,11 +21,11 @@ rel="stylesheet">
 <link href=
 "http://v4-alpha.getbootstrap.com/examples/dashboard/dashboard.css"
 rel="stylesheet">
+<link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <br>
 <h1><t class="text-danger"><p align="center"><strong>Rate Yo Course</strong></p></t></h1>
-<br>
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
 <button class="navbar-toggler navbar-toggler-right hidden-lg-up"
 type="button"
@@ -34,7 +36,6 @@ aria-expanded="false"
 aria-label="Toggle navigation">
 <span class="navbar-toggler-icon"></span>
 </button>
-
 <div class="collapse navbar-collapse" id="navbar">
 <ul class="navbar-nav mr-auto">
  <li class="nav-item active">
@@ -83,11 +84,6 @@ About
 </ul>
 </div>
 </nav>
-
-<div>
-{% block sidebar_block %}
-{% endblock %}
-</div>
 
 <!--star_ratings-->
 <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
