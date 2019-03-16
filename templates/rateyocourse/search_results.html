@@ -8,31 +8,30 @@
 {% block body_block %}
 
     <p>You searched for: <strong>{{ query }}</strong></p>
-	<!--
+	
     {% if courses %}
         <p>Found {{ courses|length }} course{{ courses|pluralize }}.</p>
     
         <ul>
 			{% for course in courses %}
 			<li>
-                <a href="{% url 'goto' %}?course_id={{course.id}}">{{ course.name }}</a>: Course rating {{ course.rating }}
-                    
-            </li>
+                <a href="{% url 'course'  course.get_university_slug course.slug %}">{{ course.name }}: {{ course.university}}</a></li>
             {% endfor %}           
 		</ul>
 		
         {% endif %}
-    -->
+
     {% if universities %}
     <p>Found {{ universities|length }} university{{ universities|pluralize }}.</p>   
     <ul>
         {% for university in universities %}
       
-        <li><a href="{{ university.slug }}">{{ university.name }}</a></li>
+        <li><a href="{{ university.slug }}">{{ university.name }}, {{ university.city }}</a></li>
          {% endfor %}           
 		 {% else %}
 		 <p> There are no universities matching <strong> {{ query }} </strong> </p>
     </ul>
     {% endif %}
+	<br/>
 	<p> <a href="{% url 'index' %}"> Click here to go back </p>
 {% endblock %}
