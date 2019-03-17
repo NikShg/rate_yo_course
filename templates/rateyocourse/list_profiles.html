@@ -6,31 +6,39 @@
 {% endblock %}
 
 {% block body_block %}
-	<h1>User Profiles</h1>
-	
-	<div class="panel">
-		{% if userprofile_list %}
-		<div class="panel-heading">
-			<div class="panel-body">
-				<div class="list-group">
-					{% for listuser in userprofile_list %}
-					<div class="list-group-item">
-						{% if listuser.picture %}
-						<img width="64" height="64" src="{{ MEDIA_URL}}{{listuser.picture}}"/>
-						{% else %}
-						<img width="64" height="64" src="http://lorempixel.com/64/64/people/"/>
-						{% endif %}
-						<h4 class="list-group-item-heading">
-							<a href="{% url 'profile' listuser.user.username %}">
-								{{ listuser.user.username }}</a>
-						</h4>
+<link rel="stylesheet" href="{% static "css/list_profiles.css" %}">
+<div class="site-map"><p>You are here > <a href="{% url 'index' %}"> Home</a> / <a href="{% url 'list_profiles' %}" > Registered Users </a></a></p></div>
+	<div class="jumbotron">
+	<h1 class="display-4">Registered Users</h1>
+
+<div class="panel">
+	{% if userprofile_list %}
+	<div class="panel-heading">
+		<div class="panel-body">
+			<div class="list-group">
+				{% for listuser in userprofile_list %}
+				<div class="list-group-item ">
+					{% if listuser.picture %}
+					<img class="d-flex align-self-start mr-3" width="64" height="64" src="{{ MEDIA_URL}}{{listuser.picture}}"/>
+					{% else %}
+					<img class="d-flex align-self-start mr-3" width="64" height="64" src="http://lorempixel.com/64/64/people/"/>
+					{% endif %}
+					<div class="media-body">
+					<h5 class="mt-0 list-group-item-heading">
+						<a href="{% url 'profile' listuser.user.username %}">{{ listuser.user.username }}</a></h5>
+					<p class="status">({{ listuser.status }})</p>
+					<p><strong>About Me:</strong></p>
+					<p class="about">{{ listuser.about }}</p>
 					</div>
-					{% endfor %}
 				</div>
+				{% endfor %}
 			</div>
 		</div>
-		{% else %}
-			<p><strong>There are no registered users on this site.</strong></p>
-		{% endif %}
 	</div>
+	{% else %}
+		<p>There are no users for the site.</p>
+	{% endif %}
+</div>
+</div>
+<script src="{% static "js/list_profiles.js" %}" type="text/javascript"/>
 {% endblock %}

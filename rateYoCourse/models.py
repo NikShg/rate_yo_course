@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
-from star_ratings.models import Rating
+from star_ratings.models import Rating, UserRating
 from django.contrib.contenttypes.fields import GenericRelation
 
 # Create your models here.
@@ -31,7 +31,6 @@ class Course(models.Model):
 	university = models.ForeignKey(University)
 	name = models.CharField(max_length=256, null=False)
 	url = models.URLField(null=False)
-	rating = models.IntegerField(default=0)
 	slug = models.SlugField(unique=True)
 	
 	@property
@@ -51,7 +50,8 @@ class Course(models.Model):
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User)
-	#should we display reviews in the userprofile?
+	about = models.CharField(max_length=256)
+	status = models.CharField(max_length=256)
 	picture = models.ImageField(upload_to='profile_images', blank=True)
 
 	def __str__(self):

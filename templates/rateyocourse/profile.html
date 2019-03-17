@@ -1,23 +1,51 @@
 {% extends 'rateyocourse/base.html' %}
+{% load bootstrap_toolkit %}
 {% load staticfiles %}
 
 {% block title %}
-	{{ selecteduser.username }} Profile
+	- {{ selecteduser.username }} Profile
 {% endblock %}
 
 {% block body_block %}
-	<h1> {{ selecteduser.username }}'s Profile</h1>
-	<img src="{{ MEDIA_URL }}{{ userprofile.picture }}" width="300" height="300" alt="{{selecteduser.username}}" />
-	<br />
-	<div>
+<link rel="stylesheet" href="{% static "css/profile.css" %}">
+<link src="{% static "js/profile.js" %}" type="text/javascript">
+<div class="site-map"><p>You are here > <a href="{% url 'index' %}">Home</a> / <a href="{% url 'list_profiles' %}" >Registered Users</a> / <a href="{% url 'profile'  user.username %}" >Profile</a></p></div>
+<div class="container">
+	<div class = "jumbotron">
+	<div class="row">
+		<div class="col-md-6">
+	<div class="profile_name"><h1 class="display-4"> My Profile</h1></div>
+			<h2> {{ selecteduser.username }} </h2>
+			<p>{{ selecteduser.userprofile.status }} </p>
+			<h2> About me </h2>
+			<p>{{ selecteduser.userprofile.about }}</p>
+			</div>
+			<div class="col-md-6">
+	<img class="img-thumbnail img-fluid rounded mx-auto d-block" src="{{ MEDIA_URL }}{{ userprofile.picture }}" width="300" height="300" alt="{{selecteduser.username}}" />
+	</div>
+</div>
+<br >
+
 		{% if selecteduser.username == user.username %}
+<div class="edit_profile">
+<a class="btn btn-lg btn-success" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+ Click To Edit Profile
+  </a>
+<div class="collapse" id="collapseExample">
+	<div class="card card-body">
 		<form method="post" action="." enctype="multipart/form-data">
+		<h3 class="profile-edit-heading">Here is where you can edit your profile </h3>
+			<p> About me: </p>
 			{% csrf_token %}
 			{{ form.as_p }}
-			<input type="submit" value="Update" />
+		<button class="btn btn-primary" type="submit" value="Submit"/>Update</button>
+			<br/>
 		</form>
 	{% endif %}
+  </div>
 </div>
-<div id="edit_profile"></div>
+</div>
+</div>
+</div>
 {% endblock %}
 	

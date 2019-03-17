@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'rateYoCourse',
 	'registration',
     'star_ratings',
+	'bootstrap_toolkit',
 	#'social_django',
 ]
 

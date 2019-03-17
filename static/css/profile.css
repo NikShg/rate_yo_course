@@ -1,0 +1,19 @@
+label[for=id_about] {
+	display:none;
+}
+
+.card.card-body {
+	background-color:#eceeef;
+	margin-top:5%;
+	border:none;
+}
+
+textarea#id_about {
+	width:100%;
+	background-color:#eceeef;
+	border-radius: 10px;
+}
+
+textarea#id_about:hover {
+	width:100%;
+	}
