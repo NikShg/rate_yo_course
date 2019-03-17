@@ -12,15 +12,9 @@ from rateYoCourse.models import UserProfile, University, Course
 from rateYoCourse.models import Rate
 from star_ratings.models import Rating
 from django.views.generic import DetailView, TemplateView
-
 from django.shortcuts import redirect
 from django.db.models import Q
 
-@property
-def get_photo_url(self):
-	return 'images/%s.jpg' % self.name
-
-	
 def index(request):
 	context_dict = {}
 	visitor_cookie_handler(request)
@@ -53,18 +47,15 @@ def visitor_cookie_handler(request):
 		request.session['last_visit'] = last_visit_cookie
 
 	request.session['visits'] = visits
-'''
+
 #def login(request):
 	#return render(request, 'login.html')
 '''
-@login_required
+#@login_required
 def home(request):
 	return render(request, 'index.html')
-'''
-=======
 
->>>>>>> 7799bb623bcf7b24f064e0c7151e3c0bc24d3743
-#def register(request):
+def register(request):
 	registered = False
 	if request.method == 'POST':
 		user_form = UserForm(data=request.POST)
@@ -75,9 +66,9 @@ def home(request):
 			user.set_password(user.password)
 			user.save()
 
-			profile = profile_form.save(commit = False)
-			user.set_password(user.password)
-			user.save()
+			#profile = profile_form.save(commit=False)
+			#user.set_password(user.password)
+			#user.save()
 
 			profile = profile_form.save(commit=False)
 			profile.user = user
@@ -95,14 +86,8 @@ def home(request):
 		profile_form = UserProfileForm()
 
 	return render(request, 'rateyocourse/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
-<<<<<<< HEAD
-'''
-'''
-=======
 
-
->>>>>>> 7799bb623bcf7b24f064e0c7151e3c0bc24d3743
-#def user_login(request):
+def user_login(request):
 	if request.method == 'POST':
 		username = request.POST.get('username')
 		password = request.POST.get('password')
@@ -122,15 +107,11 @@ def home(request):
 			return HttpResponse("Invalid login details supplied.")
 	else:
 		return render(request, 'rateyocourse/login.html', {})
-<<<<<<< HEAD
-'''
-'''
-=======
 
->>>>>>> 7799bb623bcf7b24f064e0c7151e3c0bc24d3743
-		#Commenting out as using registration app package
-#@login_required
-#def user_logout(request):
+
+#Commenting out as using registration app package
+@login_required
+def user_logout(request):
 	logout(request)
 
 	return HttpResponseRedirect(reverse('index'))
@@ -311,6 +292,4 @@ def search(request):
     #else:
       #  form = PasswordForm(request.user)
 #    return render(request, 'core/password.html', {'form': form})
-<<<<<<< HEAD
-
 '''

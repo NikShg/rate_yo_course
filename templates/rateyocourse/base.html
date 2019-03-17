@@ -1,14 +1,14 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 {% load staticfiles %}
 {% load rateYoCourse_template_tags %}
 
 <html lang="en">
 <head>
-<zeta charset="utf-8">
+<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,
-initial-scale=1, shrink-to-fit=no>
+initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
 <title>
@@ -24,10 +24,9 @@ rel="stylesheet">
 <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<br>
-<h1><t class="text-danger"><p align="center"><strong>Rate Yo Course</strong></p></t></h1>
+
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-<button class="navbar-toggler navbar-toggler-right hidden-lg-up"
+<button class="navbar-toggler  hidden-lg-up"
 type="button"
 data-toggle="collapse"
 data-target="#navbar"
@@ -36,6 +35,7 @@ aria-expanded="false"
 aria-label="Toggle navigation">
 <span class="navbar-toggler-icon"></span>
 </button>
+
 <div class="collapse navbar-collapse" id="navbar">
 <ul class="navbar-nav mr-auto">
  <li class="nav-item active">
@@ -71,7 +71,7 @@ Register Here
 </a>
 </li>
 <li class="nav-item" >
-<a class="nav-link" href="{% url 'auth_login' %}"  >
+<a class="nav-link" href="{% url 'auth_login' %}">
 Login
 </a>
 </li>
@@ -84,15 +84,16 @@ About
 </ul>
 </div>
 </nav>
+<br/>
+<div class="header">
+<h1><a href="{% url 'index' %}"><t class="text-danger"><p align="center"><strong>Rate Yo Course</strong></p></t></a></h1></div>
 
 <!--star_ratings-->
 <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
 <!--end of star_ratings-->
-<div class="col-sm-9 offset-sm-3 col-md-10 offset-md-1 main">
+<div class="col-sm-12 col-md-10 offset-md-1 main">
 {% block body_block %}
 {% endblock %}
-	</div>
-	</div>
 </div>
 
 <!--star_ratings-->
@@ -101,7 +102,6 @@ About
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-
 <script
 src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
 </script>
@@ -115,7 +115,8 @@ src=
 </script>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   <script src="{% static 'js/index.js' %}"></script>
    <script src="{% static 'js/base.js' %}"></script>
+   <script  src="{% static "js/index.js" %}"></script>
+
 </body>
 </html>

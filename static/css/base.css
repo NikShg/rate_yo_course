@@ -10,3 +10,7 @@
 .ui-helper-hidden-accessible {
 	display:none;
 }
+
+.header a {
+	text-decoration:none!important;
+}
