@@ -8,7 +8,7 @@
 
 {% block body_block %}
 <link rel="stylesheet" href="{% static "css/university.css" %}"/>
-<p id="site-map">You are here > <a href="{% url 'index' %}"> Home</a> / <a href="{% url 'universities' %}" > Universities</a> / <a href="{% url 'university' university.slug%}" >  {{  university.name}} </a></p>
+<div class="site-map"><p>You are here > <a href="{% url 'index' %}"> Home</a> / <a href="{% url 'universities' %}" > Universities</a> / <a href="{% url 'university' university.slug%}" >  {{  university.name}} </a></p></div>
 <hr/>
 <div class = "jumbotron">
 	<div class="row">

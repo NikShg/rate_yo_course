@@ -10,7 +10,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from rateYoCourse.models import UserProfile, University, Course
 from rateYoCourse.models import Rate
-from star_ratings.models import Rating
+from star_ratings.models import Rating, UserRating
 from django.views.generic import DetailView, TemplateView
 from django.shortcuts import redirect
 from django.db.models import Q
@@ -208,7 +208,7 @@ def profile(request, username):
 		return redirect('index')
 
 	userprofile = UserProfile.objects.get_or_create(user=user)[0]
-	form = UserProfileForm({'picture': userprofile.picture})
+	form = UserProfileForm({'picture': userprofile.picture, 'about': userprofile.about, 'status': userprofile.status})
 
 	if request.method == 'POST':
 		form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
@@ -217,7 +217,8 @@ def profile(request, username):
 			return redirect('profile', user.username)
 		else:
 			print(form.errors)
-
+	
+	
 	return render(request, 'rateyocourse/profile.html', {'userprofile': userprofile, 'selecteduser': user, 'form': form})
 
 @login_required
