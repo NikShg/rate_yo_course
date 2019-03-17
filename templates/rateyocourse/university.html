@@ -54,13 +54,16 @@
 		
 	{% ratings university %}
 {% block content %}
+{% if user.is_authenticated %}
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.as_p }}		
 		<!--<button class="bnt bnt-lg btn-primary btn-block" type="submit" value="Submit"/>Submit Query</button>-->
         <!--<input type="submit" id="id_submit">-->
+		<br/>
 		<button class="btn btn-primary" input type="submit" type="submit" value="Submit" id="id_submit"/>Submit</button>
     </form>
+	{% endif %}
+		{% endblock %}
 </div>
-	{% endblock %}
 {% endblock %}

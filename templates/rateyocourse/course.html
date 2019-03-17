@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block body_block %}
+<link href="{% static "css/course.css" %}" rel="stylesheet" />
 <p id="site-map">You are here > <a href="{% url 'index' %}"> Home</a> / <a href="{% url 'universities' %}" > Universities</a> / <a href="{% url 'university' university.slug%}" >  {{ course.university}} </a> / <a href="{% url 'course' university.slug course.slug%}" >  {{ course.name}} </a></p>
 
 <div class = "jumbotron">
@@ -24,15 +25,20 @@
 	<div class="col-lg-8">
 	{% ratings course %}
 	{% block content %}
+		{% if user.is_authenticated %}
 	    <form method="post">
 	        {% csrf_token %}
 	        {{ form.as_p }}
+			<br/>
 	        <button class="btn btn-primary" input type="submit" type="submit" value="Submit" id="id_submit"/>Submit</button>
 	    </form>
+		{% endif %}
 				{% endblock %}
 				</div>
-			<div class="col-lg-4">	
-				<img class=img-fluid height=auto width=auto src="{% static course.get_photo_url %}" alt="a photo"></div>
+			<div class="col-lg-4">
+				<div class="image">
+				<img class="img-fluid rounded"  height=auto width=auto src="{% static course.get_photo_url %}" alt="a photo"></div>
+				</div>
 			</div>
 
 {% endblock %}

@@ -1,13 +1,13 @@
 {% extends 'rateyocourse/base.html' %}
+{% load static %}
 {% load staticfiles %}
 
-
-
 {% block title_block %}
-	 GradeYoCourse
+	- GradeYoCourse
 {% endblock %}
 
 {% block body_block %}
+
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
  <br>
@@ -53,3 +53,4 @@ to help students decide if they are in the right course.
 </div>
 </div>
 {% endblock %}
+
