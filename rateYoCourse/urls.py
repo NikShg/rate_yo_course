@@ -23,7 +23,7 @@ urlpatterns = [
 	url(r'^oauth/', include('social_django.urls', namespace='social')),
 #	url(r'^settings/$', views.settings, name='settings'),
  #   url(r'^settings/password/$', views.password, name='password'),
-	#url(r'^social-auth/', include('social_django.urls', namespace="social")),
+	url(r'^social-auth/', include('social_django.urls', namespace="social")),
 	#url(r'^$', views.home, name="home"),
 	]
 

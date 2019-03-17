@@ -42,5 +42,8 @@ urlpatterns = [
 	#url(r'^university/(?P<university_name_slug>[\w\-]+)/$', views.show_university, name='university'),
 	#url(r'^university/$', views.show_university_, name='universities'),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),##NEEDED?
+	url(r'^social-auth/', include('social_django.urls', namespace="social")),
+	url(r'^oauth/', include('social_django.urls', namespace='social')),
+
     #url(r'^university/(?P<university_name_slug>[\w\-]+)/courses/(?P<course_name_slug>[\w\-]+)/$', views.show_course, name='course'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
