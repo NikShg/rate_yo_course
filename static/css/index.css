@@ -1,6 +1,37 @@
 .jumbotron {
 	background-color: #3CB371;
 	color:white;
+
+}
+
+.welcome {
+	width: 20%;
+  position:right;
+  background-color: #008000;
+  color: white;
+  position: fixed;
+  z-index: 1;
+  top: 12%;
+  right: 1%;
+  background: #black;
+  overflow-x: hidden;
+  padding: 5px 5px;
+  border-radius:5px;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
 }
 /*
 #autocomplete-suggestions { border: 1px solid #999; background: #fff; cursor: default; overflow: auto; }
@@ -44,6 +75,8 @@
 
 /* Search Box */
 #input {
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
 	position:relative!important;
 	border: 1px solid transparent;
 	border-radius: 10px;
@@ -58,6 +91,7 @@
     box-shadow: 0 0 30px #96f226;
 	background-color:white;
 	border: 1px solid lightblue;
+	 width: 100%;
 }
 
 /* Search Box when hovered over*/
@@ -128,6 +162,7 @@
 
 .ui-helper-hidden-accessible {
 	display:none;
-	}
+}
+	
 /*
 .ui-autocomplete { position: absolute; cursor: default;z-index:9000 !important;}  

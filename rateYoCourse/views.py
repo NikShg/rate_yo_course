@@ -10,7 +10,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from rateYoCourse.models import UserProfile, University, Course
 from rateYoCourse.models import Rate
-from star_ratings.models import Rating, UserRating
+from star_ratings.models import Rating
 from django.views.generic import DetailView, TemplateView
 from django.shortcuts import redirect
 from django.db.models import Q
@@ -153,13 +153,14 @@ def show_course(request, university_name_slug, course_name_slug):
 
 	context_dict['query'] = course.name
 	result_list = []
-	if request.method == 'POST':
-		query = request.POST['query'].strip()
+	
+	#if request.method == 'POST':
+		#query = request.POST['query'].strip()
 
-		if query:
-			result_list = run_query(query)
-			context_dict['query'] = query
-			context_dict['result_list'] = result_list
+		#if query:
+			#result_list = run_query(query)
+			#context_dict['query'] = query
+			#context_dict['result_list'] = result_list
 
 	return render(request, 'rateYoCourse/course.html', context=context_dict)
 

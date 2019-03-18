@@ -37,18 +37,18 @@ aria-label="Toggle navigation">
 </button>
 
 <div class="collapse navbar-collapse" id="navbar">
-<ul class="navbar-nav mr-auto">
- <li class="nav-item active">
+<ul class="navbar-nav mr-auto" id="selectable">
+ <li class="nav-item inactive">
 <a class="nav-link" href="{% url 'index' %}">
 Home
 </a>
 </li>
-<li class="nav-item">
+<li class="nav-item inactive">
 <a class="nav-link" href="{% url 'universities' %}">
 Universities
 </a>
 </li>
-<li class="nav-item">
+<li class="nav-item inactive">
 <a class="nav-link" href="{% url 'list_profiles' %}">
 Registered Users
 </a>
@@ -87,7 +87,13 @@ About
 <br/>
 <div class="header">
 <h1><a href="{% url 'index' %}"><t class="text-danger"><p align="center"><strong>Rate Yo Course</strong></p></t></a></h1></div>
-
+  {% if user.is_authenticated %} 
+  {% else %}
+  <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>WARNING!</strong> You are not signed in, this means you will not be able to rate courses and universities
+</div>
+{% endif %}
 <!--star_ratings-->
 <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
 <!--end of star_ratings-->
@@ -115,7 +121,8 @@ src=
 </script>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   <script  src="{% static "js/index.js" %}"></script>
+  <script  src="{% static "js/base.js" %}"></script>
+   <script  src="{% static 'js/index.js' %}"></script>
  <script  src="{% static 'js/profile.js' %}"></script>
   <script  src="{% static 'js/list_profiles.js' %}"></script>
 </body>
