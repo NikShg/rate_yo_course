@@ -10,7 +10,7 @@ $(document).ready(function(){
 	$("#cancel-link").click(function(){
 		$("#search-form").hide(500);
 		$("#cancel-link").hide();
-		$("#show").delay(550).show(1);
+		$("#show").delay(550).fadeIn(10);
 			});
 });
 

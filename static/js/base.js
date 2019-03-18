@@ -12,4 +12,5 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $( document ).tooltip();
+		$(".welcome").fadeOut(5000);
   } );

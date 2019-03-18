@@ -4,7 +4,35 @@
 
 }
 
+.welcome {
+	width: 20%;
+  position:right;
+  background-color: #008000;
+  color: white;
+  position: fixed;
+  z-index: 1;
+  top: 12%;
+  right: 1%;
+  background: #black;
+  overflow-x: hidden;
+  padding: 5px 5px;
+  border-radius:5px;
+}
 
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
 /*
 #autocomplete-suggestions { border: 1px solid #999; background: #fff; cursor: default; overflow: auto; }
 #autocomplete-suggestion { padding: 10px 5px; font-size: 1.2em; white-space: nowrap; overflow: hidden; }

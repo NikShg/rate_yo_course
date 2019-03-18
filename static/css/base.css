@@ -22,3 +22,47 @@ color:white!important;
 .active a{
 	color:white!important;
 	}
+	
+	.alert {
+  width: 20%;
+  position:right;
+  background-color: #f44336;
+  color: white;
+  position: fixed;
+  z-index: 1;
+  top: 12%;
+  right: 1%;
+  background: #red;
+  overflow-x: hidden;
+  padding: 10px 5px;
+}
+
+.welcome {
+	width: 20%;
+  position:right;
+  background-color: #008000;
+  color: white;
+  position: fixed;
+  z-index: 1;
+  top: 12%;
+  right: 1%;
+  background: #black;
+  overflow-x: hidden;
+  padding: 5px 5px;
+  border-radius:5px;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
