@@ -1,8 +1,15 @@
 {% extends "rateyocourse/base.html" %}
+{% load staticfiles %}
+{% load socialaccount %}
+
+{% block title %}
+	- Registeration Form - Step 1
+{% endblock %}
 
 {% block body_block %}
 <link href="http://v4-alpha.getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
-	<div class="jumbotron">
+<link href="{% static "css/registration_form.css" %}" rel="stylesheet" type="text/css"/>
+	<div class="jumbotron" >
 	<h2 class="form-signin-heading text-center">Register here</h2>
 	<form role="form" method="post" action=".">
 		{% csrf_token %}
@@ -30,10 +37,12 @@
 					</p>
 					</div>
 					<button type="submit" class="btn btn-primary">Submit</button>
+						</form>
 					<p><h5 class="text-center">~~<strong>OR</strong>~~</p></h3>
-	<p class="text-center"><a class="btn btn-primary btn-block " href="{% url 'social:begin' 'facebook' %}" role="button">Login with Facebook</a></p>
-		<p class="text-center"><a class="btn btn-info btn-block "href="{% url 'social:begin' 'twitter' %}" role="button">Login with Twitter</a></p>
-	
-	</form>
+					<div class="button">
+					<!--<p class="text-center"><a class="btn btn-primary btn-block " href="{% url 'social:begin' 'facebook' %}" role="button">Login with Facebook</a></p>-->
+	<p class="text-center"><a class="btn btn-lg btn-primary" id="facebook" href="{% provider_login_url 'facebook' %}" role="button">Login with Facebook</a></p></div>
+		<p class="text-center"><a class="btn btn-lg btn-info" href="{% provider_login_url 'twitter' %}" role="button">Login with Twitter</a></p>
+	  <p class="text-center"><a class="btn btn-lg btn-outline-primary waves-effect" href="{% provider_login_url 'github' %}" role="button">Login with GitHub</a></p>
 	</div>
 {% endblock %}
