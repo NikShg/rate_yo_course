@@ -21,8 +21,12 @@
 		{% endif %}
 </div>
 <br/>
+
 <div class="row">
 	<div class="col-lg-8">
+	
+	
+	
 	{% ratings course %}
 	{% block content %}
 		{% if user.is_authenticated %}
@@ -35,11 +39,11 @@
 		{% endif %}
 				{% endblock %}
 				</div>
+				
 			<div class="col-lg-4">
 				<div class="image">
 				<img class="img-fluid rounded"  height=auto width=auto src="{% static course.get_photo_url %}" alt="a photo"></div>
 				</div>
 			</div>
-
 {% endblock %}
 	

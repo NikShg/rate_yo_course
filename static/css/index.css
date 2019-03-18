@@ -1,7 +1,10 @@
 .jumbotron {
 	background-color: #3CB371;
 	color:white;
+
 }
+
+
 /*
 #autocomplete-suggestions { border: 1px solid #999; background: #fff; cursor: default; overflow: auto; }
 #autocomplete-suggestion { padding: 10px 5px; font-size: 1.2em; white-space: nowrap; overflow: hidden; }
@@ -44,6 +47,8 @@
 
 /* Search Box */
 #input {
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
 	position:relative!important;
 	border: 1px solid transparent;
 	border-radius: 10px;
@@ -58,6 +63,7 @@
     box-shadow: 0 0 30px #96f226;
 	background-color:white;
 	border: 1px solid lightblue;
+	 width: 100%;
 }
 
 /* Search Box when hovered over*/
@@ -128,6 +134,7 @@
 
 .ui-helper-hidden-accessible {
 	display:none;
-	}
+}
+	
 /*
 .ui-autocomplete { position: absolute; cursor: default;z-index:9000 !important;}  

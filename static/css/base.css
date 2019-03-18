@@ -14,3 +14,11 @@
 .header a {
 	text-decoration:none!important;
 }
+
+.active {
+color:white!important;
+}
+
+.active a{
+	color:white!important;
+	}

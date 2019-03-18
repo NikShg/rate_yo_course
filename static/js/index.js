@@ -3,21 +3,17 @@ $(document).ready(function(){
 	$("#search-form").hide();
 	$("#cancel-link").hide();
 	$("#show").click(function(){
-		$("#search-form").show();
+		$("#search-form").show(1000);
 		$("#cancel-link").show();
 		$("#show").hide();
 		});
 	$("#cancel-link").click(function(){
-		$("#search-form").hide();
+		$("#search-form").hide(500);
 		$("#cancel-link").hide();
-		$("#show").show();
+		$("#show").delay(550).show(1);
 			});
 });
 
-  $( function() {
-    $( document ).tooltip();
-  } );
-  
 /* Autocomplete suggestions */ 
 $(document).ready(function(){
 	var availableTags = ["University of Glasgow", "University of Edinburgh", "Internet Technology", "Advanced Programming", "Artificial Intelligence BSc", "Computer Science BSc"];
@@ -38,4 +34,11 @@ $(document).ready(function(){
 jQuery.ui.autocomplete.prototype._resizeMenu = function () {
   var ul = this.menu.element;
   ul.outerWidth(this.element.outerWidth());
-}
+};
+
+
+
+
+
+
+

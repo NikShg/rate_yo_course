@@ -14,33 +14,28 @@
 <div align="center" >
 <div class="fb-like" data-href="https://rateyocourse.com" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 
-<br>
-<br>
 Welcome to Rate Yo Course where you can rate yo course,
 without your professors` knowledge. This site was created
 to help students decide if they are in the right course.
  <br>
  <br>
-<br>
-<br>
 <div>
 <img class="img-responsive" src="{% static "images/rate.jpg" %}" alt="Rate Yo Course" width="400" height="280"/>
+ </div>
  <br>
  <br>
- <br>
- <br>
- <br>
-</div>
+
 <div align="center" >
 <div class="form-group">
 		<button class="btn btn-danger center-block" id="show" alt="Max-width 100%">Search Yo Uni!</button>
 </div>
-<div class="col-md-4 ">
+
+<div class="col-md-8 ">
 <form class="form-group" action="{% url 'search'  %}" method="get" accept-charset="utf-8" id="search-form" >
-    <input class="form-control center-block" type="text" placeholder="University/Course Name" id="input" title="Start typing a university name or course for suggestions.." name="q">
-   <p><button class="btn btn-danger" type="submit">Search</button></p>
+    <input class="form-control center-block text-center" type="text" placeholder="University / Course Name" id="input" title="Start typing a university name or course for suggestions.." name="q" required>
+  <button class="btn btn-danger" type="submit" id="button">Search</button>
   </form>
-	<p><a href="#" id="cancel-link" title="Click here to go back"> Cancel </a></p>
+	<p><button class = "btn btn-link" id="cancel-link" title="Click here to go back"> Cancel </button></p>
 	</div>
 	<link rel="stylesheet" href="{% static 'css/index.css' %}"/>
 <div class="jumbotron col-md-6"> 
