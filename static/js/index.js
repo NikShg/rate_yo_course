@@ -6,13 +6,20 @@ $(document).ready(function(){
 		$("#search-form").show(1000);
 		$("#cancel-link").show();
 		$("#show").hide();
-		
 		});
 	$("#cancel-link").click(function(){
 		$("#search-form").hide(500);
 		$("#cancel-link").hide();
 		$("#show").delay(550).fadeIn(10);
 			});
+});
+
+$("#show").click(function() {
+ $('html, body').animate({ 
+   scrollTop: $(document).height()-$(window).height()}, 
+   1400, 
+   "easeInOutSine"
+);
 });
 
 /* Autocomplete suggestions */ 

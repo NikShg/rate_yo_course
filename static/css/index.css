@@ -1,6 +1,7 @@
 /*
 Welcome logged in user
 */
+
 .welcome {
 	width: 20%;
   position:right;
@@ -94,6 +95,11 @@ Welcome logged in user
 
 .ui-helper-hidden-accessible {
 	display:none;
+}
+
+#button {
+	margin-top:10px;
+	border-radius:5px!important;
 }
 	
 /*
