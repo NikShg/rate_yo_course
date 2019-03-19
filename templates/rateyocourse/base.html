@@ -38,17 +38,22 @@ aria-label="Toggle navigation">
 
 <div class="collapse navbar-collapse" id="navbar">
 <ul class="navbar-nav mr-auto" id="selectable">
- <li class="nav-item inactive">
+ <li class="nav-item">
 <a class="nav-link" href="{% url 'index' %}">
 Home
 </a>
 </li>
-<li class="nav-item inactive">
+<li class="nav-item"  >
+<a class="nav-link" href="{% url 'about' %}">
+About
+</a>
+</li>
+<li class="nav-item ">
 <a class="nav-link" href="{% url 'universities' %}">
 Universities
 </a>
 </li>
-<li class="nav-item inactive">
+<li class="nav-item ">
 <a class="nav-link" href="{% url 'list_profiles' %}">
 Registered Users
 </a>
@@ -76,11 +81,6 @@ Login
 </a>
 </li>
 {% endif %}
-<li class="nav-item"  >
-<a class="nav-link" href="{% url 'about' %}">
-About
-</a>
-</li>
 </ul>
 </div>
 </nav>
