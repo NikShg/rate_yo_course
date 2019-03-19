@@ -7,42 +7,41 @@
 {% endblock %}
 
 {% block body_block %}
-
   {% if user.is_authenticated %} 
   <div class="welcome">
    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
    <strong>Welcome </strong>  {{ user.username }}!
   </div>
   {% endif %}
+  <div align="center" >
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
- <br>
-<div align="center" >
 <div class="fb-like" data-href="https://rateyocourse.com" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
-<br>
-<br>
-Welcome to Rate Yo Course where you can rate yo course,
-without your professors` knowledge. This site was created
-to help students decide if they are in the right course.
- <br>
+</div> <br>
+<div align="center">
+<div class="welcome-message">
+<p><strong>Welcome to Rate Yo Course </strong>where you can rate yo course,
+without your professors` knowledge. </p> 
+<p>This site was created
+to help students decide if they are in the right course.</p></div>
  <br>
 <div>
-<img class="img-responsive" src="{% static "images/rate.jpg" %}" alt="Rate Yo Course" width="400" height="280"/>
+<img class="img-responsive" src="{% static "images/rate.jpg" %}" alt="Rate Yo Course" width="400" height="280"/></div>
  </div>
  <br>
- <br>
-
 <div align="center" >
 <div class="form-group">
-		<button class="btn btn-danger center-block" id="show" alt="Max-width 100%">Search Yo Uni!</button>
+		<button class="btn btn-danger center-block" id="show" alt="Max-width 100%" >Search Yo Uni!</button>
 </div>
 
 <div class="col-md-8 ">
 <form class="form-group" action="{% url 'search'  %}" method="get" accept-charset="utf-8" id="search-form" >
     <input class="form-control center-block text-center" type="text" placeholder="University / Course Name" id="input" title="Start typing a university name or course for suggestions.." name="q" required>
-  <button class="btn btn-danger" type="submit" id="button">Search</button>
+  <button class="btn btn-lg btn-danger btn-block" type="submit" id="button">Search</button>
   </form>
+  <div class="cancel">
 	<p><button class = "btn btn-link" id="cancel-link" title="Click here to go back"> Cancel </button></p>
+	</div>
 	</div>
 	<link rel="stylesheet" href="{% static 'css/index.css' %}"/>
 	<!--
@@ -54,6 +53,7 @@ to help students decide if they are in the right course.
   <p> You are not signed in, this means you will not be able to rate courses and universities</p>
 {% endif %}
 </div>-->
+   <script  src="{% static 'js/index.js' %}"></script>
 </div>
 {% endblock %}
 

@@ -10,7 +10,15 @@
 <link href="http://v4-alpha.getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
 <link href="{% static "css/registration_form.css" %}" rel="stylesheet" type="text/css"/>
 	<div class="jumbotron" >
-	<h2 class="form-signin-heading text-center">Register here</h2>
+	<h1 class="form-signin-heading">Sign Up</h1>
+	<div class="socialLogIn">
+	<h3 > Get started faster </h3>
+	<p> Connect via one of these sites </p>
+	<div class="row"> 
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="text-align:center;"><a class="btn btn-lg btn-info fa fa-twitter" id="twitter" href="{% provider_login_url 'twitter' %}" role="button">Login with Twitter</a></div>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="text-align:center;"> <a class="btn btn-lg  btn-outline-primary waves-effect fa fa-github" id="github" href="{% provider_login_url 'github' %}" role="button">Login with GitHub</a></div>
+	  </div></div>
+	<div class="form">
 	<form role="form" method="post" action=".">
 		{% csrf_token %}
 		<div class="form-group">
@@ -38,11 +46,7 @@
 					</div>
 					<button type="submit" class="btn btn-primary">Submit</button>
 						</form>
-					<p><h5 class="text-center">~~<strong>OR</strong>~~</p></h3>
-					<div class="button">
+						</div>
+					
 					<!--<p class="text-center"><a class="btn btn-primary btn-block " href="{% url 'social:begin' 'facebook' %}" role="button">Login with Facebook</a></p>-->
-	<p class="text-center"><a class="btn btn-lg btn-primary" id="facebook" href="{% provider_login_url 'facebook' %}" role="button">Login with Facebook</a></p></div>
-		<p class="text-center"><a class="btn btn-lg btn-info" href="{% provider_login_url 'twitter' %}" role="button">Login with Twitter</a></p>
-	  <p class="text-center"><a class="btn btn-lg btn-outline-primary waves-effect" href="{% provider_login_url 'github' %}" role="button">Login with GitHub</a></p>
-	</div>
 {% endblock %}
