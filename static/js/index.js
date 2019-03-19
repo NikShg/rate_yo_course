@@ -6,6 +6,7 @@ $(document).ready(function(){
 		$("#search-form").show(1000);
 		$("#cancel-link").show();
 		$("#show").hide();
+		
 		});
 	$("#cancel-link").click(function(){
 		$("#search-form").hide(500);
