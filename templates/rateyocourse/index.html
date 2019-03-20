@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body_block %}
-  {% if user.is_authenticated %} 
+  {%   if user.is_authenticated %} 
   <div class="welcome">
    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
    <strong>Welcome </strong>  {{ user.username }}!
@@ -26,12 +26,12 @@ without your professors` knowledge. </p>
 to help students decide if they are in the right course.</p></div>
  <br>
 <div>
-<img class="img-responsive" src="{% static "images/rate.jpg" %}" alt="Rate Yo Course" width="400" height="280"/></div>
+<img class="img-responsive" src="{% static "images/rate.jpg" %}" alt="Rate Yo Course" width="350" height="230"/></div>
  </div>
  <br>
 <div align="center" >
 <div class="form-group">
-		<button class="btn btn-danger center-block" id="show" alt="Max-width 100%" >Search Yo Uni!</button>
+		<button class="btn btn-danger center-block button-glow" id="show" alt="Max-width 100%" >Search Yo Uni!</button>
 </div>
 
 <div class="col-md-8 ">

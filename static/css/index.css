@@ -101,6 +101,22 @@ Welcome logged in user
 	margin-top:10px;
 	border-radius:5px!important;
 }
+
+#show {
+	width:50%!important;
+}
+
+@keyframes glowing {
+  0% { box-shadow: 0 0 -10px #7CFC00; }
+  40% { box-shadow: 0 0 20px #7CFC00; }
+  60% { box-shadow: 0 0 20px #7CFC00; }
+  100% { box-shadow: 0 0 -10px #7CFC00; }
+}
+
+.button-glow {
+  animation: glowing 2500ms infinite;
+}
+
 	
 /*
 .ui-autocomplete { position: absolute; cursor: default;z-index:9000 !important;}  
