@@ -7,42 +7,88 @@
 {% endblock %}
 
 {% block body_block %}
-	<div >
-	<p id="site-map">You are here > <a href="{% url 'index' %}"> Home</a> / <a href="{% url 'universities' %}" > Universities</a> 
-	<h4 > <u> Here are the universities that are currently on our list </u> </h4>
+<div class="site-map">
+	<p id="site-map">You are here > <a href="{% url 'index' %}"> Home</a> / <a href="{% url 'universities' %}" > Universities</a> <hr/>
+</div>
+<div class="jumbotron">
+<link href="{% static 'css/universities.css' %}" rel="stylesheet">
+	<div class="heading text-center">
+	<h1 class="display-5 text-center" id="header" > <u> Universities and courses currently on our list </u> </h1>
+	<p> Go on. Choose one!</p>
 	</div>
-<br>
-<br>
+	<br/>
+	
 	<div class="row marketing">
 		<div class="col-lg-12">
-<div class="row">
-	<div class="element1 col-md-5">
-		<h5>Most recently searched</h5>
-		<p>
-			<ul>
+			<div class="row">
+				<div class="col-md-2"></div>
+					<div class="element1 col-md-5 col-xs-12 col-sm-12" align="left">
+						<h5>Recently Added Universities </h5>
+						<ul> {% for u in universities %}
+						<li><a href="{% url 'university' u.slug %}">{{ u.name }}</a></li>
+						{% endfor %}
+						</ul>
+					</div>
+					<div class="element2 col-md-5 col-xs-12 col-sm-12" align="left">
+						<h5> Recently Added Courses </h5>
+						<ul> {% for c in courses %}
+						<li><a href="{% url 'course' c.university.slug c.slug %}">{{ c.name }}</a></li>
+						{% endfor %}
+						</ul>	
+					</div>
+					<div class="col-md-1"></div>
+				</div>
+
+<!--
+<div class="Highest_Rated_Universities">
+	<h5> Highest Rated Universities </h5>
+	{% for u in university_ratings %} 
+	<li>{{u}} </li>
+	{% endfor %}
+	</div>
+	<div class="Highest_Rated_Courses">
+	<h5> Highest Rated Courses </h5>
+	{% for c in course_ratings %} 
+	<li>{{c}} </li>
+	{% endfor %}
+	</div>
+</div>
+-->
+<br/>
+<div class="row marketing" id="recent_ratings">
+		<div class="col-lg-12">
+				<div class="row">
+			
+						<div class="element3 col-md-12 col-lg-12 col-xs-12 col-sm-12 header" align="center">
+							<h5 class="display-5 "><u>Top 5 Recent Ratings </u></h5>
+						{% for u in userratings %} 
+							<p><a href="{% url 'profile' u.user %}">{{ u.user}} </a>gave {{ u.rating }} a rating of <u><i><b>  {{ u.score}}</b></i></u>!</p>
+							{% endfor %}
+							
+						</div>
+						</div>
+				</div>
+		</div>
+	</div>
+</div>
+</div>
+{% endblock %}
+	
+	<!--
+				<ul>
 			{% for u in universities %}
 			<li><a href="{{ u.slug }}">{{ u.name }}</a></li>
 			{% endfor %}
 			</ul>
 		</p>
 </div>
-<div class="element2 col-md-5">
-
-		<h5>Higest ranking universities</h5>
+	<h5>Most recently searched</h5>
 		<p>
 			<ul>
 			{% for u in universities %}
 			<li><a href="{{ u.slug }}">{{ u.name }}</a></li>
 			{% endfor %}
 			</ul>
-		</p>
-</div>
-</div>
-<div>
-<br>
-<br>
-<br>
-
 		<h5>Bookmarked</h5>
 		<p>
 			<ul>
@@ -50,7 +96,4 @@
 			<li><a href="{{ u.slug }}">{{ u.name }}</a></li>
 			{% endfor %}
 			</ul>
-		</p>
-	</div>
-</div>
-{% endblock %}
+		</p>-->

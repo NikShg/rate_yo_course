@@ -1,0 +1,16 @@
+#recent_ratings > div:nth-child(1) {
+	  border: 3px solid #800035!important;
+	  border-radius:5px!important;
+}
+
+.element3 {
+	margin-top:2%!important;
+}
+#recent_ratings {
+	padding-left:10%!important;
+	padding-right:10%!important;
+}
+
+.element3 > p:nth-child(2) {
+	padding:10px!important;
+}

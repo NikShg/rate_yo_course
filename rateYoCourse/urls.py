@@ -6,10 +6,6 @@ from django.conf.urls import include
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
 	url(r'^about/$', views.about, name='about'),
-	# 3 following urls decommissioned since using registration app
-	#url(r'^login/$', views.user_login, name='login'),
-	#url(r'^logout/$', views.user_logout, name='logout'),
-	#url(r'^register/$', views.register, name='register'),
 	url(r'^universities/(?P<university_name_slug>[\w\-]+)/$', views.show_university, name='university'),
 	url(r'^universities/$', views.show_university_, name='universities'),
 	url(r'^universities/(?P<university_name_slug>[\w\-]+)/courses/(?P<course_name_slug>[\w\-]+)/$', views.show_course, name='course'),
