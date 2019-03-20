@@ -1,4 +1,4 @@
-/*
-.fb_reset {
-	padding: 50px;
-}*/
+.fb-page, .fb-page iframe[style], .fb-page span {
+    width: 100% !important;
+	font-weight:bold!important;
+	}

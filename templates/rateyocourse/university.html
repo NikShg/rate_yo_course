@@ -7,12 +7,13 @@
 {% endblock %}
 
 {% block body_block %}
-<link rel="stylesheet" href="{% static "css/university.css" %}"/>
+<link rel="stylesheet" href="{% static "css/university.css" %}">
+<script href="{% static "js/university.js" %}" type="text/javascript"></script>
 <div class="site-map"><p>You are here > <a href="{% url 'index' %}"> Home</a> / <a href="{% url 'universities' %}" > Universities</a> / <a href="{% url 'university' university.slug%}" >  {{  university.name}} </a></p></div>
 <hr/>
 <div class = "jumbotron">
 	<div class="row">
-	<div class="col-lg-8">
+	<div class="col-lg-8 col-sm-6 col-xs-6">
 			{% if university %}
 			<h1 class="display-4"> {{ university.name }} </h1>
 			<p id="uni-city">Location: {{university.city}} </p>
@@ -24,15 +25,15 @@
 		<img class="img-fluid" position=inline width=auto height=auto src="{% static 'edinburgh.jpg' %}" alt="Picture of University"  id="picture" />
 		{% endif %}-->
 
-	<div class="col-lg-4">
+	<div class="col-lg-4  col-sm-6 col-xs-6" align="center">
 	<div id="fb-root"></div>
 		<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
 		{% if university.name|default:""|slice:"-1:" == "w" %}
 		<div align="right">
-		<div class="fb-page" data-href="https://www.facebook.com/UofGlasgow/" data-tabs="timeline" data-width="400" data-height="400" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/UofGlasgow/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/UofGlasgow/">University of Glasgow</a></blockquote></div>
+		<div class="fb-page" data-href="https://www.facebook.com/UofGlasgow/" data-tabs="timeline" data-width="500" data-height="550" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/UofGlasgow/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/UofGlasgow/">University of Glasgow</a></blockquote></div>
 		{% else %}
 <div align="right">
-		<div class="fb-page" data-href="https://www.facebook.com/UniversityOfEdinburgh/" data-tabs="timeline" data-width="400" data-height="400" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/UniversityOfEdinburgh/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/UofGlasgow/">University of Edinburgh</a></blockquote></div>
+		<div class="fb-page" data-href="https://www.facebook.com/UniversityOfEdinburgh/" data-tabs="timeline" data-width="500" data-height="550" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/UniversityOfEdinburgh/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/UofGlasgow/">University of Edinburgh</a></blockquote></div>
 		{% endif %}
 		</div> 
 	</div>

@@ -22,8 +22,11 @@ color:white!important;
 .active a{
 	color:white!important;
 	}
-	
-	.alert {
+
+/*
+Alert user that they're not logged in
+*/	
+.alert {
   width: 20%;
   position:right;
   background-color: #f44336;
@@ -36,7 +39,9 @@ color:white!important;
   overflow-x: hidden;
   padding: 10px 5px;
 }
-
+/*
+Welcome logged in user
+*/
 .welcome {
 	width: 20%;
   position:right;

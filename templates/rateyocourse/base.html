@@ -21,6 +21,7 @@ rel="stylesheet">
 <link href=
 "http://v4-alpha.getbootstrap.com/examples/dashboard/dashboard.css"
 rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -38,17 +39,22 @@ aria-label="Toggle navigation">
 
 <div class="collapse navbar-collapse" id="navbar">
 <ul class="navbar-nav mr-auto" id="selectable">
- <li class="nav-item inactive">
+ <li class="nav-item">
 <a class="nav-link" href="{% url 'index' %}">
 Home
 </a>
 </li>
-<li class="nav-item inactive">
+<li class="nav-item"  >
+<a class="nav-link" href="{% url 'about' %}">
+About
+</a>
+</li>
+<li class="nav-item ">
 <a class="nav-link" href="{% url 'universities' %}">
 Universities
 </a>
 </li>
-<li class="nav-item inactive">
+<li class="nav-item ">
 <a class="nav-link" href="{% url 'list_profiles' %}">
 Registered Users
 </a>
@@ -76,11 +82,6 @@ Login
 </a>
 </li>
 {% endif %}
-<li class="nav-item"  >
-<a class="nav-link" href="{% url 'about' %}">
-About
-</a>
-</li>
 </ul>
 </div>
 </nav>
@@ -122,8 +123,9 @@ src=
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script  src="{% static "js/base.js" %}"></script>
-   <script  src="{% static 'js/index.js' %}"></script>
  <script  src="{% static 'js/profile.js' %}"></script>
   <script  src="{% static 'js/list_profiles.js' %}"></script>
+     <script  src="{% static 'js/index.js' %}"></script>
+ <script  src="{% static 'js/about.js' %}"></script>
 </body>
 </html>

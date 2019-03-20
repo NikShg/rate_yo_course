@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 from registration.backends.simple.views import RegistrationView
 from django.contrib.auth.views import (password_reset, password_reset_done, password_reset_confirm, password_reset_complete, password_change, password_change_done)
 from django.core.urlresolvers import reverse
+from django.contrib.auth import views as auth_views
 
 class MyRegistrationView(RegistrationView):
 	def get_success_url(self, user):
