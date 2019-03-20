@@ -61,3 +61,8 @@ class test_models(TestCase):
 		only = uni_in_data[0]
 		self.assertEquals(only, uni)
 
+class RateMethodTest(TestCase):
+	def test_static_files(self):
+		result = finders.find('images/team.jpg')
+		self.assertIsNotNone(result)
+
