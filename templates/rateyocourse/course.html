@@ -46,7 +46,6 @@
 		{% block detail %}
 	<br>
 	<h2>Leave a comment</h2>
-	<p>Total number of comments {{ course.comments.count }}</p>
 	<a href="{% url 'add_comment' university.slug course.slug %}">Leave a Comment</a>
 	{% for comment in comments %}
 		<p>{{ comment.created}}</p>
