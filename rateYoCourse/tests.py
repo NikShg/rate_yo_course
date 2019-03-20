@@ -29,15 +29,9 @@ class CourseMethodTest(TestCase):
 		'''
 		Test that url path to images is as expected
 		'''
-		university = University.objects.create(name="University of Glasgow", city="Glasgow", url="www.gla.ac.uk")
+		university = University(name="University of Glasgow", city="Glasgow", url="www.gla.ac.uk")
 		course = Course(university=university, name="Internet Technology", url="https://www.gla.ac.uk/postgraduate/taught/informationtechnology/")
 		itech = course.get_photo_url
 		course.save()
 		self.assertEqual(itech, 'images/Internet Technology.jpg')
 		
-class RateMethodTest(TestCase):
-	def test_bar_length(self):
-		#Test max length validator
-		rate = Rate(bar=120)
-		rate.save()
-		self.assertEqual((rate.bar <=100), True)

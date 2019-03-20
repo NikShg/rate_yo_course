@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from star_ratings.models import Rating, UserRating
 from django.contrib.contenttypes.fields import GenericRelation
+from django.utils.text import Truncator
 
 # Create your models here.
 
@@ -18,6 +19,8 @@ class University(models.Model):
 		return 'images/%s.jpg' % self.name
 
 	def save(self, *args, **kwargs):
+		self.name=self.name[:128]
+		self.city=self.city[:32]
 		self.slug = slugify(self.name)
 		super(University, self).save(*args, **kwargs)
 
@@ -59,6 +62,7 @@ class UserProfile(models.Model):
 
 class Rate(models.Model):
     bar = models.CharField(max_length=100)
+	
 
 class Comment(models.Model): #post = Course
 	university = models.ForeignKey(University, related_name="university")
