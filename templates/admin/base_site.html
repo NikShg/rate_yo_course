@@ -1,17 +1,16 @@
-<!––the template extends the base-->
+
 {% extends "admin/base.html" %}
 
-<!––declairing the title of the all pages that extend this base-->
+
 {% block title %}{{ title }} | {{ site_title|default:_('GradeYoCourse administration') }}{% endblock %}
 
-<!––beggining of block statement-->
 {% block branding %}
 
-<!––link to the admin index page-->
+
 <h1 id="site-name"><a href="{% url 'admin:index' %}">Django administration</a></h1>
 
-<!––end block-->
+
 {% endblock %}
 
-<!––end of the navigation bar-->
+
 {% block nav-global %}{% endblock %}

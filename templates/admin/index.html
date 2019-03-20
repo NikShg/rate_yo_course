@@ -1,18 +1,15 @@
-<!––this template is the index of the admin user interface-->
 
-<!––this page extends the admine base-->
 {% extends "admin/base_site.html" %}
 
-<!––tag to load static files-->
 {% load i18n static %}
 
-<!––this block uses the css style sheet-->
+
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
 
-<!––two column layout-->
+
 {% block coltype %}colMS{% endblock %}
 
-<!––using dashboard-->
+
 {% block bodyclass %}{{ block.super }} dashboard{% endblock %}
 
 {% block breadcrumbs %}{% endblock %}
@@ -21,53 +18,53 @@
 {% block content %}
 <div id="content-main">
 
-<!––for all app_list-->
+
 {% if app_list %}
 
-    <!––for all declaired apps in the app_list-->
+    
     {% for app in app_list %}
 
-	<!––label of this page-->
+	
         <div class="app-{{ app.app_label }} module">
         
-	<!––create table style-->
+	
 	<table>
 
-	<!––caption of the table-->
+	
         <caption>
-            	<!––linking the models of the application-->
+            	
 		<a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>
        
-	<!––caption of the table-->
+	
 	 </caption>
         
-	<!––for all applications in the models-->
+	
 	{% for model in app.models %}
 
-		<!––name lowercase-->
+		
             <tr class="model-{{ model.object_name|lower }}">
         
-	<!––for all admin URL in the model-->    
+	    
 	{% if model.admin_url %}
 		
-		<!––organize it in rows, linking it to the model.admin_url and displaying the model name-->
+		
                 <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>    
 	{% else %}
                 
-		<!––if no URL then just display the name of teh model-->
+		
 		<th scope="row">{{ model.name }}</th>
             {% endif %}
 
-		<!––for all new URL-->
+		
             {% if model.add_url %}
 		
-		<!––add the link of the model-->
+		
                 <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
             {% else %}
                 <td>&nbsp;</td>
             {% endif %}
 
-		<!––if the link changes-->
+		
             {% if model.admin_url %}
                 <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
             {% else %}
@@ -79,7 +76,7 @@
         </div>
     {% endfor %}
 {% else %}
-    	<!––if the user does not have admin permission-->
+    	
 	<p>{% trans "You don't have permission to edit anything." %}</p>
 {% endif %}
 </div>
@@ -88,22 +85,22 @@
 {% block sidebar %}
 <div id="content-related">
     	
-	<!––getting the recently used actions-->
+	
 	<div class="module" id="recent-actions-module">
         <h2>{% trans 'Recent actions' %}</h2>
         <h3>{% trans 'My actions' %}</h3>
             
-		<!––getting the recently used actions-->
+		
 		{% load log %}
             {% get_admin_log 10 as admin_log for_user user %}
             
-		<!––if no recent action is available-->
+		
 		{% if not admin_log %}
             <p>{% trans 'None available' %}</p>
             {% else %}
             <ul class="actionlist">
             
-		<!––if admin is logged in, let them add, change or delet links-->
+		
 		{% for entry in admin_log %}
             <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
                 {% if entry.is_deletion or not entry.get_admin_url %}
@@ -113,7 +110,7 @@
                 {% endif %}
                 <br/>
 
-		<!––if the entry is a content type-->
+		
                 {% if entry.content_type %}
                     <span class="mini quiet">{% filter capfirst %}{{ entry.content_type }}{% endfilter %}</span>
                 {% else %}
