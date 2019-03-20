@@ -39,9 +39,13 @@ urlpatterns = [
 	url(r'^accounts/password/change/done/$', password_change_done, name='password_change_done'),
 	url(r'^accounts/password/reset/$', password_reset, name='password_reset'),
 	url(r'^accounts/password/reset/done/$', password_reset_done, name='password_reset_done'),
-	url(r'^university/(?P<university_name_slug>[\w\-]+)/$', views.show_university, name='university'),
-	url(r'^university/$', views.show_university_, name='universities'),
-    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
+	#url(r'^university/(?P<university_name_slug>[\w\-]+)/$', views.show_university, name='university'),
+	#url(r'^university/$', views.show_university_, name='universities'),
+    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),##NEEDED?
+	url(r'^social-auth/', include('social_django.urls', namespace="socialedited")),
+	url(r'^accounts/', include('allauth.urls')),
+	url(r'^oauth/', include('social_django.urls', namespace='social')),
+    url(r'^add_comment/', views.add_comment, name='comment_form'),
     url(r'^university/(?P<university_name_slug>[\w\-]+)/courses/(?P<course_name_slug>[\w\-]+)/$', views.show_course, name='course'),
     url(r'^university/(?P<university_name_slug>[\w\-]+)/courses/(?P<course_name_slug>[\w\-]+)/comment/$', views.add_comment, name='add_comment'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

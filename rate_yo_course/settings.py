@@ -50,7 +50,15 @@ INSTALLED_APPS = [
     'rateYoCourse',
 	'registration',
     'star_ratings',
+	'bootstrap_toolkit',
 	'social_django',
+	'django.contrib.sites',
+	'allauth', 
+	'allauth.account', 
+	'allauth.socialaccount', 
+	'allauth.socialaccount.providers.github', 
+	'allauth.socialaccount.providers.twitter',
+	'allauth.socialaccount.providers.facebook',
 ]
 
 MIDDLEWARE = [
@@ -78,8 +86,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-                'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.request',
 				'social_django.context_processors.backends',
 				'social_django.context_processors.login_redirect',
             ],
@@ -89,24 +95,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rate_yo_course.wsgi.application'
 
-LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/rateyocourse/'
-
 REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
+LOGIN_REDIRECT_URL = '/rateyocourse/'
+LOGIN_URL = '/accounts/login/'
+
 
 #LOGOUT_URL =  '/rateyocourse/'
 #LOGIN_URL = 'login'
 #LOGOUT_URL = 'logout'
-
-
+SOCIAL_AUTH_GITHUB_KEY = '7d2f614a6ecfee58419b'
+SOCIAL_AUTH_GITHUB_SECRET = '265572fb714309de9885fd7aee7dd54df570bf0b'
 SOCIAL_AUTH_FACEBOOK_KEY = '569098240271575'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'bde071c254249f1655178756c1fbd8d8'
-SOCIAL_AUTH_LOGIN_ERROR_URL = '/settings/'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/settings/'
-SOCIAL_AUTH_RAISE_EXCEPTIONS = False
-SESSION_COOKIE_SECURE = True
+SOCIAL_AUTH_TWITTER_KEY = 'x4xB0G7qHdnHoILvA8LfYErhC'
+SOCIAL_AUTH_TWITTER_SECRET = 'SVJkja12vem7fUT40E52Wji13z4ripbotZKc7tfwTChg3Hej6t'
+#SOCIAL_AUTH_LOGIN_ERROR_URL = '/settings/'
+#SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/settings/'
+#SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -118,11 +125,13 @@ DATABASES = {
 }
 
 AUTHENTICATION_BACKENDS = (
+	'django.contrib.auth.backends.ModelBackend',
+	"allauth.account.auth_backends.AuthenticationBackend",
     'social_core.backends.facebook.FacebookOAuth2',
-	 'social_core.backends.twitter.TwitterOAuth',
-    'django.contrib.auth.backends.ModelBackend',
+	'social_core.backends.twitter.TwitterOAuth',
+	'social_core.backends.github.GithubOAuth2',
 )
-
+SITE_ID = 1
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 

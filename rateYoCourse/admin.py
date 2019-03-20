@@ -18,6 +18,6 @@ admin.site.register(Course, CourseAdmin)
 admin.site.register(UserProfile)
 
 class CommentAdmin(admin.ModelAdmin):
-	list_display = ('user', 'approved')
+	list_display = ('user', 'approved', 'body', 'course', 'university', )
 
-admin.site.register(Comment, CommentAdmin)	
+admin.site.register(Comment, CommentAdmin)

@@ -9,21 +9,21 @@
 	<h1>Login to Rate Yo Course</h1>
 	<form id="login_form" method="post" action="{% url 'login' %}">
 		{% csrf_token %}
-		<p>Username: <input type="text" name="username" value="" size="50"/>
+		Username: <input type="text" name="username" value="" size="50" />
 		<br/>
-		<p>Password: <input type="text" name="password" value="" size="50" />
+		Password: <input type="password" name="password" value="" size="50" />
 		<br/>
-		<p><input type="submit" value="submit" />
+		<input type="submit" value="submit" />
 		<p><a href="{% url 'password_reset' %}">Forgotten your password?</a>
 		<button class="btn btn-primary mb-2">
                 <a href="#">Login with Facebook
                 </a>
             </button>
-
 		<p>
 		Not a member?
-		<a href="{% url 'registration_register' %}">Register</a>
+		<!--<a href="{% url 'registration_register' %}">Register</a>-->
+		<a href="{% url 'register' %}">Register</a>
 	</p>
 	</form>
-
+	<link rel="stylesheet"  href="{% static 'css/login.css' %}" />
 {% endblock %}

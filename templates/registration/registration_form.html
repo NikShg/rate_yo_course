@@ -1,27 +1,48 @@
 {% extends "rateyocourse/base.html" %}
+{% load staticfiles %}
+{% load socialaccount %}
+
+{% block title %}
+	- Registeration Form - Step 1
+{% endblock %}
 
 {% block body_block %}
-	<h2 class="form-signin heading">Register here</h2>
+<link href="http://v4-alpha.getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+<link href="{% static "css/registration_form.css" %}" rel="stylesheet" type="text/css"/>
+	<div class="jumbotron" >
+	<h2 class="form-signin-heading text-center">Register here</h2>
 	<form role="form" method="post" action=".">
 		{% csrf_token %}
 		<div class="form-group">
 		<p class="required"><label class="required for="id_username">
 			Username:</label>
-			<input class="form-control" id="id_username" maxlength="30" name="username" type="text"/>
+			<input class="form-control" id="id_username" maxlength="30" name="username" type="text" required autofocus/>
 			<span class="helptext">
 			Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
 			</p>
 			<p class="required"><label class="required" for="id_email">
 				E-mail:</label>
-				<input class="form-control" id="id_email" name="email" type="email"/>
+				<input class="form-control" id="id_email" name="email" type="email" required autofocus/>
 				</p>
+				<p class="required">
+					<label class="required" for="id_password1">
+						Password confirmation:</label>
+						<input class="form-control" id="id_password1" name="password1" type="password" required autofocus/>
+						</p>
 				<p class="required">
 					<label class="required" for="id_password2">
 						Password confirmation:</label>
-						<input class="form-control" id="id_password2" name="password2" type="password"/>
+						<input class="form-control" id="id_password2" name="password2" type="password" required autofocus/>
 						<span class="helptext"> Enter the same password as before, for verification</span>
-						</p>
-						</div>
-						<button type="submit" class="btn btn-default">Submit</button>
-	</form>
+					</p>
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+						</form>
+					<p><h5 class="text-center">~~<strong>OR</strong>~~</p></h3>
+					<div class="button">
+					<!--<p class="text-center"><a class="btn btn-primary btn-block " href="{% url 'social:begin' 'facebook' %}" role="button">Login with Facebook</a></p>-->
+	<p class="text-center"><a class="btn btn-lg btn-primary" id="facebook" href="{% provider_login_url 'facebook' %}" role="button">Login with Facebook</a></p></div>
+		<p class="text-center"><a class="btn btn-lg btn-info" href="{% provider_login_url 'twitter' %}" role="button">Login with Twitter</a></p>
+	  <p class="text-center"><a class="btn btn-lg btn-outline-primary waves-effect" href="{% provider_login_url 'github' %}" role="button">Login with GitHub</a></p>
+	</div>
 {% endblock %}

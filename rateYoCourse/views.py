@@ -8,15 +8,13 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.contrib.auth.models import User
-from rateYoCourse.models import UserProfile, University, Course
+from rateYoCourse.models import UserProfile, University, Course, Comment
 from rateYoCourse.models import Rate
 from star_ratings.models import Rating
 from django.views.generic import DetailView, TemplateView
-
 from django.shortcuts import redirect
 from django.db.models import Q
-
-
+from django.shortcuts import get_list_or_404, get_object_or_404
 def index(request):
 	context_dict = {}
 	visitor_cookie_handler(request)
@@ -49,18 +47,15 @@ def visitor_cookie_handler(request):
 		request.session['last_visit'] = last_visit_cookie
 
 	request.session['visits'] = visits
-'''
+
 #def login(request):
 	#return render(request, 'login.html')
 '''
-@login_required
+#@login_required
 def home(request):
 	return render(request, 'index.html')
-'''
-=======
 
->>>>>>> 7799bb623bcf7b24f064e0c7151e3c0bc24d3743
-#def register(request):
+def register(request):
 	registered = False
 	if request.method == 'POST':
 		user_form = UserForm(data=request.POST)
@@ -71,9 +66,9 @@ def home(request):
 			user.set_password(user.password)
 			user.save()
 
-			profile = profile_form.save(commit = False)
-			user.set_password(user.password)
-			user.save()
+			#profile = profile_form.save(commit=False)
+			#user.set_password(user.password)
+			#user.save()
 
 			profile = profile_form.save(commit=False)
 			profile.user = user
@@ -91,14 +86,8 @@ def home(request):
 		profile_form = UserProfileForm()
 
 	return render(request, 'rateyocourse/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
-<<<<<<< HEAD
-'''
-'''
-=======
 
-
->>>>>>> 7799bb623bcf7b24f064e0c7151e3c0bc24d3743
-#def user_login(request):
+def user_login(request):
 	if request.method == 'POST':
 		username = request.POST.get('username')
 		password = request.POST.get('password')
@@ -118,15 +107,11 @@ def home(request):
 			return HttpResponse("Invalid login details supplied.")
 	else:
 		return render(request, 'rateyocourse/login.html', {})
-<<<<<<< HEAD
-'''
-'''
-=======
 
->>>>>>> 7799bb623bcf7b24f064e0c7151e3c0bc24d3743
-		#Commenting out as using registration app package
-#@login_required
-#def user_logout(request):
+
+#Commenting out as using registration app package
+@login_required
+def user_logout(request):
 	logout(request)
 
 	return HttpResponseRedirect(reverse('index'))
@@ -160,23 +145,50 @@ def show_course(request, university_name_slug, course_name_slug):
 	try:
 		university = University.objects.get(slug=university_name_slug)
 		course = Course.objects.get(slug=course_name_slug)
+		comments = Comment.objects.filter(course=course)
 		context_dict['course'] = course
 		context_dict['university'] = university
+		context_dict['comments'] = comments
 	except Course.DoesNotExist:
 		context_dict['course'] = None
 		context_dict['university'] = None
+		context_dict['comments'] = None
 
 	context_dict['query'] = course.name
 	result_list = []
-	if request.method == 'POST':
-		query = request.POST['query'].strip()
 
-		if query:
-			result_list = run_query(query)
-			context_dict['query'] = query
-			context_dict['result_list'] = result_list
+	#if request.method == 'POST':
+		#query = request.POST['query'].strip()
+
+		#if query:
+			#result_list = run_query(query)
+			#context_dict['query'] = query
+			#context_dict['result_list'] = result_list
 
 	return render(request, 'rateYoCourse/course.html', context=context_dict)
+
+
+def add_comment(request, university_name_slug, course_name_slug):
+	university = get_object_or_404(University, slug=university_name_slug)
+	course = get_object_or_404(Course, slug=course_name_slug)
+
+	
+	if request.method == 'POST':
+		form = CommentForm(request.POST)
+		if form.is_valid():
+			comment=form.save(commit=False)
+			comment.course = course
+			comment.university = university
+			comment.user = UserProfile.objects.get(user=request.user)
+			comment.save()
+			return redirect('index')
+
+	else:
+		form = CommentForm()
+	template = 'rateYoCourse/add_comment.html' #is this course or no course or just uni?
+	context = {'form': form}
+	return render(request, template, context)
+
 
 class RateView(DetailView):
     model = Rate
@@ -223,7 +235,7 @@ def profile(request, username):
 		return redirect('index')
 
 	userprofile = UserProfile.objects.get_or_create(user=user)[0]
-	form = UserProfileForm({'picture': userprofile.picture})
+	form = UserProfileForm({'picture': userprofile.picture, 'about': userprofile.about, 'status': userprofile.status})
 
 	if request.method == 'POST':
 		form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
@@ -233,6 +245,7 @@ def profile(request, username):
 		else:
 			print(form.errors)
 
+
 	return render(request, 'rateyocourse/profile.html', {'userprofile': userprofile, 'selecteduser': user, 'form': form})
 
 @login_required
@@ -240,6 +253,7 @@ def list_profiles(request):
 	userprofile_list = UserProfile.objects.all()
 
 	return render(request, 'rateyocourse/list_profiles.html', {'userprofile_list': userprofile_list})
+
 def track_url(request):
 	course_id = None
 	url = '/rateyocourse/'
@@ -270,24 +284,7 @@ def search(request):
 
 	return render(request, 'rateyocourse/search_form.html',{'error':error})
 
-def add_comment(request, slug):
-	#university = get_object_or_404(University, slug=slug)
-	#course = get_object_or_404(Course, slug=slug)
-	university = University.objects.get(slug=university_name_slug)
-	course = Course.objects.get(slug=course_name_slug)
-	if request.method == 'POST':
-		form = CommentForm(request.POST)
-		if form.is_valid():
-			comment=form.save(commit=False)
-			comment.course = course
-			comment.save()
-			return redirect('index') #this might have to be a uni slug
 
-		else:
-			form = CommentForm()
-			template = 'rateyocourse/add_comment.html' #is this course or no course or just uni?
-			content = {'form': form}
-			return render(request, template, context)
 '''
 #@login_required
 #def settings(request):

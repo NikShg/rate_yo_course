@@ -1,8 +1,12 @@
-{% extends rateyocourse/base.html %}
+{% extends 'rateyocourse/base.html' %}
+{% block title_block %}
+	Leave a comment!
+{% endblock %}
 
-{% block content %}
+{% block body_block %}
+
   <h1>Add New Comment</h1>
-  <form method='POST'>{% csrf_token %}
+  <form method='POST' action=".">{% csrf_token %}
   {{ form.as_p }}
   <button type = 'submit'>Submit</button>
   </form>

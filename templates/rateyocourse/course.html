@@ -1,40 +1,57 @@
 {% extends 'rateyocourse/base.html' %}
 {% load staticfiles %}
+{% load static %}
 {% load ratings %}
+{% load rateYoCourse_template_tags %}
 
 {% block title_block %}
 	 Courses
 {% endblock %}
 
 {% block body_block %}
-<div>
-<h1>Rate Yo Course - Courses section</h1>
+<link href="{% static "css/course.css" %}" rel="stylesheet" />
+<p id="site-map">You are here > <a href="{% url 'index' %}"> Home</a> / <a href="{% url 'universities' %}" > Universities</a> / <a href="{% url 'university' university.slug%}" >  {{ course.university}} </a> / <a href="{% url 'course' university.slug course.slug%}" >  {{ course.name}} </a></p>
 
+<div class = "jumbotron">
 <div>
-	<p><a href="{% url 'universities' %}"> Universities</a> / <a href="{% url 'university' university.slug %}">{{ university.name }}</a></p>
 	{% if course %}
-	<h2>
-				<a href="{{ course.url }}">{{ university.name}}:  {{ course.name }}</a></h2></li>
-			</ul>
-			{% else %}
-				<strong>This is not a course provided by any university.</strong>
-			{% endif %}
-	</div>
+	<h2><a href="{{ course.url }}">{{ university.name}}:  {{ course.name }}</a></h2></li>
+		{% else %}
+		<strong>This is not a course provided by any university.</strong>
+		{% endif %}
+</div>
+<br/>
+
+<div class="row">
+	<div class="col-lg-8">
+
+
+
 	{% ratings course %}
 	{% block content %}
+		{% if user.is_authenticated %}
 	    <form method="post">
 	        {% csrf_token %}
 	        {{ form.as_p }}
-	        <input type="submit" id="id_submit">
+			<br/>
+	        <button class="btn btn-primary" input type="submit" type="submit" value="Submit" id="id_submit"/>Submit</button>
 	    </form>
+		{% endif %}
+
+				</div>
+
+			<div class="col-lg-4">
+				<div class="image">
+				<img class="img-fluid rounded"  height=auto width=auto src="{% static course.get_photo_url %}" alt="a photo"></div>
+				</div>
+			</div>
 		{% endblock %}
 		{% block detail %}
 	<br>
 	<h2>Leave a comment</h2>
 	<p>Total number of comments {{ course.comments.count }}</p>
-	<!--slug might have to be different below-->
 	<a href="{% url 'add_comment' university.slug course.slug %}">Leave a Comment</a>
-	{% for comment in course.comments.all %}
+	{% for comment in comments %}
 		<p>{{ comment.created}}</p>
 		<p>{{ comment.user }}</p>
 		<p>{{ comment.body}}</p>
@@ -42,5 +59,4 @@
 		<p>There are no comments</p>
 	{% endfor %}
 	{% endblock %}
-
 {% endblock %}

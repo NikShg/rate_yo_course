@@ -7,7 +7,8 @@
 {% endblock %}
 
 {% block body_block %}
-<p id="site-map">You are here > <a href="{% url 'index' %}"> Home</a> / <a href="{% url 'universities' %}" > Universities</a></p>
+<link rel="stylesheet" href="{% static "css/university.css" %}"/>
+<div class="site-map"><p>You are here > <a href="{% url 'index' %}"> Home</a> / <a href="{% url 'universities' %}" > Universities</a> / <a href="{% url 'university' university.slug%}" >  {{  university.name}} </a></p></div>
 <hr/>
 <div class = "jumbotron">
 	<div class="row">
@@ -15,18 +16,23 @@
 			{% if university %}
 			<h1 class="display-4"> {{ university.name }} </h1>
 			<p id="uni-city">Location: {{university.city}} </p>
+			<img class=img-fluid height=auto width=auto src="{% static university.get_photo_url %}" alt="a photo"></div>
+			<!--
 			{% if university.name|default:""|slice:"-1:" == "w" %}
         <img class="img-fluid" position=inline width=auto height=auto src="{% static 'glasgow.jpg' %}" alt="Picture of University"  id="picture"/>
 		{% else %}
 		<img class="img-fluid" position=inline width=auto height=auto src="{% static 'edinburgh.jpg' %}" alt="Picture of University"  id="picture" />
-		{% endif %}
-		</div>
+		{% endif %}-->
+
 	<div class="col-lg-4">
 	<div id="fb-root"></div>
 		<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
-		{% if university.name %}
+		{% if university.name|default:""|slice:"-1:" == "w" %}
 		<div align="right">
 		<div class="fb-page" data-href="https://www.facebook.com/UofGlasgow/" data-tabs="timeline" data-width="400" data-height="400" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/UofGlasgow/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/UofGlasgow/">University of Glasgow</a></blockquote></div>
+		{% else %}
+<div align="right">
+		<div class="fb-page" data-href="https://www.facebook.com/UniversityOfEdinburgh/" data-tabs="timeline" data-width="400" data-height="400" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/UniversityOfEdinburgh/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/UofGlasgow/">University of Edinburgh</a></blockquote></div>
 		{% endif %}
 		</div> 
 	</div>
@@ -48,11 +54,16 @@
 		
 	{% ratings university %}
 {% block content %}
+{% if user.is_authenticated %}
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" id="id_submit">
+        {{ form.as_p }}		
+		<!--<button class="bnt bnt-lg btn-primary btn-block" type="submit" value="Submit"/>Submit Query</button>-->
+        <!--<input type="submit" id="id_submit">-->
+		<br/>
+		<button class="btn btn-primary" input type="submit" type="submit" value="Submit" id="id_submit"/>Submit</button>
     </form>
+	{% endif %}
+		{% endblock %}
 </div>
-	{% endblock %}
 {% endblock %}

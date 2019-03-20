@@ -1,0 +1,9 @@
+.status {
+	font-size: 14px;
+	font-style:italic;
+}
+
+.list-group-item {
+	background:#eceeef;
+	border: 1px dashed black;
+}
