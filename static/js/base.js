@@ -1,5 +1,5 @@
 
-// some javascript that highlights the active tab when selected based on urls
+// some jquery that highlights the active tab when selected based on urls
 $(document).ready(function(){
     var current = location.pathname;
     $('#selectable li a').each(function(){
@@ -10,6 +10,7 @@ $(document).ready(function(){
     });
 });
 
+// some jquery for the tooltips
 $(document).ready(function(){
     $( document ).tooltip();
 		$(".welcome").fadeOut(5000);

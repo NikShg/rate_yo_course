@@ -14,6 +14,14 @@ $(document).ready(function(){
 			});
 });
 
+$("#show").click(function() {
+ $('html, body').animate({ 
+   scrollTop: $(document).height()-$(window).height()/2}, 
+   1000, 
+   "easeInOutSine"
+);
+});
+
 /* Autocomplete suggestions */ 
 $(document).ready(function(){
 	var availableTags = ["University of Glasgow", "University of Edinburgh", "Internet Technology", "Advanced Programming", "Artificial Intelligence BSc", "Computer Science BSc"];

@@ -1,100 +1,73 @@
 {% extends 'rateyocourse/base.html' %}
-{% load staticfiles %} <!-- New line-->
+{% load staticfiles %}
+{% load static %}
 
-{% block title_block %}
-	About
+
+{% block title %}
+	- About
 {% endblock %}
 
 {% block body_block %}
-<!--
-	<div>
-	<link href="{% static "css/about.css" %}"  rel="stylesheet" type="text/css"/>
-	<h1>About Rate Yo Course</h1>
-	<p> The site designed by students, for students to rate their university courses and get back at their professors</p>
+ 
+
+<div class="container>
+s<p id="site-map">You are here > <a href="{% url 'index' %}"> Home</a> / <a href="{% url 'about' %}" >About</a> <hr/>
+ <div class="jumbotron">
+	<div align="center" >
+
 	
-	<h2>If you have any questions, why not contact us?</h2>
-	<p> Your concerns will be disregarded.</p>
-
-<div class="container">
-  <form action="/action_page.php">
-  <div class="row">
-    <div class="col-25">
-      <label for="fname">First Name:</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="fname" name="firstname" placeholder="Your name.." title="Enter your first name">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="lname">Last Name:</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="lname" name="lastname" placeholder="Your last name.." title="Enter your last name">
-    </div>
-  </div>
- <div class="row">
-    <div class="col-25">
-      <label for="email">E-mail:</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="email" name="email" placeholder="Your contact e-mail address.." title="Enter your email address">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="subject">Message:</label>
-    </div>
-    <div class="col-75">
-      <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px" title="Enter your message"></textarea>
-    </div>
-  </div>
-  <div class="row">
-    <input type="submit" value="Submit">
-  </div>
-  </form>
-</div>-->
-
-<p id="site-map">You are here > <a href="{% url 'index' %}"> Home</a> / <a href="{% url 'about' %}" > About</a> 
-	<div align="center" > 
 	<h2>About Our Team</h2>
 </div>
-	
+
+
 <div class="col-md-0 ">
-<br>
-This website was created for you to be able to rate your professors and courses without the worry of procrations. We aim to help you to be able to gain
-an objective view of the professor and courses you are about to take. Or if you are a new studnet then you can gain an objective view of your chosen
-university. We verify all users before they are able to comment or rate courses and universities. However, it is not meant to offend people, so please
-use the cite responsively. 
-<br>
-<div align="center" >
-<img class="img-responsive" src="{% static "images/team.jpg" %}" alt="Rate Yo Course" width="400" height="280"/>
-</div>
-<br>
-Our team came to existence during our university years. We realized that student experience with given courses and universities is vital, however,
-it is hard to gain excess to this information without having pepole who you know and already took the courses. This website lets you skip this stage
-and allows you to gain the information you need, without knowing people. 
-<br>
-<br>
-<br>
+
+	
+	<br>
+		This website was created for you to be able to rate your professors and courses without the worry of procrations. We aim to help you to be able to gain
+		an objective view of the professor and courses you are about to take. Or if you are a new studnet then you can gain an objective view of your chosen
+		university. We verify all users before they are able to comment or rate courses and universities. However, it is not meant to offend people, so please
+		use the cite responsively. 
+	<br>
+
+
+	<div align="center" >
+
+		
+		<img class="img-responsive" src="{% static "images/team.jpg" %}" alt="Rate Yo Course" width="400" height="280"/>
+	</div>
+
+	
+	<br>
+		Our team came to existence during our university years. We realized that student experience with given courses and universities is vital, however,
+		it is hard to gain excess to this information without having pepole who you know and already took the courses. This website lets you skip this stage
+		and allows you to gain the information you need, without knowing people. 
+	<br>
+	<br>
+	<br>
+
+
 <div align="center">
-<a class="btn btn-danger" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-   How to use the cite?
-  </a><br>
-<br>
+	
+	
+	<a class="btn btn-danger" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" id="cite">
+  		 How to use the cite?
+  	</a><br>
+	<br>
+
 
 <div class="collapse" id="collapseExample">
-<br> 
- <div class="card card-body">
+	 <div class="card card-body">
    
-You can view courses and universities, as well as, read comments related to the given university or course. However, to be
-able to write reviews and rate, you have to sign in. If you are not yet a member, you can register. If you are already a member, you would not be
-reading this page (but you can sign in under the page).
-  </div>
-<br>
-<br>
-<br>
- 
+		You can view courses and universities, as well as, read comments related to the given university or course. However, to be
+		able to write reviews and rate, you have to sign in. If you are not yet a member, you can register. If you are already a member, you would not be
+		reading this page (but you can sign in under the page).
+  	</div>
+	<br>
+	<br>
+	<br>
+</div>
+</div>
 </div>
 </div>
 </div>

@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 from registration.backends.simple.views import RegistrationView
 from django.contrib.auth.views import (password_reset, password_reset_done, password_reset_confirm, password_reset_complete, password_change, password_change_done)
 from django.core.urlresolvers import reverse
+from django.contrib.auth import views as auth_views
 
 class MyRegistrationView(RegistrationView):
 	def get_success_url(self, user):
@@ -42,9 +43,10 @@ urlpatterns = [
 	#url(r'^university/(?P<university_name_slug>[\w\-]+)/$', views.show_university, name='university'),
 	#url(r'^university/$', views.show_university_, name='universities'),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),##NEEDED?
-	url(r'^social-auth/', include('social_django.urls', namespace="social")),
+	url(r'^social-auth/', include('social_django.urls', namespace="socialedited")),
 	url(r'^accounts/', include('allauth.urls')),
 	url(r'^oauth/', include('social_django.urls', namespace='social')),
-
-    #url(r'^university/(?P<university_name_slug>[\w\-]+)/courses/(?P<course_name_slug>[\w\-]+)/$', views.show_course, name='course'),
+    url(r'^add_comment/', views.add_comment, name='comment_form'),
+    url(r'^university/(?P<university_name_slug>[\w\-]+)/courses/(?P<course_name_slug>[\w\-]+)/$', views.show_course, name='course'),
+    url(r'^university/(?P<university_name_slug>[\w\-]+)/courses/(?P<course_name_slug>[\w\-]+)/comment/$', views.add_comment, name='add_comment'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
