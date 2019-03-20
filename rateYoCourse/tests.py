@@ -21,17 +21,4 @@ class UniversityCourseMethodTests(TestCase):
 		university.save()
 		self.assertEqual((len(university.name) <= 128), True)	
 		
-	
-class CourseMethodTest(TestCase):
-
-
-	def test_correct_image_url(self):
-		'''
-		Test that url path to images is as expected
-		'''
-		university = University(name="University of Glasgow", city="Glasgow", url="www.gla.ac.uk")
-		course = Course(university=university, name="Internet Technology", url="https://www.gla.ac.uk/postgraduate/taught/informationtechnology/")
-		itech = course.get_photo_url
-		course.save()
-		self.assertEqual(itech, 'images/Internet Technology.jpg')
 		
