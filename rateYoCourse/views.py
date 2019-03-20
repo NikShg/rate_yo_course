@@ -2,19 +2,19 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
-from rateYoCourse.forms import UserForm, UserProfileForm
+from rateYoCourse.forms import UserForm, UserProfileForm, CommentForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.contrib.auth.models import User
-from rateYoCourse.models import UserProfile, University, Course
+from rateYoCourse.models import UserProfile, University, Course, Comment
 from rateYoCourse.models import Rate
 from star_ratings.models import Rating
 from django.views.generic import DetailView, TemplateView
 from django.shortcuts import redirect
 from django.db.models import Q
-
+from django.shortcuts import get_list_or_404, get_object_or_404
 def index(request):
 	context_dict = {}
 	visitor_cookie_handler(request)
@@ -145,15 +145,18 @@ def show_course(request, university_name_slug, course_name_slug):
 	try:
 		university = University.objects.get(slug=university_name_slug)
 		course = Course.objects.get(slug=course_name_slug)
+		comments = Comment.objects.filter(course=course)
 		context_dict['course'] = course
 		context_dict['university'] = university
+		context_dict['comments'] = comments
 	except Course.DoesNotExist:
 		context_dict['course'] = None
 		context_dict['university'] = None
+		context_dict['comments'] = None
 
 	context_dict['query'] = course.name
 	result_list = []
-	
+
 	#if request.method == 'POST':
 		#query = request.POST['query'].strip()
 
@@ -163,6 +166,29 @@ def show_course(request, university_name_slug, course_name_slug):
 			#context_dict['result_list'] = result_list
 
 	return render(request, 'rateYoCourse/course.html', context=context_dict)
+
+
+def add_comment(request, university_name_slug, course_name_slug):
+	university = get_object_or_404(University, slug=university_name_slug)
+	course = get_object_or_404(Course, slug=course_name_slug)
+
+	
+	if request.method == 'POST':
+		form = CommentForm(request.POST)
+		if form.is_valid():
+			comment=form.save(commit=False)
+			comment.course = course
+			comment.university = university
+			comment.user = UserProfile.objects.get(user=request.user)
+			comment.save()
+			return redirect('index')
+
+	else:
+		form = CommentForm()
+	template = 'rateYoCourse/add_comment.html' #is this course or no course or just uni?
+	context = {'form': form}
+	return render(request, template, context)
+
 
 class RateView(DetailView):
     model = Rate
@@ -218,8 +244,8 @@ def profile(request, username):
 			return redirect('profile', user.username)
 		else:
 			print(form.errors)
-	
-	
+
+
 	return render(request, 'rateyocourse/profile.html', {'userprofile': userprofile, 'selecteduser': user, 'form': form})
 
 @login_required
@@ -227,7 +253,7 @@ def list_profiles(request):
 	userprofile_list = UserProfile.objects.all()
 
 	return render(request, 'rateyocourse/list_profiles.html', {'userprofile_list': userprofile_list})
-	
+
 def track_url(request):
 	course_id = None
 	url = '/rateyocourse/'
@@ -257,7 +283,7 @@ def search(request):
 
 
 	return render(request, 'rateyocourse/search_form.html',{'error':error})
-	
+
 
 '''
 #@login_required
@@ -294,4 +320,6 @@ def search(request):
     #else:
       #  form = PasswordForm(request.user)
 #    return render(request, 'core/password.html', {'form': form})
+
+
 '''
