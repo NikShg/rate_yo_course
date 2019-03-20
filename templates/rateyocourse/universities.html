@@ -60,7 +60,7 @@
 				<div class="row">
 			
 						<div class="element3 col-md-12 col-lg-12 col-xs-12 col-sm-12 header" align="center">
-							<h5 class="display-5 "><u>Top 5 Recent Ratings </u></h5>
+							<h5 class="display-5 "><u>Most Recent Ratings </u></h5>
 						{% for u in userratings %} 
 							<p><a href="{% url 'profile' u.user %}">{{ u.user}} </a>gave {{ u.rating }} a rating of <u><i><b>  {{ u.score}}</b></i></u>!</p>
 							{% endfor %}
