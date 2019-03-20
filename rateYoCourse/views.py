@@ -118,7 +118,9 @@ def show_course(request, university_name_slug, course_name_slug):
 def add_comment(request, university_name_slug, course_name_slug):
 	university = get_object_or_404(University, slug=university_name_slug)
 	course = get_object_or_404(Course, slug=course_name_slug)
-
+	
+	c_slug = course.slug
+	u_slug = university.slug
 	
 	if request.method == 'POST':
 		form = CommentForm(request.POST)
@@ -128,10 +130,11 @@ def add_comment(request, university_name_slug, course_name_slug):
 			comment.university = university
 			comment.user = UserProfile.objects.get(user=request.user)
 			comment.save()
-			return redirect('index')
+			return HttpResponseRedirect(reverse('course', kwargs={'university_name_slug':u_slug, 'course_name_slug': c_slug}))
 
 	else:
 		form = CommentForm()
+		
 	template = 'rateYoCourse/add_comment.html' #is this course or no course or just uni?
 	context = {'form': form}
 	return render(request, template, context)

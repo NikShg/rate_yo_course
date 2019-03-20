@@ -1,0 +1,15 @@
+label[for="id_body"] {
+	display:none!important;
+}
+
+textarea#id_body {
+	/*width:100%;*/
+	background-color:#eceeef;
+	border-radius: 10px;
+}
+
+textarea#id_body:hover {
+	/*width:100%;*/
+	background-color:white;
+	}
+	

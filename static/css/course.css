@@ -1,3 +1,36 @@
 .image {
 	margin-top:5%;
 }
+
+div.list-group-item, div.list-group-item:nth-child(2) > div:nth-child(2) {
+	border:2px solid black!important;
+	border-left:2px solid black!important;
+}
+
+div.media-body {
+	padding:10px!important;
+}
+
+.status {
+	font-size:10px!important;
+}
+
+.media, {
+	border:1px dashed #999!important;
+}
+
+#user-picture,  {
+	margin-top:2%!important;
+	padding:2px!important;
+}
+
+
+.list-unstyled,  .media {
+	margin-top: 2%!important;
+	border:1px dashed #999!important;
+}
+
+.posted-date {
+	margin-top:1px!important;
+	border-bottom: black!important;
+}
