@@ -12,7 +12,7 @@ class University(models.Model):
 	city = models.CharField(max_length=32, null=False)
 	url = models.URLField(null=False)
 	slug = models.SlugField(unique=True)
-	
+
 	@property
 	def get_photo_url(self):
 		return 'images/%s.jpg' % self.name
@@ -32,15 +32,15 @@ class Course(models.Model):
 	name = models.CharField(max_length=256, null=False)
 	url = models.URLField(null=False)
 	slug = models.SlugField(unique=True)
-	
+
 	@property
 	def get_university_slug(self):
 		return self.university.slug
-		
+
 	@property
 	def get_photo_url(self):
 		return 'images/%s.jpg' % self.name
-		
+
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
 		super(Course, self).save(*args, **kwargs)
@@ -59,9 +59,14 @@ class UserProfile(models.Model):
 
 class Rate(models.Model):
     bar = models.CharField(max_length=100)
-	#ratings = GenericRelation(Rating, related_query_name='rates') #object_list
 
+class Comment(models.Model): #post = Course
+	university = models.ForeignKey(University, related_name="university")
+	course = models.ForeignKey(Course, related_name='course') #Course?
+	user = models.ForeignKey(UserProfile, related_name='user_name') #if it doesn't work try 'user = models.OneToOneField(User)'
+	body = models.TextField()
+	created = models.DateTimeField(auto_now_add=True)
 
-	#def __str__(self):
-		#return self.name
-#Rate.ratings.filter(ratings__isnull=False).order_by('ratings__average') #Foo.object_list.filter
+	def approved(self):
+		self.approved = True
+		self.save()

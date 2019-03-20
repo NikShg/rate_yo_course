@@ -34,13 +34,25 @@
 	        <button class="btn btn-primary" input type="submit" type="submit" value="Submit" id="id_submit"/>Submit</button>
 	    </form>
 		{% endif %}
-				{% endblock %}
+
 				</div>
-				
+
 			<div class="col-lg-4">
 				<div class="image">
 				<img class="img-fluid rounded"  height=auto width=auto src="{% static course.get_photo_url %}" alt="a photo"></div>
 				</div>
 			</div>
+		{% endblock %}
+		{% block detail %}
+	<br>
+	<h2>Leave a comment</h2>
+	<a href="{% url 'add_comment' university.slug course.slug %}">Leave a Comment</a>
+	{% for comment in comments %}
+		<p>{{ comment.created}}</p>
+		<p>{{ comment.user }}</p>
+		<p>{{ comment.body}}</p>
+	{% empty %}
+		<p>There are no comments</p>
+	{% endfor %}
+	{% endblock %}
 {% endblock %}
-	

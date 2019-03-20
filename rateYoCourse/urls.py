@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^search/$', views.search, name = 'search'),
 	url(r'^search/(?P<university_name_slug>[\w\-]+)/$', views.show_university, name='course'),
 	url(r'^search/(?P<course_name_slug>[\w\-]+)/$', views.show_course, name='course'),
-	url(r'^oauth/', include('social_django.urls', namespace='social')),
+	url(r'^oauth/', include('social_django.urls', namespace='sociala')),
 	url(r'^accounts/', include('allauth.urls')),
 	url(r'^social-auth/', include('social_django.urls', namespace="social")),
 	]
