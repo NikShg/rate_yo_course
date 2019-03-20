@@ -31,8 +31,8 @@ class CourseMethodTest(TestCase):
 		'''
 		university = University.objects.create(name="University of Glasgow", city="Glasgow", url="www.gla.ac.uk")
 		course = Course(university=university, name="Internet Technology", url="https://www.gla.ac.uk/postgraduate/taught/informationtechnology/")
-		itech = course.get_photo_url
 		course.save()
+		itech = course.get_photo_url
 		self.assertEqual(itech, 'images/Internet Technology.jpg')
 		
 class RateMethodTest(TestCase):

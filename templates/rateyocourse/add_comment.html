@@ -1,13 +1,23 @@
 {% extends 'rateyocourse/base.html' %}
-{% block title_block %}
-	Leave a comment!
+{% load staticfiles %}
+
+{% block title %}
+	- Leave a comment!
 {% endblock %}
 
 {% block body_block %}
-
-  <h1>Add New Comment</h1>
-  <form method='POST'>{% csrf_token %}
+<div class="jumbotron">
+<div class="row">
+<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 comment-box">
+<link href="{% static 'css/add_comment.css' %}" rel="stylesheet">
+  <h1>Add New Comment </h1>
+  <form method='POST'>
+  {% csrf_token %}
   {{ form.as_p }}
-  <button type = 'submit'>Submit</button>
+  <button class="btn btn-primary" input type="submit" type="submit" value="Submit" id="id_submit"/>Submit</button>
+  <!--<button type = 'submit'>Submit</button>-->
   </form>
+  </div>
+  </div>
+  </div>
 {% endblock %}

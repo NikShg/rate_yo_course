@@ -16,8 +16,8 @@ $(document).ready(function(){
 
 $("#show").click(function() {
  $('html, body').animate({ 
-   scrollTop: $(document).height()-$(window).height()}, 
-   1400, 
+   scrollTop: $(document).height()-$(window).height()/2}, 
+   1000, 
    "easeInOutSine"
 );
 });
