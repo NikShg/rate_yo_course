@@ -28,7 +28,7 @@ SECRET_KEY = 'rzya*d=cn6q1=+^qey-d9-e64i)sqbx6455oybdg@*13auu0(l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['bsasfy.pythonanywhere.com']
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
@@ -52,10 +52,10 @@ INSTALLED_APPS = [
     'star_ratings',
 	'bootstrap_toolkit',
 	'django.contrib.sites',
-	'allauth', 
-	'allauth.account', 
-	'allauth.socialaccount', 
-	'allauth.socialaccount.providers.github', 
+	'allauth',
+	'allauth.account',
+	'allauth.socialaccount',
+	'allauth.socialaccount.providers.github',
 	'allauth.socialaccount.providers.twitter',
 	'allauth.socialaccount.providers.facebook',
 ]
