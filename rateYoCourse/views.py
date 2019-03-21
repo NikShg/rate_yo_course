@@ -16,15 +16,22 @@ from django.shortcuts import redirect
 from django.db.models import Q
 from django.shortcuts import get_list_or_404, get_object_or_404
 
+
 # Return the index view
+
 def index(request):
+	#dictionary to pass template as its context
 	context_dict = {}
+	#helper function for cookies
 	visitor_cookie_handler(request)
 	context_dict['visits'] = request.session['visits']
+	# get object to add information about cookies
 	response = render(request, 'rateyocourse/index.html', context=context_dict)
 	return response
 
+
 # return the about view
+
 def about(request):
 	visitor_cookie_handler(request)
 	context_dict = {}
@@ -32,7 +39,9 @@ def about(request):
 	response = render(request, 'rateyocourse/about.html', context_dict)
 	return response
 
+
 # helper method to request for a cookies, returns a cookies values if its in session data
+
 def get_server_side_cookie(request, cookie, default_val=None):
 	val = request.session.get(cookie)
 	if not val:
@@ -40,17 +49,22 @@ def get_server_side_cookie(request, cookie, default_val=None):
 	return val
 
 # handles the cookies
+
 def visitor_cookie_handler(request):
+
 	visits = int(get_server_side_cookie(request,'visits', '1'))
 	last_visit_cookie = get_server_side_cookie(request, 'last_visit', str(datetime.now()))
 	last_visit_time = datetime.strptime(last_visit_cookie[:-7], '%Y-%m-%d %H:%M:%S')
 
+	# more than day since visit
 	if (datetime.now() - last_visit_time).days > 0:
 		visits = visits + 1
+		#update cookies
 		request.session['last_visit'] = str(datetime.now())
 	else:
+		# set cookies
 		request.session['last_visit'] = last_visit_cookie
-
+	#update
 	request.session['visits'] = visits
 
 # This function returns the view for the list of universities. Top 5 Universities are fetched
@@ -59,23 +73,27 @@ def visitor_cookie_handler(request):
 
 def show_university_(request):
 	context_dict = {}
+	# get objects and filter
 	try:
 		universities = University.objects.all().order_by('name')[:5]
 		course_ratings = Rating.objects.filter(content_type = 8).order_by('-average')
 		university_ratings = Rating.objects.filter(content_type = 9).order_by('-average')
 		userratings = UserRating.objects.all().order_by('rating')[:5] 
 		courses = Course.objects.all().order_by('name')[:5]
+		# add results
 		context_dict['universities'] = universities
 		context_dict['userratings'] = userratings
 		context_dict['courses']= courses
 		context_dict['course_ratings']= course_ratings
 		context_dict['university_ratings']= university_ratings
 	except:
+		#if does not exists
 		context_dict['universities'] = None
 		context_dict['userratings'] = None
 		context_dict['courses']= None
 		context_dict['course_ratings']= None
 		context_dict['university_ratings']= None
+		#render the response and return to the client
 	return render(request, 'rateYoCourse/universities.html', context=context_dict)
 
 # This function returns the view for the list of courses provided by a university. #
@@ -114,7 +132,9 @@ def show_course(request, university_name_slug, course_name_slug):
 	
 	return render(request, 'rateYoCourse/course.html', context=context_dict)
 
+
 # view for the add comment page, if a form submission is valid, the comment linked to the user is saved and the submit button will take the user to the previous page (i.e. the course they just commented on)
+
 def add_comment(request, university_name_slug, course_name_slug):
 	university = get_object_or_404(University, slug=university_name_slug)
 	course = get_object_or_404(Course, slug=course_name_slug)
@@ -141,6 +161,7 @@ def add_comment(request, university_name_slug, course_name_slug):
 	return render(request, template, context)
 
 # view for the ratings
+
 class RateView(DetailView):
     model = Rate
 
@@ -159,11 +180,13 @@ class SizesView(TemplateView):
 
 # a user must log in to register their profile, if a form is valid, save the registration form
 @login_required
+# profile register method
 def register_profile(request):
 	form = UserProfileForm()
-
+	# if request = Post, proceed 
 	if request.method == 'POST':
 		form = UserProfileForm(request.POST, request.FILES)
+		# if form is valid. add to the database
 		if form.is_valid():
 			user_profile = form.save(commit=False)
 			user_profile.user = request.user
@@ -179,17 +202,22 @@ def register_profile(request):
 
 # view for a user to view profile, login required. gets the specific user their profile, if the user doesn't exist, return them to index
 @login_required
+# profile view, requires user's login.
 def profile(request, username):
+	# select user from the database
 	try:
 		user = User.objects.get(username=username)
+	#if does not exists, redirect to the homepage instead of error message
 	except User.DoesNotExist:
 		return redirect('index')
-
+	# otherwise, display users' information
 	userprofile = UserProfile.objects.get_or_create(user=user)[0]
 	form = UserProfileForm({'picture': userprofile.picture, 'about': userprofile.about, 'status': userprofile.status})
-
+	# uer can update information, submit form
+	# the information is extracted from UserProfileForm to UserProfile 
 	if request.method == 'POST':
 		form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+		#update
 		if form.is_valid():
 			form.save(commit=True)
 			return redirect('profile', user.username)
@@ -201,11 +229,12 @@ def profile(request, username):
 
 	# login required to view registered users
 @login_required
+# this method selects all users from UserProfile model
 def list_profiles(request):
 	userprofile_list = UserProfile.objects.all()
 
 	return render(request, 'rateyocourse/list_profiles.html', {'userprofile_list': userprofile_list})
-
+'''
 def track_url(request):
 	course_id = None
 	url = '/rateyocourse/'
@@ -221,14 +250,18 @@ def track_url(request):
 				pass
 	return redirect(url)
 
-# search method that checks if a course or university tuple contains the query
+'''
+# method for the serach. gets query, checks whether such course/university is in 
+# database
 def search(request):
 	error = False
+	# get query
 	if'q' in request.GET:
 		q = request.GET['q']
 		if not q:
 			error = True
 		else:
+			# if query, check whether requested course/university exists in database
 			course = Course.objects.filter(name__icontains = q)
 			university = University.objects.filter(name__icontains = q)
 			return render(request, 'rateyocourse/search_results.html', {'universities':university, 'courses':course,'query': q})
