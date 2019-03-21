@@ -1,110 +1,142 @@
+<!--this template is teh base-->
+<!--this template extends static files-->
 <!DOCTYPE html>
 {% load static %}
 {% load staticfiles %}
 {% load rateYoCourse_template_tags %}
 
+<!--declairing bootstrap setup-->
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,
 initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
+
+<!--declairing the title-->
 <title>
-RateYoCourse {% block title %}{% endblock %}
+	RateYoCourse {% block title %}{% endblock %}
 </title>
+
 <!-- Bootstrap core CSS -->
 <link href="http://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css"
 rel="stylesheet">
+
 <!-- Custom styles for this template -->
-<link href=
-"http://v4-alpha.getbootstrap.com/examples/dashboard/dashboard.css"
-rel="stylesheet">
+<link href="http://v4-alpha.getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css"/>
 </head>
+
+<!--this section is setting up the navigation bar later we will add buttons to it-->
 <body>
 
-<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-<button class="navbar-toggler  hidden-lg-up"
-type="button"
-data-toggle="collapse"
-data-target="#navbar"
-aria-controls="navbar"
-aria-expanded="false"
-aria-label="Toggle navigation">
-<span class="navbar-toggler-icon"></span>
+	<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+	<button class="navbar-toggler  hidden-lg-up"
+	type="button"
+	data-toggle="collapse"
+	data-target="#navbar"
+	aria-controls="navbar"
+	aria-expanded="false"
+	aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
 </button>
 
-<div class="collapse navbar-collapse" id="navbar">
-<ul class="navbar-nav mr-auto" id="selectable">
- <li class="nav-item">
-<a class="nav-link" href="{% url 'index' %}">
+<!--declairint the home button and adding to navigation bar-->
+	<div class="collapse navbar-collapse" id="navbar">
+	<ul class="navbar-nav mr-auto" id="selectable">
+	<li class="nav-item">
+	<a class="nav-link" href="{% url 'index' %}">
 Home
 </a>
 </li>
-<li class="nav-item"  >
-<a class="nav-link" href="{% url 'about' %}">
+
+<!--declairint the about button and adding to navigation bar-->
+	<li class="nav-item"  >
+	<a class="nav-link" href="{% url 'about' %}">
 About
 </a>
 </li>
-<li class="nav-item ">
-<a class="nav-link" href="{% url 'universities' %}">
+
+<!--declairint the university button and adding to navigation bar-->
+	<li class="nav-item ">
+	<a class="nav-link" href="{% url 'universities' %}">
 Universities
 </a>
 </li>
-<li class="nav-item ">
-<a class="nav-link" href="{% url 'list_profiles' %}">
-Registered Users
+	
+<!--declairint the registered users button and adding to navigation bar-->
+	<li class="nav-item ">
+	<a class="nav-link" href="{% url 'list_profiles' %}">
+	Registered Users
 </a>
 </li>
+
+<!--if user is signed in-->
 {% if user.is_authenticated %}
-<li class="nav-item">
-<a class="nav-link" href="{% url 'profile' user.username %}">
-Profile
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="{% url 'auth_logout' %}?next=/rateyocourse">
-Logout
-</a>
-</li>
+		
+<!--declairint the profile button and adding to navigation bar-->
+		<li class="nav-item">
+		<a class="nav-link" href="{% url 'profile' user.username %}">
+	Profile
+	</a>
+	</li>
+		
+<!--declairint the logout button and adding to navigation bar-->
+		<li class="nav-item">
+		<a class="nav-link" href="{% url 'auth_logout' %}?next=/rateyocourse">
+	Logout
+	</a>
+	</li>
+
+<!--if user is not signed in-->
 {% else %}
-<li class="nav-item"  >
-<a class="nav-link" href="{% url 'registration_register' %}" >
-Register Here
-</a>
-</li>
-<li class="nav-item" >
-<a class="nav-link" href="{% url 'auth_login' %}">
-Login
-</a>
-</li>
+
+<!--declairint the register here button and adding to navigation bar-->
+		<li class="nav-item"  >
+		<a class="nav-link" href="{% url 'registration_register' %}" >
+	Register Here
+	</a>
+	</li>
+		
+<!--declairint the login button and adding to navigation bar-->
+		<li class="nav-item" >
+		<a class="nav-link" href="{% url 'auth_login' %}">
+	Login
+	</a>
+	</li>
 {% endif %}
 </ul>
 </div>
 </nav>
 <br/>
 <div class="header">
+
+<!--declairing the title of all pages, red-->
 <h1><a href="{% url 'index' %}"><t class="text-danger"><p align="center"><strong>Rate Yo Course</strong></p></t></a></h1></div>
   {% if user.is_authenticated %} 
   {% else %}
-  <div class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  <strong>WARNING!</strong> You are not signed in, this means you will not be able to rate courses and universities
+  	<div class="alert">
+
+<!--alert box to let the user know that they are not signed in-->
+	  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  	<strong>WARNING!</strong> You are not signed in, this means you will not be able to rate courses and universities
 </div>
+
+<!--always display star rating-->
 {% endif %}
 <!--star_ratings-->
-<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+	<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
 <!--end of star_ratings-->
-<div class="col-sm-12 col-md-10 offset-md-1 main">
+	<div class="col-sm-12 col-md-10 offset-md-1 main">
 {% block body_block %}
 {% endblock %}
 </div>
 
 <!--star_ratings-->
-<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 <!--end of star_ratings-->
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -123,9 +155,7 @@ src=
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script  src="{% static "js/base.js" %}"></script>
- <script  src="{% static 'js/profile.js' %}"></script>
-  <script  src="{% static 'js/list_profiles.js' %}"></script>
-     <script  src="{% static 'js/index.js' %}"></script>
- <script  src="{% static 'js/about.js' %}"></script>
+  <script  src="{% static "js/about.js" %}"></script>
+   <script  src="{% static "js/index.js" %}" type="text/javascript"/></script>
 </body>
 </html>

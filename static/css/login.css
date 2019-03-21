@@ -1,17 +1,20 @@
+/* styling username and password fields */
 #id_username, #id_password {
 	padding:9px!important;
 	margin:1%!important;
 	border-radius:5px!important;
 }
 
+/* styling forgotten button **/
 #forgotten {
 	margin-top:2%!important;
 	padding:8px!important;
 	border-color: #ccc!important;
 	color:#ccc!important;
-	
+	font-size:12px!important;
 }
 
+/* styling forgotten button on hover */
 #forgotten:hover {
 	margin-top:2%!important;
 	padding:8px!important;
@@ -19,9 +22,11 @@
 	color:black!important;
 	background-color:none!important;
 	 outline:none!important;
+	 font-weight:bold;
 	 
 }
 
+/* styling social login buttons */
 .fa {
 	width:105%!important;
 	font-size:14px;
@@ -31,14 +36,12 @@
 }
 
 
-/* Add a hover effect if you want */
+/* Add a hover effect*/
 .fa:hover {
   opacity:0.3;
 }
 
-/* Set a specific color for each brand */
-
-/* Github button */
+/* Set a specific style for Github button */
 .fa-github {
   background: black;
   color: white;
@@ -46,14 +49,14 @@
   border-color:black!important;
 }
 
-/* Twitter button*/
+/* Set a specific style for Twitter button */
 .fa-twitter {
   background: #55ACEE;
   color: white;
    padding:10px;
 
 } 
-
+/* lowering social buttons */
 #social {
 	margin-top:10%!important;
 }

@@ -10,7 +10,7 @@ $(document).ready(function(){
     });
 });
 
-// some jquery for the tooltips
+// some jquery for the tooltips and welcome message in index page
 $(document).ready(function(){
     $( document ).tooltip();
 		$(".welcome").fadeOut(5000);

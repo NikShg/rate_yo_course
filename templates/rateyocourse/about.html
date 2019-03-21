@@ -2,7 +2,6 @@
 <!--use tags: extend the base, load static files-->
 {% extends 'rateyocourse/base.html' %}
 {% load staticfiles %}
-{% load static %}
 
 <!--title-->
 {% block title %}
@@ -46,16 +45,16 @@ s<p id="site-map">You are here > <a href="{% url 'index' %}"> Home</a> / <a href
 	
 	<!--creating the slide out button-->
 	<a class="btn btn-danger" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" id="cite">
-  		 How to use the cite?
+  		 How to use the site?
   	</a><br>
 	<br>
 <!--content of the slide out button-->
 <div class="collapse" id="collapseExample">
 	 <div class="card card-body">
    
-		You can view courses and universities, as well as, read comments related to the given university or course. However, to be
+		You can view courses and universities, as well as, read comments related to the given course. However, to be
 		able to write reviews and rate, you have to sign in. If you are not yet a member, you can register. If you are already a member, you would not be
-		reading this page (but you can sign in under the page).
+		reading this page (but you can sign in by clicking on the login tab).
   	</div>
 	<br>
 	<br>

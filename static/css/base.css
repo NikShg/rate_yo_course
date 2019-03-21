@@ -57,6 +57,7 @@ Welcome logged in user
   border-radius:5px;
 }
 
+/* close button on alert message */
 .closebtn {
   margin-left: 15px;
   color: white;

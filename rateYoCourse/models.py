@@ -6,14 +6,14 @@ from star_ratings.models import Rating, UserRating
 from django.contrib.contenttypes.fields import GenericRelation
 from django.utils.text import Truncator
 
-# Create your models here.
-
+# Table for universities, with columns for a name, city, website and unique slug name for url mapping
 class University(models.Model):
 	name = models.CharField(max_length=128, unique=True, null=False)
 	city = models.CharField(max_length=32, null=False)
 	url = models.URLField(null=False)
 	slug = models.SlugField(unique=True)
-
+	
+	#helper method to ensure the correct image is retrieved from static folder
 	@property
 	def get_photo_url(self):
 		return 'images/%s.jpg' % self.name
@@ -23,23 +23,28 @@ class University(models.Model):
 		self.city=self.city[:32]
 		self.slug = slugify(self.name)
 		super(University, self).save(*args, **kwargs)
-
+	
+	# correct terminology for universities
 	class Meta:
 		verbose_name_plural = 'universities'
 
 	def __str__(self):
 		return self.name
 
+# table for courses, columns for university providers, name, website and unique slug names. Each course is linked with a university
+# in the university table (FK)
 class Course(models.Model):
 	university = models.ForeignKey(University)
 	name = models.CharField(max_length=256, null=False)
 	url = models.URLField(null=False)
 	slug = models.SlugField(unique=True)
-
+	
+	# helper method to return correct university slug'
 	@property
 	def get_university_slug(self):
 		return self.university.slug
-
+		
+	#helper method to ensure the correct image is retrieved from static folder
 	@property
 	def get_photo_url(self):
 		return 'images/%s.jpg' % self.name
@@ -50,7 +55,9 @@ class Course(models.Model):
 
 	def __str__(self):
 		return self.name
+
 # User profile model.
+# table to store each profile for a user, with columns for a user, about, status and picture. Each user linked with a profile
 class UserProfile(models.Model):
 	#links UserProfiel to a User model
 	user = models.OneToOneField(User)
@@ -61,11 +68,11 @@ class UserProfile(models.Model):
 
 	def __str__(self):
 		return self.user.username
-
+# ratings table
 class Rate(models.Model):
     bar = models.CharField(max_length=100)
-	
 
+# table for storing info about comments. Each comment linked with a uni and a course and a user. columns for body and date created	
 class Comment(models.Model): #post = Course
 	university = models.ForeignKey(University, related_name="university")
 	course = models.ForeignKey(Course, related_name='course') #Course?

@@ -58,7 +58,7 @@ class testView(TestCase):
 		self.client.get(reverse('index'))
 		response = self.client.get(reverse('about'))
 		self.assertIn('About our team'.lower(),response.content.decode('ascii').lower())
-#
+
 class testView2(TestCase):
 	def test_about_using_template(self):
 		self.client.get(reverse('index'))
@@ -75,6 +75,21 @@ class testView2(TestCase):
 		itech = course.get_photo_url
 		self.assertEqual(itech, 'images/Internet Technology.jpg')
 
+		
+class RateMethodTest(TestCase):
+	def test_bar_length(self):
+		#Test max length validator
+		rate = Rate(bar=120)
+		rate.save()
+		self.assertEqual((rate.bar <=100), True)
+		
+		self.assertTemplateUsed(response,'rateyocourse/about.html')
+	
+	def test_static_files(self):
+		result = finders.find('images/team.jpg')
+		self.assertIsNotNone(result)
+
+
 # test, make new uni, check number of unies in the database
 class test_models(TestCase):
 	def test_create_a_new_uni(self):
@@ -85,9 +100,11 @@ class test_models(TestCase):
 		self.assertEquals(len(uni_in_data),1)
 		only = uni_in_data[0]
 		self.assertEquals(only, uni)
+
+    
 # test for static files
+
 class RateMethodTest(TestCase):
 	def test_static_files(self):
 		result = finders.find('images/team.jpg')
 		self.assertIsNotNone(result)
-

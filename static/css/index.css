@@ -17,6 +17,9 @@ Welcome logged in user
   border-radius:5px;
 }
 
+/*
+Close button on warning logo
+*/
 .closebtn {
   margin-left: 15px;
   color: white;
@@ -28,16 +31,13 @@ Welcome logged in user
   transition: 0.3s;
 }
 
+
 .closebtn:hover {
   color: black;
 }
 
-* { box-sizing: border-box; }
-.body {
-  font: 16px Arial;
-}
 
-/* Search Box */
+/* Search Box customisation */
 #input {
 	-webkit-transition: width 0.4s ease-in-out;
 	transition: width 0.4s ease-in-out;
@@ -74,6 +74,7 @@ Welcome logged in user
 	width:200px!important;
 }
 
+/* autocomplete styling */
 .ui-autocomplete {
 	position:relative !important;
 	bottom:200px!important;
@@ -89,9 +90,7 @@ Welcome logged in user
 	border-radius:10px;!important
 }
 	
-.ui-autocomplete.source:hover {
-    background-color: #454545;
-} 
+
 
 .ui-helper-hidden-accessible {
 	display:none;
@@ -106,6 +105,7 @@ Welcome logged in user
 	width:50%!important;
 }
 
+/** glowing button */
 @keyframes glowing {
   0% { box-shadow: 0 0 -10px #7CFC00; }
   40% { box-shadow: 0 0 20px #7CFC00; }
@@ -113,10 +113,7 @@ Welcome logged in user
   100% { box-shadow: 0 0 -10px #7CFC00; }
 }
 
+/* glowing button */
 .button-glow {
   animation: glowing 2500ms infinite;
 }
-
-	
-/*
-.ui-autocomplete { position: absolute; cursor: default;z-index:9000 !important;}  

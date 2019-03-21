@@ -1,7 +1,11 @@
+<!--this template is used for the log in page-->
+<!--this template uses the base-->
+<!--this template uses social account-->
 {% extends "rateyocourse/base.html" %}
 {% load staticfiles %}
 {% load socialaccount %}
 
+<!--title-->
 {% block title %}
 	- Log in
 {% endblock %}
@@ -10,6 +14,7 @@
 {% block body_block %}
 <link href="http://v4-alpha.getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
 
+<!--log in template and title-->
 <div class="jumbotron">
 	<div class="Heading">
 	<h1 class="display-3 text-center">Login to Rate Yo Course </h1>
@@ -35,6 +40,8 @@
 			</div>
 			
 			<div class="col-md-5 col-lg-5 col-sm-12 col-xs-12" >
+
+	<!--social media plug-ins-->
 	<p><h2 class="text-center">Sign in via one of these sites</h2>
 	<div id="social">
 	<p class="text-center"><a class="btn btn-lg btn-info fa fa-twitter" id="twitter" href="{% provider_login_url 'twitter' %}" role="button">Login with Twitter</a></p>

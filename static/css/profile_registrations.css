@@ -1,14 +1,6 @@
 label[for=id_about] {
 	display:none;
 }
-
-/* editing profile section when button pressed */
-.card.card-body {
-	background-color:#eceeef;
-	margin-top:5%;
-	border:none;
-}
-
 /* styling text area */
 textarea#id_about {
 	width:100%;
