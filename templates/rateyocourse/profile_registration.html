@@ -1,10 +1,15 @@
+<!--this template is used to register-->
+<!--this template extends the base-->
+<!--this template uses static files-->
 {% extends "rateyocourse/base.html" %}
 {% load staticfiles %}
 
+<!--title-->
 {% block title_block %}
 	Registration - Step 2
 {% endblock %}
 
+<!--register-->
 {% block body_block %}
 	<h1>Registration - Step 2</h1>
 	<form method="post" action="." enctype="multipart/form-data">

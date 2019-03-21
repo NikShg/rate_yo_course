@@ -1,14 +1,21 @@
+<!--this template is used with the universities page-->
+<!--this template extends the base-->
+<!--this template uses static files-->
 {% extends 'rateyocourse/base.html' %}
 {% load staticfiles %}
 {% load ratings %}
 
+<!--title-->
 {% block title %}
 	- Universities
 {% endblock %}
 
+<!--displaying the page path-->
 {% block body_block %}
 <div class="site-map">
 	<p id="site-map">You are here > <a href="{% url 'index' %}"> Home</a> / <a href="{% url 'universities' %}" > Universities</a> <hr/>
+
+<!--displaying the universities on the users list, only 5-->
 </div>
 <div class="jumbotron">
 <link href="{% static 'css/universities.css' %}" rel="stylesheet">
@@ -21,26 +28,36 @@
 					<div class="col-lg-4 col-md-4">
 						<h5>Recently Added Universities </h5>
 						<p>
+
+						<!--if there are universities then display them-->
 						{% if universities %}
 						<ul> 
 							{% for u in universities %}
 							<li><a href="{% url 'university' u.slug %}">{{ u.name }}</a></li>
 							{% endfor %}
 						</ul>
+
+						<!--if no university then display message-->
 						{% else %}
 							<strong> There are no universities present.</strong>
 						{% endif %}
 						</p>
 					</div>
+
+					<!--recently added courses-->
 					<div class="col-lg-4 col-md-4">
 						<h5> Recently Added Courses </h5>
 						<p>
+		
+						<!--if there are courses then display them-->
 						{% if courses %}
 						<ul>
 						{% for c in courses %}
 						<li><a href="{% url 'course' c.university.slug c.slug %}">{{ c.name }}</a></li>
 						{% endfor %}
-						</ul>	
+						</ul>
+
+						<!--if no courses then display the message-->	
 						{% else %}
 						<strong> There are no courses present.</strong>
 						{% endif %}
@@ -49,6 +66,8 @@
 					<div class="col-lg-1"></div>
 				</div>
 <br/>
+
+<!--most recently rated-->
 <div class="row marketing" id="recent_ratings">
 		<div class="col-lg-12">
 				<div class="row">

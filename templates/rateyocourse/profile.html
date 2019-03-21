@@ -1,15 +1,22 @@
+<!--this template is used for profile-->
+<!--this template exteds teh base-->
+<!--this template uses static files-->
 {% extends 'rateyocourse/base.html' %}
 {% load bootstrap_toolkit %}
 {% load staticfiles %}
 
+<!--title-->
 {% block title %}
 	- {{ selecteduser.username }} Profile
 {% endblock %}
 
+<!--displaying the path of the page-->
 {% block body_block %}
 <link rel="stylesheet" href="{% static "css/profile.css" %}">
 <script src="{% static "js/profile.js" %}"></script>
 <div class="site-map"><p>You are here > <a href="{% url 'index' %}">Home</a> / <a href="{% url 'list_profiles' %}" >Registered Users</a> / <a href="{% url 'profile'  user.username %}" >Profile</a></p></div>
+
+<!--displaying the user name, the user profile, and the about me-->
 <div class="container">
 	<div class = "jumbotron">
 	<div class="row">
@@ -26,6 +33,7 @@
 </div>
 <br >
 
+<!--is user exists let the user edit profile-->
 		{% if selecteduser.username == user.username %}
 <div class="edit_profile">
 <a class="btn btn-lg btn-success" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" id="show">
