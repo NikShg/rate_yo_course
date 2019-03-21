@@ -72,9 +72,12 @@
 		</h6>
 		</div>
 		<li class="media">
-
-	<!--display the user profile picture-->
-   <img id="user-picture" class="rounded mx-auto d-block" width="64" height="64" src="{{ MEDIA_URL}}{{ comment.user.picture }}"/><p>
+			{% if comment.user.picture %}
+				<!--display the user profile picture if they have one otherwise display stock photo-->
+					<img id="user-picture" class="rounded mx-auto d-block" width="64" height="64" src="{{ MEDIA_URL}}{{comment.user.picture }}"/><p>
+					{% else %}
+					<img id="user-picture" class="rounded mx-auto d-block" width="64" height="64" src="http://lorempixel.com/64/64/people/"/><p>
+					{% endif %}
     <div class="media-body">
       <h5 class="mt-0 mb-1" id="user"><a href="{% url 'profile' comment.user %}">{{ comment.user }}</a></h5>
 		<p class="status" id="status">({{ comment.user.status }})</p>
@@ -82,7 +85,6 @@
     </div>
   </li>
 	{% endfor %}
-
 				<!--if comments are not presented then display the following message-->
 				{% else %}
 					<p>There are no comments</p>
