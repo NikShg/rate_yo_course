@@ -234,7 +234,7 @@ def list_profiles(request):
 	userprofile_list = UserProfile.objects.all()
 
 	return render(request, 'rateyocourse/list_profiles.html', {'userprofile_list': userprofile_list})
-'''
+
 def track_url(request):
 	course_id = None
 	url = '/rateyocourse/'
@@ -250,7 +250,7 @@ def track_url(request):
 				pass
 	return redirect(url)
 
-'''
+
 # method for the serach. gets query, checks whether such course/university is in 
 # database
 def search(request):

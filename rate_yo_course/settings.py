@@ -28,7 +28,7 @@ SECRET_KEY = 'rzya*d=cn6q1=+^qey-d9-e64i)sqbx6455oybdg@*13auu0(l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bsasfy.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
