@@ -50,9 +50,11 @@ class Course(models.Model):
 
 	def __str__(self):
 		return self.name
-
+# User profile model.
 class UserProfile(models.Model):
+	#links UserProfiel to a User model
 	user = models.OneToOneField(User)
+	# additional attributes
 	about = models.CharField(max_length=256)
 	status = models.CharField(max_length=256)
 	picture = models.ImageField(upload_to='profile_images', blank=True)

@@ -6,8 +6,9 @@ import populate_rateYoCourse
 from django.core.urlresolvers import reverse
 
 #from rango.models import UniverityCourse
-# Create your tests here.
+# Tests for University and Course slug fields
 class slug_tests(TestCase):
+    #create uni, test slugfield and number of objects
     def test_slug_uni(self):
         new_uni = University(name="Test Uni")
         new_uni.save()
@@ -28,7 +29,7 @@ class slug_tests(TestCase):
         self.assertEquals(len(courses),1)
 
         courses[0].slug = new_course.slug
-
+# test for city and university name fields, checks lenght
 class UniversityCourseMethodTests(TestCase):
 	def test_city_is_not_more_than_32_chars(self):
 		'''
@@ -45,17 +46,19 @@ class UniversityCourseMethodTests(TestCase):
 		university = University(name="The Brilliant, Most Expensive University For the Most Beautiful People On Planet Earth Known To Mankind In The Year 2019 That Only Teaches ITech", city="Neverland", url="www.uniwithlongname.com")
 		university.save()
 		self.assertEqual((len(university.name) <= 128), True)	
-		
+
+# test for views. 	
 class testView(TestCase):
+    # test message on the main page
 	def test_index(self):
 		response = self.client.get(reverse('index'))
 		self.assertIn('Welcome to Rate Yo Course'.lower(), response.content.decode('ascii').lower())
-	
+	# test message on about page
 	def test_about_contains_create_message(self):
 		self.client.get(reverse('index'))
 		response = self.client.get(reverse('about'))
 		self.assertIn('About our team'.lower(),response.content.decode('ascii').lower())
-
+#
 class testView2(TestCase):
 	def test_about_using_template(self):
 		self.client.get(reverse('index'))
@@ -72,6 +75,7 @@ class testView2(TestCase):
 		itech = course.get_photo_url
 		self.assertEqual(itech, 'images/Internet Technology.jpg')
 
+# test, make new uni, check number of unies in the database
 class test_models(TestCase):
 	def test_create_a_new_uni(self):
 		uni = University(name="Glasgow")
@@ -81,7 +85,7 @@ class test_models(TestCase):
 		self.assertEquals(len(uni_in_data),1)
 		only = uni_in_data[0]
 		self.assertEquals(only, uni)
-
+# test for static files
 class RateMethodTest(TestCase):
 	def test_static_files(self):
 		result = finders.find('images/team.jpg')
