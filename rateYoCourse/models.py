@@ -56,9 +56,12 @@ class Course(models.Model):
 	def __str__(self):
 		return self.name
 
-# table to store each instance of a user, with columns for a user, about, status and picture. Each user linked with a profile
+# User profile model.
+# table to store each profile for a user, with columns for a user, about, status and picture. Each user linked with a profile
 class UserProfile(models.Model):
+	#links UserProfiel to a User model
 	user = models.OneToOneField(User)
+	# additional attributes
 	about = models.CharField(max_length=256)
 	status = models.CharField(max_length=256)
 	picture = models.ImageField(upload_to='profile_images', blank=True)

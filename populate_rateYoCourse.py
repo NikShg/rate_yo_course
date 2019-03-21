@@ -6,19 +6,28 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rate_yo_course.settings')
 
 import django
 django.setup()
-from rateYoCourse.models import University, Course
+from rateYoCourse.models import University, Course, UserProfile, Comment
 
 
 def populate():
+<<<<<<< HEAD
     #Here is a list of dictionaries containing the courses we want to add to each university
     #This section also includes a dictionary of the dictionaries to allow us to iterate through each datastructure,
         #and add the data to the models.
     University_of_Glasgow_courses = [
+=======
+	University_of_Glasgow_courses = [
+>>>>>>> origin
         {"name": "Internet Technology", "url": "https://www.gla.ac.uk/postgraduate/taught/informationtechnology/?card=course&code=COMPSCI5012", "rating": 5},
         {"name": "Advanced Programming", "url": "https://www.gla.ac.uk/postgraduate/taught/softwaredevelopment/?card=course&code=COMPSCI5002", "rating": 3}
     ]
 
-    University_of_Edinburgh_courses = [
+	University_of_Edinburgh_courses = [
+        {"name":"Computer Science BSc", "url": "https://www.ed.ac.uk/studying/undergraduate/degrees/index.php?action=programme&code=G400", "rating": 0},
+        {"name":"Artificial Intelligence BSc", "url": "https://www.ed.ac.uk/studying/undergraduate/degrees/index.php?action=programme&code=G700", "rating": 1},
+    ]
+
+	University_of_Edinburgh_courses = [
         {"name":"Computer Science BSc", "url": "https://www.ed.ac.uk/studying/undergraduate/degrees/index.php?action=programme&code=G400", "rating": 0},
         {"name":"Artificial Intelligence BSc", "url": "https://www.ed.ac.uk/studying/undergraduate/degrees/index.php?action=programme&code=G700", "rating": 1},
     ]
@@ -50,6 +59,18 @@ def add_uni(name, city, url): #city, url
 	u.url=url
 	u.save()
 	return u
+
+def add_user(user, about, status, picture):
+	user = UserProfile.objects.get_or_create(user=user)[0]
+	user.about = about
+	user.status = status
+	user.picture = picture
+	return user
+
+def add_comment(university, course, user, body):
+	comment = Comment.objects.get_or_create(university=university, course=course, user=user)[0]
+	comment.body = body
+	return comment
 
 #execution starts here
 if __name__ == '__main__' :

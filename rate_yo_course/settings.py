@@ -98,9 +98,7 @@ LOGIN_REDIRECT_URL = '/rateyocourse/'
 LOGIN_URL = '/accounts/login/'
 
 
-#LOGOUT_URL =  '/rateyocourse/'
-#LOGIN_URL = 'login'
-#LOGOUT_URL = 'logout'
+
 SOCIAL_AUTH_GITHUB_KEY = '7d2f614a6ecfee58419b'
 SOCIAL_AUTH_GITHUB_SECRET = '265572fb714309de9885fd7aee7dd54df570bf0b'
 SOCIAL_AUTH_TWITTER_KEY = 'x4xB0G7qHdnHoILvA8LfYErhC'
@@ -161,5 +159,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 
-STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR, ]
