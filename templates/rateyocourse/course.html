@@ -1,34 +1,45 @@
+<!--this template is used for the course-->
+<!--extend the base template-->
+<!--load static files-->
 {% extends 'rateyocourse/base.html' %}
 {% load staticfiles %}
 {% load static %}
 {% load ratings %}
 {% load rateYoCourse_template_tags %}
 
+<!--title-->
 {% block title %}
 	 Courses
 {% endblock %}
 
+<!--let the user know where they are in the website, display simple level-->
 {% block body_block %}
-<link href="{% static "css/course.css" %}" rel="stylesheet" />
-<p id="site-map">You are here > <a href="{% url 'index' %}"> Home</a> / <a href="{% url 'universities' %}" > Universities</a> / <a href="{% url 'university' university.slug%}" >  {{ course.university}} </a> / <a href="{% url 'course' university.slug course.slug%}" >  {{ course.name}} </a></p>
+	<link href="{% static "css/course.css" %}" rel="stylesheet" />
+	<p id="site-map">You are here > <a href="{% url 'index' %}"> Home</a> / <a href="{% url 'universities' %}" > Universities</a> / <a href="{% url 'university' university.slug%}" >  {{ course.university}} </a> / <a href="{% url 'course' university.slug course.slug%}" >  {{ course.name}} </a></p>
 
-<div class = "jumbotron">
-<div>
-	{% if course %}
-	<h2><a href="{{ course.url }}">{{ university.name}}:  {{ course.name }}</a></h2></li>
+	<!--display the university and course name if the course exists-->
+	<div class = "jumbotron">
+	<div>
+		{% if course %}
+			<h2><a href="{{ course.url }}">{{ university.name}}:  {{ course.name }}</a></h2></li>
+		
+		<!--if the course does not exists display the following message-->
 		{% else %}
-		<strong>This is not a course provided by any university.</strong>
+			<strong>This is not a course provided by any university.</strong>
 		{% endif %}
-</div>
+	</div>
 <br/>
 
+<!--star ratings-->
 <div class="row">
 	<div class="col-lg-8">
 	{% ratings course %}
 	{% block content %}
+		
+		<!--if the user is signed in let them rate courses-->
 		{% if user.is_authenticated %}
-	    <form method="post">
-	        {% csrf_token %}
+	 		<form method="post">
+	        	{% csrf_token %}
 	        {{ form.as_p }}
 			<br/>
 	        <button class="btn btn-primary" input type="submit" type="submit" value="Submit" id="id_submit"/>Submit</button>
@@ -37,6 +48,7 @@
 
 				</div>
 
+			<!--display course picture-->
 			<div class="col-lg-4">
 				<div class="image">
 				<img class="img-fluid rounded"  height=auto width=auto src="{% static course.get_photo_url %}" alt="a photo"></div>
@@ -45,10 +57,12 @@
 		{% endblock %}
 		{% block detail %}
 	<br>
+
+	<!--comment section-->
 	<h2>Why not leave a comment?</h2>
 	<a href="{% url 'add_comment' university.slug course.slug %}">Leave a Comment</a>
 	
-	
+	<!--if there are comments tehn display them, with the name of user-->
 	<ul class="list-unstyled">
 		{% if comments %}
 			{% for comment in comments %}
@@ -58,7 +72,8 @@
 		</h6>
 		</div>
 		<li class="media">
-		
+
+	<!--display the user profile picture-->
    <img id="user-picture" class="rounded mx-auto d-block" width="64" height="64" src="{{ MEDIA_URL}}{{ comment.user.picture }}"/><p>
     <div class="media-body">
       <h5 class="mt-0 mb-1" id="user"><a href="{% url 'profile' comment.user %}">{{ comment.user }}</a></h5>
@@ -67,6 +82,8 @@
     </div>
   </li>
 	{% endfor %}
+
+				<!--if comments are not presented then display the following message-->
 				{% else %}
 					<p>There are no comments</p>
 				{% endif %}

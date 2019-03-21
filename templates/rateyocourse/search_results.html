@@ -1,14 +1,20 @@
+<!--this template is used to display the search results-->
+<!--this template uses the base-->
+<!--this template uses static files-->
 {% extends 'rateyocourse/base.html' %}
 {% load staticfiles %}
 
+<!--title-->
 {% block title_block %}
 	Search results
 {% endblock %}
 
 {% block body_block %}
 
+<!--subtitle-->
     <p>You searched for: <strong>{{ query }}</strong></p>
 	
+<!--display course results-->
     {% if courses %}
         <p>Found {{ courses|length }} course{{ courses|pluralize }}.</p>
     
@@ -21,6 +27,7 @@
 		
         {% endif %}
 
+<!--display university results-->
     {% if universities %}
     <p>Found {{ universities|length }} university{{ universities|pluralize }}.</p>   
     <ul>
