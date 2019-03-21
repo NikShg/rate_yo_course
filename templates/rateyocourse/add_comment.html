@@ -1,19 +1,29 @@
+<!--this template is used for the add comment page-->
+<!--this template extends the base-->
 {% extends 'rateyocourse/base.html' %}
 {% load staticfiles %}
 
+<!--title declaration-->
 {% block title %}
 	- Leave a comment!
 {% endblock %}
 
+<!--this block is using box, and rows, and attributes to define the place of the text-->
 {% block body_block %}
 <div class="jumbotron">
 <div class="row">
 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 comment-box">
+
+<!--link to the add comments-->
 <link href="{% static 'css/add_comment.css' %}" rel="stylesheet">
+  
+  <!--adding new comment title and method-->
   <h1>Add New Comment </h1>
   <form method='POST'>
   {% csrf_token %}
   {{ form.as_p }}
+
+  <!--submit button-->
   <button class="btn btn-primary" input type="submit" type="submit" value="Submit" id="id_submit"/>Submit</button>
   </form>
   </div>

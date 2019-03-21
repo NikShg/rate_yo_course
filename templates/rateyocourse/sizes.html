@@ -1,11 +1,16 @@
+<!--this template is used for star size-->
+<!--this template is using the base-->
+<!--this template is using the ratings-->
 {% extends 'base.html' %}
-
 {% load ratings %}
-
 {% block content %}
+
+<!--subtitle-->
     <h1>Block Sizes</h1>
     <p>Page showing the ratings at different star sizes</p>
-    {% for size, object in sizes.items %}
+    
+<!--star size-->
+	{% for size, object in sizes.items %}
         <div id="star-size-{{ size }}">
             <style>
                 #star-size-{{ size }} .star-ratings-rating-full, #star-size-{{ size }} .star-ratings-rating-empty {

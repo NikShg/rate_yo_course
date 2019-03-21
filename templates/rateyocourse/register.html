@@ -1,15 +1,25 @@
+<!--this template is used as the first step of registration-->
+<!--this template extends the base-->
+<!--this template uses static files-->
 {% extends 'rateyocourse/base.html' %}
 {% load staticfiles %}
 
+
+<!--title-->
 {% block title_block %}
 	Register
 {% endblock %}
 
+<!--sub title-->
 {% block body_block %}
 	<h1>Register an Account to Rate Yo Course</h1>
+	
+<!--if user is registered, return them to index-->
 	{% if registered %}
 		<strong>thank you for registering!</strong>
 		<a href="{% url 'index' %}">Return to the homepage.</a><br/>
+	
+<!--if user is not registered, let the user register-->
 	{% else %}
 		<strong>register here!</strong><br/>
 		<form id="user_form" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
