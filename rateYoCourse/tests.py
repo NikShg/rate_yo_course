@@ -5,6 +5,9 @@ from django.contrib.staticfiles import finders
 import populate_rateYoCourse
 from django.core.urlresolvers import reverse
 
+#from rango.models import UniverityCourse
+# Create your tests here.
+
 class UniversityCourseMethodTests(TestCase):
 	def test_city_is_not_more_than_32_chars(self):
 		'''
@@ -47,21 +50,8 @@ class testView2(TestCase):
 		course.save()
 		itech = course.get_photo_url
 		self.assertEqual(itech, 'images/Internet Technology.jpg')
-		
-class RateMethodTest(TestCase):
-	def test_bar_length(self):
-		#Test max length validator
-		rate = Rate(bar=120)
-		rate.save()
-		self.assertEqual((rate.bar <=100), True)
-		self.assertTemplateUsed(response,'rateyocourse/about.html')
-	
-	def test_static_files(self):
-		result = finders.find('images/team.jpg')
-		self.assertIsNotNone(result)
 
 class test_models(TestCase):
-
 	def test_create_a_new_uni(self):
 		uni = University(name="Glasgow")
 		uni.save()
@@ -70,3 +60,9 @@ class test_models(TestCase):
 		self.assertEquals(len(uni_in_data),1)
 		only = uni_in_data[0]
 		self.assertEquals(only, uni)
+
+class RateMethodTest(TestCase):
+	def test_static_files(self):
+		result = finders.find('images/team.jpg')
+		self.assertIsNotNone(result)
+
