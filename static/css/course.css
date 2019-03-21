@@ -1,36 +1,49 @@
+/* lowering course pic */
 .image {
 	margin-top:5%;
 }
 
-div.list-group-item, div.list-group-item:nth-child(2) > div:nth-child(2) {
-	border:2px solid black!important;
-	border-left:2px solid black!important;
-}
-
-div.media-body {
-	padding:10px!important;
-}
-
+/* font size of student status */
 .status {
 	font-size:10px!important;
 }
 
-.media, {
-	border:1px dashed #999!important;
+/** styling box round each comment */
+.media {
+	border-bottom-style: solid;
+	border-color:#999!important;
 }
 
-#user-picture,  {
+/** Styling user bit of reviews */
+#user-picture {
 	margin-top:2%!important;
 	padding:2px!important;
+	border-radius: 50px;
 }
 
-
-.list-unstyled,  .media {
-	margin-top: 2%!important;
-	border:1px dashed #999!important;
+h5.user {
+	font-weight:bold!important;
 }
 
+/* lowering reviews box from leave a comment line */
 .posted-date {
 	margin-top:1px!important;
-	border-bottom: black!important;
+}
+.list-unstyled {
+	margin-top: 2%!important;
+	border:1px solid #999!important;
+}
+/* Customising posted date row */
+#date {
+	/*background-color:black!important;*/
+	text-decoration:underline;
+	border-color:#999!important;
+}
+/* styling username */
+#user a{
+	color: #800020!important;
+	font-weight:bold;
+}
+.jumbotron {
+	border-radius:10px;
 }

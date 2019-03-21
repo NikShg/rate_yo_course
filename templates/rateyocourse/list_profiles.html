@@ -19,15 +19,15 @@
 				{% for listuser in userprofile_list %}
 				<div class="list-group-item ">
 					{% if listuser.picture %}
-					<img class="d-flex align-self-start mr-3" width="64" height="64" src="{{ MEDIA_URL}}{{listuser.picture}}"/>
+					<img class="d-flex align-self-start mr-3" id="pic" width="64" height="64" src="{{ MEDIA_URL}}{{listuser.picture}}"/>
 					{% else %}
-					<img class="d-flex align-self-start mr-3" width="64" height="64" src="http://lorempixel.com/64/64/people/"/>
+					<img class="d-flex align-self-start mr-3" id="pic" width="64" height="64" src="http://lorempixel.com/64/64/people/"/>
 					{% endif %}
 					<div class="media-body">
-					<h5 class="mt-0 list-group-item-heading">
+					<h5 class="mt-0 list-group-item-heading" id="username">
 						<a href="{% url 'profile' listuser.user.username %}">{{ listuser.user.username }}</a></h5>
 					<p class="status">({{ listuser.status }})</p>
-					<p><strong>About Me:</strong></p>
+					<p><strong>About Me</strong></p>
 					<p class="about">{{ listuser.about }}</p>
 					</div>
 				</div>
@@ -40,5 +40,4 @@
 	{% endif %}
 </div>
 </div>
-<script src="{% static "js/list_profiles.js" %}" type="text/javascript"/>
 {% endblock %}

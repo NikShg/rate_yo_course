@@ -1,9 +1,35 @@
+/* styling student status text*/
 .status {
 	font-size: 14px;
 	font-style:italic;
 }
+/* round avatar with white border */
+#pic {
+	border-radius:50px;
+	border-color:white;
+	border: 2px solid white;
+}
 
+/* border round table */
 .list-group-item {
 	background:#eceeef;
-	border: 1px dashed black;
+	border-bottom-style: solid;
+	
+}
+/* border round table */
+.list-group {
+	background:#eceeef;
+	border:1px solid;
+	border-color:#ccc!important;
+	border-radius:20px;
+}
+
+/* styling username */
+#username a{
+	color: #800020!important;
+	font-weight:bold;
+}
+
+.jumbotron {
+	border-radius:10px;
 }

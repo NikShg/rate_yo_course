@@ -15,6 +15,8 @@ from django.views.generic import DetailView, TemplateView
 from django.shortcuts import redirect
 from django.db.models import Q
 from django.shortcuts import get_list_or_404, get_object_or_404
+
+# Return the index view
 def index(request):
 	context_dict = {}
 	visitor_cookie_handler(request)
@@ -22,6 +24,7 @@ def index(request):
 	response = render(request, 'rateyocourse/index.html', context=context_dict)
 	return response
 
+# return the about view
 def about(request):
 	visitor_cookie_handler(request)
 	context_dict = {}
@@ -29,12 +32,14 @@ def about(request):
 	response = render(request, 'rateyocourse/about.html', context_dict)
 	return response
 
+# helper method to request for a cookies, returns a cookies values if its in session data
 def get_server_side_cookie(request, cookie, default_val=None):
 	val = request.session.get(cookie)
 	if not val:
 		val = default_val
 	return val
 
+# handles the cookies
 def visitor_cookie_handler(request):
 	visits = int(get_server_side_cookie(request,'visits', '1'))
 	last_visit_cookie = get_server_side_cookie(request, 'last_visit', str(datetime.now()))
@@ -48,15 +53,17 @@ def visitor_cookie_handler(request):
 
 	request.session['visits'] = visits
 
-# This function returns the view for the list of universities. Universities are fetched
-# from the university table and sorted by name asscending.
+# This function returns the view for the list of universities. Top 5 Universities are fetched
+# from the university table and sorted by name ascending, as are courses. Course and university ratings are retrieved from the 
+# star_ratings app database and are ordered by the average vote in descending order. Retrieve 5 most recent user ratings
+
 def show_university_(request):
 	context_dict = {}
 	try:
 		universities = University.objects.all().order_by('name')[:5]
 		course_ratings = Rating.objects.filter(content_type = 8).order_by('-average')
 		university_ratings = Rating.objects.filter(content_type = 9).order_by('-average')
-		userratings = UserRating.objects.all().order_by('rating')[:5] ## top 5 most recent user ratings
+		userratings = UserRating.objects.all().order_by('rating')[:5] 
 		courses = Course.objects.all().order_by('name')[:5]
 		context_dict['universities'] = universities
 		context_dict['userratings'] = userratings
@@ -87,6 +94,7 @@ def show_university(request, university_name_slug):
 	return render(request, 'rateYoCourse/university.html', context=context_dict)
 
 # This view defines method that returns the information for a particular course provided by a particular university
+# returns the comments for that course as well
 def show_course(request, university_name_slug, course_name_slug):
 	context_dict = {}
 	try:
@@ -104,17 +112,9 @@ def show_course(request, university_name_slug, course_name_slug):
 	context_dict['query'] = course.name
 	result_list = []
 	
-	#if request.method == 'POST':
-		#query = request.POST['query'].strip()
-
-		#if query:
-			#result_list = run_query(query)
-			#context_dict['query'] = query
-			#context_dict['result_list'] = result_list
-
 	return render(request, 'rateYoCourse/course.html', context=context_dict)
 
-
+# view for the add comment page, if a form submission is valid, the comment linked to the user is saved and the submit button will take the user to the previous page (i.e. the course they just commented on)
 def add_comment(request, university_name_slug, course_name_slug):
 	university = get_object_or_404(University, slug=university_name_slug)
 	course = get_object_or_404(Course, slug=course_name_slug)
@@ -123,6 +123,7 @@ def add_comment(request, university_name_slug, course_name_slug):
 	u_slug = university.slug
 	
 	if request.method == 'POST':
+	
 		form = CommentForm(request.POST)
 		if form.is_valid():
 			comment=form.save(commit=False)
@@ -139,7 +140,7 @@ def add_comment(request, university_name_slug, course_name_slug):
 	context = {'form': form}
 	return render(request, template, context)
 
-
+# view for the ratings
 class RateView(DetailView):
     model = Rate
 
@@ -156,7 +157,7 @@ class SizesView(TemplateView):
         kwargs['sizes'] = {size: self.model.objects.get_or_create(bar=str(size))[0] for size in range(10, 40)}
         return super(SizesView, self).get_context_data(**kwargs)
 
-
+# a user must log in to register their profile, if a form is valid, save the registration form
 @login_required
 def register_profile(request):
 	form = UserProfileForm()
@@ -176,7 +177,7 @@ def register_profile(request):
 
 	return render(request, 'rateyocourse/profile_registration.html', context_dict)
 
-
+# view for a user to view profile, login required. gets the specific user their profile, if the user doesn't exist, return them to index
 @login_required
 def profile(request, username):
 	try:
@@ -198,6 +199,7 @@ def profile(request, username):
 
 	return render(request, 'rateyocourse/profile.html', {'userprofile': userprofile, 'selecteduser': user, 'form': form})
 
+	# login required to view registered users
 @login_required
 def list_profiles(request):
 	userprofile_list = UserProfile.objects.all()
@@ -219,7 +221,7 @@ def track_url(request):
 				pass
 	return redirect(url)
 
-
+# search method that checks if a course or university tuple contains the query
 def search(request):
 	error = False
 	if'q' in request.GET:

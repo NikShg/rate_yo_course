@@ -1,3 +1,4 @@
+/* To make the fb plugin responsive to window size */
 .fb-page, .fb-page iframe[style], .fb-page span {
     width: 100% !important;
 	font-weight:bold!important;

@@ -52,9 +52,9 @@
 	<ul class="list-unstyled">
 		{% if comments %}
 			{% for comment in comments %}
-			<div class="mt-0 mb-1 posted-date" align="left">
-			<h6>
-		Posted: {{comment.created}}
+			<div class="mt-0 mb-1" id="date" align="left">
+			<h6 class="posted-date">
+		<b>Posted: {{comment.created}}</b>
 		</h6>
 		</div>
 		<li class="media">

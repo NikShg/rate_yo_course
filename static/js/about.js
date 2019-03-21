@@ -1,3 +1,4 @@
+/* scroll to bottom when pressing on button */
 $(document).ready(function(){
 $("#cite").click(function() {
  $('html, body').animate({ 

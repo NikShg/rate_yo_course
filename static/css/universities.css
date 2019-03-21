@@ -1,11 +1,15 @@
+/* border that goes round recent ratings */
 #recent_ratings > div:nth-child(1) {
 	  border: 3px solid #800035!important;
 	  border-radius:5px!important;
 }
 
+/* lowering recently added sections from header */
 .element3 {
 	margin-top:2%!important;
 }
+
+/* sizing of recent ratings box  */
 #recent_ratings {
 	padding-left:10%!important;
 	padding-right:10%!important;
@@ -13,4 +17,8 @@
 
 .element3 > p:nth-child(2) {
 	padding:10px!important;
+}
+
+.jumbotron {
+	border-radius:10px;
 }

@@ -40,7 +40,10 @@ class testView2(TestCase):
 		self.client.get(reverse('index'))
 		response = self.client.get(reverse('about'))
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 392332df6239d12d85badc753d6c9b0d5b09260a
 	def test_correct_image_url(self):
 		'''
 		Test that url path to images is as expected
@@ -50,6 +53,22 @@ class testView2(TestCase):
 		course.save()
 		itech = course.get_photo_url
 		self.assertEqual(itech, 'images/Internet Technology.jpg')
+<<<<<<< HEAD
+		
+class RateMethodTest(TestCase):
+	def test_bar_length(self):
+		#Test max length validator
+		rate = Rate(bar=120)
+		rate.save()
+		self.assertEqual((rate.bar <=100), True)
+		
+		self.assertTemplateUsed(response,'rateyocourse/about.html')
+	
+	def test_static_files(self):
+		result = finders.find('images/team.jpg')
+		self.assertIsNotNone(result)
+=======
+>>>>>>> 392332df6239d12d85badc753d6c9b0d5b09260a
 
 class test_models(TestCase):
 	def test_create_a_new_uni(self):
@@ -60,9 +79,12 @@ class test_models(TestCase):
 		self.assertEquals(len(uni_in_data),1)
 		only = uni_in_data[0]
 		self.assertEquals(only, uni)
+<<<<<<< HEAD
+=======
 
 class RateMethodTest(TestCase):
 	def test_static_files(self):
 		result = finders.find('images/team.jpg')
 		self.assertIsNotNone(result)
 
+>>>>>>> 392332df6239d12d85badc753d6c9b0d5b09260a
