@@ -13,12 +13,23 @@
 	border-bottom-style: solid;
 	border-color:#999!important;
 }
+#comment-button {
+	margin-top:1%!important;
+	margin-bottom: 1%!important;
+}
 
+ div.announcement {
+	margin-top:2%!important;
+	margin-bottom: 2%!important;
+}
 /** Styling user bit of reviews */
 #user-picture {
 	margin-top:2%!important;
 	padding:2px!important;
 	border-radius: 50px;
+	border-color:white!important;
+	border-width:1px!important;
+	padding-left:1px!important;
 }
 
 h5.user {
@@ -30,7 +41,7 @@ h5.user {
 	margin-top:1px!important;
 }
 .list-unstyled {
-	margin-top: 2%!important;
+	margin-top: 3%!important;
 	border:1px solid #999!important;
 }
 /* Customising posted date row */
@@ -47,3 +58,14 @@ h5.user {
 .jumbotron {
 	border-radius:10px;
 }
+
+/** Given  a bit of spacing between name, status and comment. Also wrapping text to fit properly on different screen sizes */
+div.body, #status, #user {
+	word-wrap: break-word!important;
+	padding-left:0.5%!important;
+}
+
+div.body {
+	padding-bottom:1%!important;
+}
+
