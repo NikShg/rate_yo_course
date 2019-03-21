@@ -58,8 +58,11 @@
 		</h6>
 		</div>
 		<li class="media">
-		
-   <img id="user-picture" class="rounded mx-auto d-block" width="64" height="64" src="{{ MEDIA_URL}}{{ comment.user.picture }}"/><p>
+			{% if comment.user.picture %}
+					<img id="user-picture" class="rounded mx-auto d-block" width="64" height="64" src="{{ MEDIA_URL}}{{comment.user.picture }}"/><p>
+					{% else %}
+					<img id="user-picture" class="rounded mx-auto d-block" width="64" height="64" src="http://lorempixel.com/64/64/people/"/><p>
+					{% endif %}
     <div class="media-body">
       <h5 class="mt-0 mb-1" id="user"><a href="{% url 'profile' comment.user %}">{{ comment.user }}</a></h5>
 		<p class="status" id="status">({{ comment.user.status }})</p>

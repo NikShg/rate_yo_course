@@ -1,0 +1,18 @@
+label[for=id_about] {
+	display:none;
+}
+/* styling text area */
+textarea#id_about {
+	width:100%;
+	background-color:#eceeef;
+	border-radius: 10px;
+}
+/* styling text area */
+textarea#id_about:hover {
+	width:100%;
+	}
+	
+.jumbotron {
+	border-radius:10px;
+}
+
