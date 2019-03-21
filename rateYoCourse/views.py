@@ -235,22 +235,6 @@ def list_profiles(request):
 
 	return render(request, 'rateyocourse/list_profiles.html', {'userprofile_list': userprofile_list})
 
-def track_url(request):
-	course_id = None
-	url = '/rateyocourse/'
-	if request.method == 'GET':
-		if 'course_id' in request.GET:
-			course_id= request.GET['course_id']
-			try:
-				course = Course.objects.get(id=course_id)
-				course.views = Course.views + 1
-				course.save()
-				url = course.url
-			except:
-				pass
-	return redirect(url)
-
-
 # method for the serach. gets query, checks whether such course/university is in 
 # database
 def search(request):

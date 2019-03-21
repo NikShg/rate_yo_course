@@ -10,7 +10,6 @@ urlpatterns = [
 	url(r'^universities/$', views.show_university_, name='universities'), # showing all unis
 	# showing a specific course
 	url(r'^universities/(?P<university_name_slug>[\w\-]+)/courses/(?P<course_name_slug>[\w\-]+)/$', views.show_course, name='course'), 
-	
 	# registration a profile (step 2)
 	url(r'^register_profile/$', views.register_profile, name='register_profile'),
 	# viewing a user's profile
