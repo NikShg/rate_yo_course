@@ -40,7 +40,6 @@ class testView2(TestCase):
 		self.client.get(reverse('index'))
 		response = self.client.get(reverse('about'))
 
-<<<<<<< HEAD
 	def test_correct_image_url(self):
 		'''
 		Test that url path to images is as expected
@@ -57,7 +56,7 @@ class RateMethodTest(TestCase):
 		rate = Rate(bar=120)
 		rate.save()
 		self.assertEqual((rate.bar <=100), True)
-=======
+		
 		self.assertTemplateUsed(response,'rateyocourse/about.html')
 	
 	def test_static_files(self):
@@ -73,6 +72,3 @@ class test_models(TestCase):
 		self.assertEquals(len(uni_in_data),1)
 		only = uni_in_data[0]
 		self.assertEquals(only, uni)
-
-	
->>>>>>> d9aa82e723315a4d222d2feeaf9438230b86e0f5

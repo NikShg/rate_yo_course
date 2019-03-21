@@ -1,15 +1,17 @@
+/* Removing body label */
 label[for="id_body"] {
 	display:none!important;
 }
 
+/* customising text area */
 textarea#id_body {
-	/*width:100%;*/
 	background-color:#eceeef;
 	border-radius: 10px;
+	width:80%!important;
 }
 
+/* change colour on hover */
 textarea#id_body:hover {
-	/*width:100%;*/
 	background-color:white;
 	}
 	

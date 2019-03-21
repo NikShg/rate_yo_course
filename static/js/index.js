@@ -14,6 +14,7 @@ $(document).ready(function(){
 			});
 });
 
+/* scroll to bottom after clicking on search yo uni button */
 $("#show").click(function() {
  $('html, body').animate({ 
    scrollTop: $(document).height()-$(window).height()/2}, 

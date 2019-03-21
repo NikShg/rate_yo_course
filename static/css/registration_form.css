@@ -1,19 +1,9 @@
- #facebook.btn.btn-lg.btn-primary {
-	padding:12px;
-}
-/*
-#facebook, #twitter, #github{
-	width:105%!important;
-	font-size:12px;
-	color:black!important;
-	font-weight:bold;
-}
-*/
+/* lowering height of input fields */
 .form {
 	margin-top: 2%!important;
 }
 
-
+/* customising social login buttons */
 .fa {
  width:105%!important;
 	font-size:14px;
@@ -23,18 +13,16 @@
 
 }
 
-
-/* Add a hover effect if you want */
+/* Add a hover effect ifor social log in buttons*/
 .fa:hover {
-  opacity:0.3;
+  opacity:0.5;
 }
-
-/* Set a specific color for each brand */
 
 /* Github button */
 .fa-github {
   background: black;
   color: white;
+  border-color:black!important;
 }
 
 /* Twitter button*/
@@ -43,6 +31,7 @@
   color: white;
 } 
 
+/* underlines login header */
 .form-signin-heading {
 	text-decoration:underline;
 }
