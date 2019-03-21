@@ -28,8 +28,7 @@ SECRET_KEY = 'rzya*d=cn6q1=+^qey-d9-e64i)sqbx6455oybdg@*13auu0(l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bsasfy.pythonanywhere.com',
-                '127.0.0.1']
+ALLOWED_HOSTS = []
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
@@ -97,8 +96,6 @@ ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 LOGIN_REDIRECT_URL = '/rateyocourse/'
 LOGIN_URL = '/accounts/login/'
-
-
 
 SOCIAL_AUTH_GITHUB_KEY = '7d2f614a6ecfee58419b'
 SOCIAL_AUTH_GITHUB_SECRET = '265572fb714309de9885fd7aee7dd54df570bf0b'

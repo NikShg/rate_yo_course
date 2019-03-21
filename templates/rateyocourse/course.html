@@ -62,7 +62,7 @@
 	<h2>Why not leave a comment?</h2>
 	<a href="{% url 'add_comment' university.slug course.slug %}">Leave a Comment</a>
 	
-	<!--if there are comments then display them, with the name of user-->
+	<!--if there are comments tehn display them, with the name of user-->
 	<ul class="list-unstyled">
 		{% if comments %}
 			{% for comment in comments %}
