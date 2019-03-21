@@ -7,6 +7,27 @@ from django.core.urlresolvers import reverse
 
 #from rango.models import UniverityCourse
 # Create your tests here.
+class slug_tests(TestCase):
+    def test_slug_uni(self):
+        new_uni = University(name="Test Uni")
+        new_uni.save()
+
+        self.assertEquals(new_uni.slug,"test-uni")
+        universities = University.objects.all()
+        self.assertEquals(len(universities),1)
+
+        universities[0].slug = new_uni.slug
+    
+    def test_slug_course(self):
+        new_course = Course(name = "Test Course", university_id = 1)
+        new_course.save()
+
+        self.assertEquals(new_course.slug,"test-course")
+
+        courses = Course.objects.all()
+        self.assertEquals(len(courses),1)
+
+        courses[0].slug = new_course.slug
 
 class UniversityCourseMethodTests(TestCase):
 	def test_city_is_not_more_than_32_chars(self):
